@@ -807,8 +807,48 @@
     
     function copyCode(index) {
         const content = generatedFiles[index].content;
-        navigator.clipboard.writeText(content).then(() => {
-            const btn = document.querySelector(`#gen-status-${index} button`);
+        
+        // Try modern clipboard API first
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(content).then(() => {
+                showCopySuccess(index);
+            }).catch(err => {
+                // Fallback for iframe/security restrictions
+                fallbackCopy(content, index);
+            });
+        } else {
+            fallbackCopy(content, index);
+        }
+    }
+    
+    function fallbackCopy(content, index) {
+        // Create a temporary textarea
+        const textarea = document.createElement('textarea');
+        textarea.value = content;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        textarea.style.top = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess(index);
+            } else {
+                showCopyModal(content);
+            }
+        } catch (err) {
+            showCopyModal(content);
+        }
+        
+        document.body.removeChild(textarea);
+    }
+    
+    function showCopySuccess(index) {
+        const btn = document.querySelector(`#gen-status-${index} button`);
+        if (btn) {
             const originalText = btn.textContent;
             btn.textContent = 'Copied!';
             btn.style.background = '#4CAF50';
@@ -818,9 +858,27 @@
                 btn.style.background = '';
                 btn.style.color = '';
             }, 1500);
-        }).catch(err => {
-            alert('Failed to copy. Please try again.');
-        });
+        }
+    }
+    
+    function showCopyModal(content) {
+        // Create modal for manual copy
+        const modal = document.createElement('div');
+        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;';
+        modal.innerHTML = `
+            <div style="background:#fff;border-radius:12px;padding:24px;max-width:600px;width:100%;max-height:80vh;display:flex;flex-direction:column;">
+                <h3 style="margin:0 0 12px;">Copy Code Manually</h3>
+                <p style="margin:0 0 12px;color:#666;font-size:14px;">Select all text below (Ctrl+A) and copy it (Ctrl+C):</p>
+                <textarea style="flex:1;min-height:200px;font-family:monospace;font-size:11px;padding:12px;border:1px solid #ddd;border-radius:8px;resize:none;" readonly>${content.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+                <button onclick="this.parentElement.parentElement.remove()" style="margin-top:12px;padding:12px 24px;background:#BAA342;color:#242424;border:none;border-radius:999px;font-weight:700;cursor:pointer;">Close</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        // Auto-select the textarea content
+        const textarea = modal.querySelector('textarea');
+        textarea.focus();
+        textarea.select();
     }
     
     function startOver() {
