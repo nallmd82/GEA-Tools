@@ -245,6 +245,11 @@
                 // Convert edit URL to export URL if needed
                 csvUrl = convertToExportUrl(csvUrl);
                 
+                // Use CORS proxy for Google Sheets
+                if (csvUrl.includes('docs.google.com')) {
+                    csvUrl = 'https://corsproxy.io/?' + encodeURIComponent(csvUrl);
+                }
+                
                 statusEl.textContent = 'Loading data from Google Sheets...';
                 const response = await fetch(csvUrl, { cache: 'no-store' });
                 if (!response.ok) throw new Error('Failed to fetch CSV. If opening this file locally, use "Upload CSV file" instead (CORS restriction).');
