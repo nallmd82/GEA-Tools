@@ -1421,6 +1421,19 @@
             flex-wrap: wrap;
         }
 
+        .bid-disclaimer {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.5;
+            margin-top: 4px;
+        }
+
+        .bid-disclaimer sup {
+            color: #666;
+        }
+
         .btn {
             display: inline-block;
             padding: 14px 32px;
@@ -1757,16 +1770,17 @@
                     <span class="high-bid-amount" id="bid-amount-top">${escapeHtml(data.currentHighBid || '')}</span>
                 </div>
                 <div class="high-bid-display proxibid" id="proxibid-bid-top" ${data.proxibidHighBid ? '' : 'style="display:none;"'}>
-                    <span class="high-bid-label">Proxibid High Bid</span>
+                    <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
                     <span class="high-bid-amount" id="proxibid-amount-top">${escapeHtml(data.proxibidHighBid || '')}</span>
                 </div>
             </div>
+            ${data.proxibidHighBid || data.currentHighBid ? '<p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>' : ''}
             <div class="cta-buttons">
                 ${data.ctaUrl ? `
                 <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
-                    <i class="fa fa-gavel"></i> Bid Now
+                    <i class="fa fa-gavel"></i> Bid Now on GEA Live
                 </a>
-                ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-top" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now</a>'}
+                ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-top" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now on GEA Live</a>'}
             </div>
         </section>
 
@@ -1869,16 +1883,17 @@
                     <span class="high-bid-amount" id="bid-amount-bottom">${escapeHtml(data.currentHighBid || '')}</span>
                 </div>
                 <div class="high-bid-display proxibid" id="proxibid-bid-bottom" ${data.proxibidHighBid ? '' : 'style="display:none;"'}>
-                    <span class="high-bid-label">Proxibid High Bid</span>
+                    <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
                     <span class="high-bid-amount" id="proxibid-amount-bottom">${escapeHtml(data.proxibidHighBid || '')}</span>
                 </div>
             </div>
+            ${data.proxibidHighBid || data.currentHighBid ? '<p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>' : ''}
             <div class="cta-buttons">
                 ${data.ctaUrl ? `
                 <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
-                    <i class="fa fa-gavel"></i> Bid Now
+                    <i class="fa fa-gavel"></i> Bid Now on GEA Live
                 </a>
-                ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-bottom" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now</a>'}
+                ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-bottom" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now on GEA Live</a>'}
             </div>
         </section>
 
