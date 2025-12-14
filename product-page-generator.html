@@ -1310,6 +1310,10 @@
             border-top: 1px solid var(--color-gray-medium);
         }
 
+        .cta-section.empty {
+            display: none;
+        }
+
         .high-bid-display {
             display: flex;
             flex-direction: column;
@@ -1663,21 +1667,17 @@
         </section>
 
         <!-- Top CTA -->
-        ${data.ctaUrl || data.currentHighBid ? `
-        <section class="cta-section">
-            ${data.currentHighBid ? `
-            <div class="high-bid-display">
+        <section class="cta-section${!data.currentHighBid && !data.ctaUrl ? ' empty' : ''}" id="cta-top">
+            <div class="high-bid-display" id="high-bid-top" ${data.currentHighBid ? '' : 'style="display:none;"'}>
                 <span class="high-bid-label">GEA Live High Bid</span>
-                <span class="high-bid-amount">${escapeHtml(data.currentHighBid)}</span>
+                <span class="high-bid-amount" id="bid-amount-top">${escapeHtml(data.currentHighBid || '')}</span>
             </div>
-            ` : ''}
             ${data.ctaUrl ? `
-            <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary" target="_blank">
+            <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
                 <i class="fa fa-gavel"></i> Bid Now
             </a>
-            ` : ''}
+            ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-top" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now</a>'}
         </section>
-        ` : ''}
 
         <!-- Overview -->
         ${data.overview ? `
@@ -1771,21 +1771,17 @@
         ` : ''}
 
         <!-- Bottom CTA -->
-        ${data.ctaUrl || data.currentHighBid ? `
-        <section class="cta-section bottom">
-            ${data.currentHighBid ? `
-            <div class="high-bid-display">
+        <section class="cta-section bottom${!data.currentHighBid && !data.ctaUrl ? ' empty' : ''}" id="cta-bottom">
+            <div class="high-bid-display" id="high-bid-bottom" ${data.currentHighBid ? '' : 'style="display:none;"'}>
                 <span class="high-bid-label">GEA Live High Bid</span>
-                <span class="high-bid-amount">${escapeHtml(data.currentHighBid)}</span>
+                <span class="high-bid-amount" id="bid-amount-bottom">${escapeHtml(data.currentHighBid || '')}</span>
             </div>
-            ` : ''}
             ${data.ctaUrl ? `
-            <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary" target="_blank">
+            <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
                 <i class="fa fa-gavel"></i> Bid Now
             </a>
-            ` : ''}
+            ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-bottom" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now</a>'}
         </section>
-        ` : ''}
 
         <!-- Bottom Navigation -->
         <nav class="page-nav bottom">
@@ -2044,6 +2040,102 @@
     zoomInBtn.addEventListener('click', function() {
         zoomHint.classList.add('hidden');
     });
+    <\/script>
+
+    <!-- Live Bid Update Script -->
+    <script>
+    (function() {
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384';
+        const PRODUCT_TITLE = ${JSON.stringify(data.title)};
+        
+        function parseCSV(text) {
+            const rows = [];
+            let i = 0, field = '', row = [], inQuotes = false;
+            while (i < text.length) {
+                const c = text[i], n = text[i + 1];
+                if (inQuotes) {
+                    if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
+                    if (c === '"') { inQuotes = false; i++; continue; }
+                    field += c; i++; continue;
+                }
+                if (c === '"') { inQuotes = true; i++; continue; }
+                if (c === ',') { row.push(field); field = ''; i++; continue; }
+                if (c === '\\n') { row.push(field); rows.push(row); field = ''; row = []; i++; continue; }
+                if (c === '\\r') { i++; continue; }
+                field += c; i++;
+            }
+            if (field.length || row.length) { row.push(field); rows.push(row); }
+            return rows;
+        }
+        
+        function csvToObjects(rows) {
+            if (rows.length < 2) return [];
+            const headers = rows[0].map(h => h.trim());
+            return rows.slice(1).map(row => {
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
+                return obj;
+            });
+        }
+        
+        async function updateLiveBid() {
+            try {
+                const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(SHEET_URL);
+                const response = await fetch(proxyUrl, { cache: 'no-store' });
+                if (!response.ok) return;
+                
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+                const items = csvToObjects(rows);
+                
+                // Find matching item by title
+                const item = items.find(i => i['Title'] === PRODUCT_TITLE);
+                if (!item) return;
+                
+                const highBid = item['Current High Bid'];
+                const ctaUrl = item['CTA URL'];
+                
+                // Update bid displays
+                if (highBid) {
+                    const bidTop = document.getElementById('bid-amount-top');
+                    const bidBottom = document.getElementById('bid-amount-bottom');
+                    const displayTop = document.getElementById('high-bid-top');
+                    const displayBottom = document.getElementById('high-bid-bottom');
+                    
+                    if (bidTop) bidTop.textContent = highBid;
+                    if (bidBottom) bidBottom.textContent = highBid;
+                    if (displayTop) displayTop.style.display = '';
+                    if (displayBottom) displayBottom.style.display = '';
+                    
+                    // Show CTA sections
+                    const ctaTop = document.getElementById('cta-top');
+                    const ctaBottom = document.getElementById('cta-bottom');
+                    if (ctaTop) ctaTop.classList.remove('empty');
+                    if (ctaBottom) ctaBottom.classList.remove('empty');
+                }
+                
+                // Update CTA buttons if URL changed
+                if (ctaUrl) {
+                    const btnTop = document.getElementById('cta-btn-top');
+                    const btnBottom = document.getElementById('cta-btn-bottom');
+                    if (btnTop) { btnTop.href = ctaUrl; btnTop.style.display = ''; }
+                    if (btnBottom) { btnBottom.href = ctaUrl; btnBottom.style.display = ''; }
+                    
+                    // Show CTA sections
+                    const ctaTop = document.getElementById('cta-top');
+                    const ctaBottom = document.getElementById('cta-bottom');
+                    if (ctaTop) ctaTop.classList.remove('empty');
+                    if (ctaBottom) ctaBottom.classList.remove('empty');
+                }
+                
+            } catch (e) {
+                console.log('Live bid update skipped:', e.message);
+            }
+        }
+        
+        // Update on page load
+        updateLiveBid();
+    })();
     <\/script>
 </body>
 </html>`;
