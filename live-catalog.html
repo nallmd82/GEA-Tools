@@ -312,10 +312,39 @@
 
 <script>
 // ============================================================
-// CONFIGURATION - Update this URL to your Google Sheet
+// CONFIGURATION - Update these for your site
 // ============================================================
 const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384';
 const ITEMS_PER_PAGE = 48;
+
+// Detect parent site URL (for iframe embedding)
+function getBaseUrl() {
+    // Check referrer first (most reliable for cross-origin iframes)
+    if (document.referrer) {
+        try {
+            const url = new URL(document.referrer);
+            return url.origin;
+        } catch (e) {}
+    }
+    
+    // Check if we're on GitHub Pages and guess the Orchid URL
+    if (window.location.hostname.includes('github.io')) {
+        return 'https://goldeneagleauctions.orchidnow.com';
+    }
+    
+    // Same-origin iframe
+    try {
+        if (window.parent !== window) {
+            return window.parent.location.origin;
+        }
+    } catch (e) {}
+    
+    // Default fallback
+    return '';
+}
+
+const BASE_URL = getBaseUrl();
+console.log('BASE_URL detected:', BASE_URL);
 
 // ============================================================
 // DATA & STATE
@@ -785,7 +814,8 @@ function renderPage() {
         const imgUrl = it.imageURL ? toImageUrl(it.imageURL) : '';
         const cond = formatCondition(it);
         
-        html += '<a class="catalog-item" href="/' + slug + '">';
+        const fullUrl = BASE_URL + '/' + slug;
+        html += '<a class="catalog-item" href="' + fullUrl + '" target="_top">';
         if (imgUrl) {
             html += '<div class="thumb"><img referrerpolicy="no-referrer" src="' + imgUrl + '" alt="' + esc(it.title) + '" loading="lazy"></div>';
         } else {
