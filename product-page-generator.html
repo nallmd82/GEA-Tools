@@ -1008,7 +1008,8 @@
             marketNote: row['Market Note'] || '',
             navigation: navigation,
             ctaUrl: row['CTA URL'] || ctaUrl,  // Item-specific CTA URL with fallback to global
-            currentHighBid: row['Current High Bid'] || ''
+            currentHighBid: row['Current High Bid'] || '',
+            proxibidHighBid: row['Proxibid High Bid'] || ''
         };
         
         return getProductTemplate(productData);
@@ -1372,6 +1373,13 @@
             display: none;
         }
 
+        .high-bid-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
         .high-bid-display {
             display: flex;
             flex-direction: column;
@@ -1381,6 +1389,11 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             border-radius: 12px;
             border: 2px solid var(--color-gold);
+            min-width: 180px;
+        }
+
+        .high-bid-display.proxibid {
+            border-color: #00A651;
         }
 
         .high-bid-label {
@@ -1391,10 +1404,21 @@
             color: var(--color-gold);
         }
 
+        .high-bid-display.proxibid .high-bid-label {
+            color: #00A651;
+        }
+
         .high-bid-amount {
             font-size: 28px;
             font-weight: 700;
             color: #fff;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -1416,8 +1440,7 @@
         }
 
         .btn-primary:hover {
-            background-color: var(--color-black);
-            color: var(--color-white);
+            opacity: 0.9;
         }
 
         .btn i {
@@ -1725,16 +1748,24 @@
         </section>
 
         <!-- Top CTA -->
-        <section class="cta-section${!data.currentHighBid && !data.ctaUrl ? ' empty' : ''}" id="cta-top">
-            <div class="high-bid-display" id="high-bid-top" ${data.currentHighBid ? '' : 'style="display:none;"'}>
-                <span class="high-bid-label">GEA Live High Bid</span>
-                <span class="high-bid-amount" id="bid-amount-top">${escapeHtml(data.currentHighBid || '')}</span>
+        <section class="cta-section${!data.currentHighBid && !data.proxibidHighBid && !data.ctaUrl ? ' empty' : ''}" id="cta-top">
+            <div class="high-bid-row">
+                <div class="high-bid-display" id="high-bid-top" ${data.currentHighBid ? '' : 'style="display:none;"'}>
+                    <span class="high-bid-label">GEA Live High Bid</span>
+                    <span class="high-bid-amount" id="bid-amount-top">${escapeHtml(data.currentHighBid || '')}</span>
+                </div>
+                <div class="high-bid-display proxibid" id="proxibid-bid-top" ${data.proxibidHighBid ? '' : 'style="display:none;"'}>
+                    <span class="high-bid-label">Proxibid High Bid</span>
+                    <span class="high-bid-amount" id="proxibid-amount-top">${escapeHtml(data.proxibidHighBid || '')}</span>
+                </div>
             </div>
-            ${data.ctaUrl ? `
-            <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
-                <i class="fa fa-gavel"></i> Bid Now
-            </a>
-            ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-top" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now</a>'}
+            <div class="cta-buttons">
+                ${data.ctaUrl ? `
+                <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
+                    <i class="fa fa-gavel"></i> Bid Now
+                </a>
+                ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-top" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now</a>'}
+            </div>
         </section>
 
         <!-- Overview -->
@@ -1829,16 +1860,24 @@
         ` : ''}
 
         <!-- Bottom CTA -->
-        <section class="cta-section bottom${!data.currentHighBid && !data.ctaUrl ? ' empty' : ''}" id="cta-bottom">
-            <div class="high-bid-display" id="high-bid-bottom" ${data.currentHighBid ? '' : 'style="display:none;"'}>
-                <span class="high-bid-label">GEA Live High Bid</span>
-                <span class="high-bid-amount" id="bid-amount-bottom">${escapeHtml(data.currentHighBid || '')}</span>
+        <section class="cta-section bottom${!data.currentHighBid && !data.proxibidHighBid && !data.ctaUrl ? ' empty' : ''}" id="cta-bottom">
+            <div class="high-bid-row">
+                <div class="high-bid-display" id="high-bid-bottom" ${data.currentHighBid ? '' : 'style="display:none;"'}>
+                    <span class="high-bid-label">GEA Live High Bid</span>
+                    <span class="high-bid-amount" id="bid-amount-bottom">${escapeHtml(data.currentHighBid || '')}</span>
+                </div>
+                <div class="high-bid-display proxibid" id="proxibid-bid-bottom" ${data.proxibidHighBid ? '' : 'style="display:none;"'}>
+                    <span class="high-bid-label">Proxibid High Bid</span>
+                    <span class="high-bid-amount" id="proxibid-amount-bottom">${escapeHtml(data.proxibidHighBid || '')}</span>
+                </div>
             </div>
-            ${data.ctaUrl ? `
-            <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
-                <i class="fa fa-gavel"></i> Bid Now
-            </a>
-            ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-bottom" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now</a>'}
+            <div class="cta-buttons">
+                ${data.ctaUrl ? `
+                <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
+                    <i class="fa fa-gavel"></i> Bid Now
+                </a>
+                ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-bottom" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now</a>'}
+            </div>
         </section>
 
         <!-- Bottom Navigation -->
@@ -2151,9 +2190,10 @@
                 if (!item) return;
                 
                 const highBid = item['Current High Bid'];
+                const proxibidBid = item['Proxibid High Bid'];
                 const ctaUrl = item['CTA URL'];
                 
-                // Update bid displays
+                // Update GEA Live bid displays
                 if (highBid) {
                     const bidTop = document.getElementById('bid-amount-top');
                     const bidBottom = document.getElementById('bid-amount-bottom');
@@ -2164,6 +2204,25 @@
                     if (bidBottom) bidBottom.textContent = highBid;
                     if (displayTop) displayTop.style.display = '';
                     if (displayBottom) displayBottom.style.display = '';
+                    
+                    // Show CTA sections
+                    const ctaTop = document.getElementById('cta-top');
+                    const ctaBottom = document.getElementById('cta-bottom');
+                    if (ctaTop) ctaTop.classList.remove('empty');
+                    if (ctaBottom) ctaBottom.classList.remove('empty');
+                }
+                
+                // Update Proxibid bid displays
+                if (proxibidBid) {
+                    const proxibidTop = document.getElementById('proxibid-amount-top');
+                    const proxibidBottom = document.getElementById('proxibid-amount-bottom');
+                    const proxibidDisplayTop = document.getElementById('proxibid-bid-top');
+                    const proxibidDisplayBottom = document.getElementById('proxibid-bid-bottom');
+                    
+                    if (proxibidTop) proxibidTop.textContent = proxibidBid;
+                    if (proxibidBottom) proxibidBottom.textContent = proxibidBid;
+                    if (proxibidDisplayTop) proxibidDisplayTop.style.display = '';
+                    if (proxibidDisplayBottom) proxibidDisplayBottom.style.display = '';
                     
                     // Show CTA sections
                     const ctaTop = document.getElementById('cta-top');
