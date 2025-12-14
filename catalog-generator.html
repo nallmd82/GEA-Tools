@@ -354,11 +354,61 @@
     }
     
     function copyCode() {
-        navigator.clipboard.writeText(generatedCode).then(() => {
-            const feedback = document.getElementById('copy-feedback');
-            feedback.classList.add('show');
-            setTimeout(() => feedback.classList.remove('show'), 2000);
-        });
+        // Try modern clipboard API first
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(generatedCode).then(() => {
+                showCopySuccess();
+            }).catch(err => {
+                fallbackCopy();
+            });
+        } else {
+            fallbackCopy();
+        }
+    }
+    
+    function showCopySuccess() {
+        const feedback = document.getElementById('copy-feedback');
+        feedback.classList.add('show');
+        setTimeout(() => feedback.classList.remove('show'), 2000);
+    }
+    
+    function fallbackCopy() {
+        const textarea = document.createElement('textarea');
+        textarea.value = generatedCode;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showCopySuccess();
+            } else {
+                showCopyModal();
+            }
+        } catch (err) {
+            showCopyModal();
+        }
+        
+        document.body.removeChild(textarea);
+    }
+    
+    function showCopyModal() {
+        const modal = document.createElement('div');
+        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;';
+        modal.innerHTML = `
+            <div style="background:#fff;border-radius:12px;padding:24px;max-width:600px;width:100%;max-height:80vh;display:flex;flex-direction:column;">
+                <h3 style="margin:0 0 12px;">Copy Code Manually</h3>
+                <p style="margin:0 0 12px;color:#666;font-size:14px;">Select all text below (Ctrl+A) and copy it (Ctrl+C):</p>
+                <textarea style="flex:1;min-height:200px;font-family:monospace;font-size:11px;padding:12px;border:1px solid #ddd;border-radius:8px;resize:none;" readonly>${generatedCode.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+                <button onclick="this.parentElement.parentElement.remove()" style="margin-top:12px;padding:12px 24px;background:#BAA342;color:#242424;border:none;border-radius:999px;font-weight:700;cursor:pointer;">Close</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        modal.querySelector('textarea').focus();
+        modal.querySelector('textarea').select();
     }
     
     function getCatalogTemplate(itemsJson, itemsPerPage, makes, models, calibers, classifications) {
