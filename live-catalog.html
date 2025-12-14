@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Catalog - Golden Eagle Auctions</title>
+    <style>
+        :root {
+            --color-black: #242424;
+            --color-gold: #BAA342;
+            --color-gray-light: #F5F5F5;
+            --color-gray-medium: #DDDDDD;
+            --color-gray-text: #555555;
+            --gap: 20px;
+            --card-radius: 14px;
+            --max: 1200px;
+        }
+        
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 24px; background: #fafafa; }
+        
+        /* Loading State */
+        .loading-container {
+            max-width: var(--max);
+            margin: 60px auto;
+            text-align: center;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--color-gray-medium);
+            border-top-color: var(--color-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-size: 18px;
+            color: var(--color-gray-text);
+        }
+        
+        /* Error State */
+        .error-container {
+            max-width: 600px;
+            margin: 60px auto;
+            text-align: center;
+            padding: 40px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .error-container h2 { color: #c62828; margin-bottom: 16px; }
+        .error-container p { color: var(--color-gray-text); }
+        .retry-btn {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: var(--color-gold);
+            color: var(--color-black);
+            border: none;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .retry-btn:hover { background: var(--color-black); color: #fff; }
+        
+        /* Filter Section */
+        .filter-section { max-width: var(--max); margin: 0 auto 20px; padding-top: 30px; }
+        .search-row { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+        .search-row input[type="search"] { flex: 1 1 300px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; }
+        .search-row .clear-btn { padding: 12px 20px; border: 1px solid #ddd; background: #fff; border-radius: 10px; cursor: pointer; font-size: 14px; }
+        .search-row .clear-btn:hover { background: #f5f5f5; }
+        .result-count { font-size: 14px; color: var(--color-gray-text); padding: 0 8px; }
+        
+        .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+        
+        /* Multi-select dropdown */
+        .filter-dropdown { position: relative; min-width: 160px; flex: 1 1 160px; max-width: 220px; }
+        .filter-dropdown .dropdown-btn {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .filter-dropdown .dropdown-btn:hover { border-color: #999; }
+        .filter-dropdown .dropdown-btn.active { border-color: var(--color-gold); background: #fffdf5; }
+        .filter-dropdown .dropdown-btn .arrow { transition: transform 0.2s; }
+        .filter-dropdown.open .dropdown-btn .arrow { transform: rotate(180deg); }
+        .filter-dropdown .badge { background: var(--color-gold); color: var(--color-black); font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 10px; margin-left: 6px; }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 100;
+            max-height: 280px;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .filter-dropdown.open .dropdown-menu { display: flex; }
+        
+        .dropdown-search { padding: 8px; border-bottom: 1px solid #eee; }
+        .dropdown-search input { width: 100%; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
+        
+        .dropdown-options { overflow-y: auto; max-height: 220px; padding: 4px 0; }
+        .dropdown-option { display: flex; align-items: center; padding: 8px 12px; cursor: pointer; font-size: 13px; }
+        .dropdown-option:hover { background: #f5f5f5; }
+        .dropdown-option input { margin-right: 8px; cursor: pointer; }
+        .dropdown-option.selected { background: #fffdf5; }
+        .dropdown-option .count { margin-left: auto; font-size: 11px; color: #999; }
+        
+        .dropdown-actions { display: flex; justify-content: space-between; padding: 8px; border-top: 1px solid #eee; }
+        .dropdown-actions button { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; background: #eee; }
+        .dropdown-actions button:hover { background: #ddd; }
+        
+        /* Condition toggle buttons */
+        .condition-filter { display: flex; gap: 8px; align-items: center; }
+        .condition-filter span.label { font-size: 14px; font-weight: 600; margin-right: 4px; }
+        .condition-btn {
+            padding: 10px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .condition-btn:hover { border-color: #999; }
+        .condition-btn.active { background: var(--color-gold); border-color: var(--color-gold); font-weight: 600; }
+        
+        /* Active filters display */
+        .active-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+        .active-filters:empty { display: none; }
+        .filter-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: var(--color-gray-light);
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .filter-tag .remove { cursor: pointer; font-weight: bold; opacity: 0.6; }
+        .filter-tag .remove:hover { opacity: 1; }
+        .clear-all-filters { padding: 6px 12px; background: none; border: 1px solid #ddd; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        .clear-all-filters:hover { background: #f5f5f5; }
+        
+        /* Pagination */
+        .pagination { max-width: var(--max); margin: 20px auto; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .pagination button { padding: 8px 12px; border: 1px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s ease; min-width: 40px; }
+        .pagination button:hover:not(:disabled) { background: #f5f5f5; border-color: #999; }
+        .pagination button.active { background: var(--color-black); color: #fff; border-color: var(--color-black); }
+        .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .pagination .page-info { padding: 0 12px; font-size: 14px; color: #666; }
+        .items-info { max-width: var(--max); margin: 10px auto; text-align: center; font-size: 14px; color: #666; }
+        
+        /* Catalog grid */
+        .catalog-container { max-width: var(--max); margin: 0 auto; display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+        .catalog-item { background: #fff; border: 1px solid #e9e9e9; border-radius: var(--card-radius); overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,.06); transition: transform .2s ease; display: flex; flex-direction: column; text-decoration: none; color: inherit; max-width: 320px; }
+        .catalog-item:hover { transform: translateY(-3px); }
+        .catalog-item .thumb { width: 100%; aspect-ratio: 4/3; background:#fff; position: relative; overflow: hidden; }
+        .thumb img { width: 100%; height: 100%; object-fit: contain; background:#fff; }
+        .catalog-item .pad { padding: 14px; display: flex; flex-direction: column; flex: 1; }
+        .catalog-item h3 { margin: 6px 0 8px; font-size: 18px; color: var(--color-black); }
+        .meta { font-size: 14px; color: var(--color-gray-text); margin-bottom: 10px; flex-grow: 1; }
+        .high-bid { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px; margin-bottom: 12px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 8px; border: 1px solid var(--color-gold); }
+        .high-bid-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-gold); }
+        .high-bid-amount { font-size: 18px; font-weight: 700; color: #fff; }
+        .card-bottom { margin-top: auto; }
+        .btn-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .btn { display: inline-block; background: var(--color-gold); color: var(--color-black); text-decoration: none; padding: 12px 24px; border-radius: 999px; font-weight: 700; font-size: 14px; transition: all 0.2s ease; border: none; cursor: pointer; }
+        .btn:hover { background: var(--color-black); color: #fff; }
+        .empty { max-width: var(--max); margin: 30px auto; color:#666; text-align:center; }
+        
+        .hidden { display: none !important; }
+        
+        @media (max-width: 768px) {
+            .filter-bar { flex-direction: column; }
+            .filter-dropdown { max-width: none; }
+            .condition-filter { width: 100%; justify-content: flex-start; }
+        }
+        @media (max-width: 600px) {
+            body { padding: 12px; }
+            .catalog-container { gap: 14px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+            .catalog-item { max-width: none; }
+            .pagination button { padding: 6px 10px; font-size: 13px; min-width: 35px; }
+            .catalog-item h3 { font-size: 16px; }
+            .btn { padding: 10px 20px; font-size: 13px; }
+            .high-bid { padding: 8px; }
+            .high-bid-label { font-size: 9px; }
+            .high-bid-amount { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loading State -->
+<div class="loading-container" id="loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading auction catalog...</div>
+</div>
+
+<!-- Error State -->
+<div class="error-container hidden" id="error">
+    <h2>Unable to Load Catalog</h2>
+    <p id="error-message">There was a problem loading the auction data. Please try again.</p>
+    <button class="retry-btn" onclick="loadCatalogData()">Try Again</button>
+</div>
+
+<!-- Main Catalog (hidden until loaded) -->
+<div class="hidden" id="main-content">
+    <div class="filter-section">
+        <div class="search-row">
+            <input id="search" placeholder="Search by title, make, model, caliber..." type="search">
+            <button class="clear-btn" onclick="clearSearch()">Clear</button>
+            <span class="result-count" id="result-count"></span>
+        </div>
+        
+        <div class="filter-bar">
+            <div class="filter-dropdown" id="filter-make">
+                <button class="dropdown-btn" onclick="toggleDropdown('make')">
+                    <span>Make <span class="badge" id="badge-make" style="display:none">0</span></span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-search"><input type="text" placeholder="Search makes..." oninput="searchInDropdown('make', this.value)"></div>
+                    <div class="dropdown-options" id="options-make"></div>
+                    <div class="dropdown-actions">
+                        <button onclick="selectAllVisible('make')">Select All</button>
+                        <button onclick="clearFilter('make')">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-dropdown" id="filter-model">
+                <button class="dropdown-btn" onclick="toggleDropdown('model')">
+                    <span>Model <span class="badge" id="badge-model" style="display:none">0</span></span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-search"><input type="text" placeholder="Search models..." oninput="searchInDropdown('model', this.value)"></div>
+                    <div class="dropdown-options" id="options-model"></div>
+                    <div class="dropdown-actions">
+                        <button onclick="selectAllVisible('model')">Select All</button>
+                        <button onclick="clearFilter('model')">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-dropdown" id="filter-caliber">
+                <button class="dropdown-btn" onclick="toggleDropdown('caliber')">
+                    <span>Caliber <span class="badge" id="badge-caliber" style="display:none">0</span></span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-search"><input type="text" placeholder="Search calibers..." oninput="searchInDropdown('caliber', this.value)"></div>
+                    <div class="dropdown-options" id="options-caliber"></div>
+                    <div class="dropdown-actions">
+                        <button onclick="selectAllVisible('caliber')">Select All</button>
+                        <button onclick="clearFilter('caliber')">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-dropdown" id="filter-classification">
+                <button class="dropdown-btn" onclick="toggleDropdown('classification')">
+                    <span>Type <span class="badge" id="badge-classification" style="display:none">0</span></span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-search"><input type="text" placeholder="Search types..." oninput="searchInDropdown('classification', this.value)"></div>
+                    <div class="dropdown-options" id="options-classification"></div>
+                    <div class="dropdown-actions">
+                        <button onclick="selectAllVisible('classification')">Select All</button>
+                        <button onclick="clearFilter('classification')">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="condition-filter">
+                <span class="label">Condition:</span>
+                <button class="condition-btn" id="cond-new" onclick="toggleCondition('new')">Factory New</button>
+                <button class="condition-btn" id="cond-used" onclick="toggleCondition('used')">Used</button>
+            </div>
+        </div>
+        
+        <div class="active-filters" id="active-filters"></div>
+    </div>
+
+    <div class="pagination" id="pagination-top"></div>
+    <div class="items-info" id="items-info-top"></div>
+    <div class="catalog-container" id="catalog"></div>
+    <div class="empty" id="empty" style="display:none;">No items match your filters.</div>
+    <div class="items-info" id="items-info-bottom"></div>
+    <div class="pagination" id="pagination-bottom"></div>
+</div>
+
+<script>
+// ============================================================
+// CONFIGURATION - Update this URL to your Google Sheet
+// ============================================================
+const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384';
+const ITEMS_PER_PAGE = 48;
+
+// ============================================================
+// DATA & STATE
+// ============================================================
+let ITEMS = [];
+let OPTIONS = { make: [], model: [], caliber: [], classification: [] };
+let filters = {
+    make: new Set(),
+    model: new Set(),
+    caliber: new Set(),
+    classification: new Set(),
+    condition: new Set()
+};
+let searchQuery = '';
+let searchTerms = { make: '', model: '', caliber: '', classification: '' };
+let filteredItems = [];
+let currentPage = 1;
+
+// ============================================================
+// CSV PARSING
+// ============================================================
+function parseCSV(text) {
+    const rows = [];
+    let i = 0, field = '', row = [], inQuotes = false;
+    while (i < text.length) {
+        const c = text[i], n = text[i + 1];
+        if (inQuotes) {
+            if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
+            if (c === '"') { inQuotes = false; i++; continue; }
+            field += c; i++; continue;
+        }
+        if (c === '"') { inQuotes = true; i++; continue; }
+        if (c === ',') { row.push(field); field = ''; i++; continue; }
+        if (c === '\n') { row.push(field); rows.push(row); field = ''; row = []; i++; continue; }
+        if (c === '\r') { i++; continue; }
+        field += c; i++;
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    return rows;
+}
+
+function csvToObjects(rows) {
+    if (rows.length < 2) return [];
+    const headers = rows[0].map(h => h.trim());
+    return rows.slice(1).map(row => {
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
+        return obj;
+    }).filter(obj => obj['Title'] && obj['Title'].trim());
+}
+
+// ============================================================
+// DATA LOADING
+// ============================================================
+async function loadCatalogData() {
+    document.getElementById('loading').classList.remove('hidden');
+    document.getElementById('error').classList.add('hidden');
+    document.getElementById('main-content').classList.add('hidden');
+    
+    try {
+        const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(GOOGLE_SHEET_URL);
+        const response = await fetch(proxyUrl, { cache: 'no-store' });
+        
+        if (!response.ok) throw new Error('Failed to fetch data');
+        
+        const csvText = await response.text();
+        const rows = parseCSV(csvText);
+        const data = csvToObjects(rows);
+        
+        if (data.length === 0) throw new Error('No items found');
+        
+        // Transform to item objects
+        ITEMS = data.map(row => ({
+            title: row['Title'] || '',
+            seoSlug: row['SEO Title/URL Slug'] || '',
+            make: row['Make'] || '',
+            model: row['Model'] || '',
+            condition: row['Condition'] || '',
+            conditionDesc: row['Condition Description'] || '',
+            caliber: row['Caliber/Gauge'] || '',
+            classification: row['Classification'] || '',
+            imageURL: row['ImageURL'] || '',
+            description: row['Overview'] || row['Description'] || '',
+            ctaUrl: row['CTA URL'] || '',
+            currentHighBid: row['Current High Bid'] || ''
+        }));
+        
+        // Build filter options
+        OPTIONS.make = [...new Set(ITEMS.map(i => i.make).filter(Boolean))].sort();
+        OPTIONS.model = [...new Set(ITEMS.map(i => i.model).filter(Boolean))].sort();
+        OPTIONS.caliber = [...new Set(ITEMS.map(i => i.caliber).filter(Boolean))].sort();
+        OPTIONS.classification = [...new Set(ITEMS.map(i => i.classification).filter(Boolean))].sort();
+        
+        filteredItems = [...ITEMS];
+        
+        // Show main content
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+        
+        // Initialize
+        updateAllDropdowns();
+        applyFilters();
+        
+    } catch (error) {
+        console.error('Load error:', error);
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('error').classList.remove('hidden');
+        document.getElementById('error-message').textContent = error.message || 'There was a problem loading the auction data.';
+    }
+}
+
+// ============================================================
+// UTILITIES
+// ============================================================
+function esc(s) {
+    const div = document.createElement('div');
+    div.textContent = s || '';
+    return div.innerHTML;
+}
+
+function generateSlug(text) {
+    if (!text) return '';
+    return String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+function toImageUrl(token, size) {
+    size = size || 'w400';
+    if (!token) return '';
+    const t = String(token).trim();
+    if (/^https?:\/\//i.test(t)) {
+        const m = t.match(/(?:\/d\/|[?&]id=)([A-Za-z0-9_-]{20,})/);
+        if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=' + size;
+        return t;
+    }
+    return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(t) + '&sz=' + size;
+}
+
+function formatCondition(item) {
+    const condition = (item.condition || '').trim();
+    const conditionDesc = (item.conditionDesc || '').trim();
+    if (condition.toLowerCase() === 'used' && conditionDesc) return 'Used - ' + conditionDesc;
+    return condition;
+}
+
+// ============================================================
+// FILTERING
+// ============================================================
+function getFilteredItemsExcept(exceptKey) {
+    return ITEMS.filter(function(item) {
+        if (searchQuery) {
+            const searchText = [item.title, item.make, item.model, item.caliber, item.description, item.classification].join(' ').toLowerCase();
+            if (searchText.indexOf(searchQuery) === -1) return false;
+        }
+        
+        if (exceptKey !== 'make' && filters.make.size > 0) {
+            if (!filters.make.has(item.make)) return false;
+        }
+        if (exceptKey !== 'model' && filters.model.size > 0) {
+            if (!filters.model.has(item.model)) return false;
+        }
+        if (exceptKey !== 'caliber' && filters.caliber.size > 0) {
+            if (!filters.caliber.has(item.caliber)) return false;
+        }
+        if (exceptKey !== 'classification' && filters.classification.size > 0) {
+            if (!filters.classification.has(item.classification)) return false;
+        }
+        if (exceptKey !== 'condition' && filters.condition.size > 0) {
+            const itemCond = (item.condition || '').toLowerCase();
+            const isNew = itemCond === 'factory new';
+            const isUsed = itemCond === 'used';
+            const wantNew = filters.condition.has('new');
+            const wantUsed = filters.condition.has('used');
+            if (wantNew && wantUsed) { /* both */ }
+            else if (wantNew && !isNew) return false;
+            else if (wantUsed && !isUsed) return false;
+        }
+        
+        return true;
+    });
+}
+
+function getOptionCounts(key) {
+    const relevantItems = getFilteredItemsExcept(key);
+    const counts = {};
+    for (let i = 0; i < relevantItems.length; i++) {
+        const val = relevantItems[i][key];
+        if (val) counts[val] = (counts[val] || 0) + 1;
+    }
+    return counts;
+}
+
+function updateDropdownOptions(key) {
+    const container = document.getElementById('options-' + key);
+    const counts = getOptionCounts(key);
+    const searchTerm = searchTerms[key].toLowerCase();
+    const options = OPTIONS[key];
+    
+    let html = '';
+    for (let i = 0; i < options.length; i++) {
+        const val = options[i];
+        const count = counts[val] || 0;
+        const isChecked = filters[key].has(val);
+        const matchesSearch = !searchTerm || val.toLowerCase().indexOf(searchTerm) !== -1;
+        
+        if ((count === 0 && !isChecked) || !matchesSearch) continue;
+        
+        html += '<label class="dropdown-option' + (isChecked ? ' selected' : '') + '" data-idx="' + i + '">' +
+            '<input type="checkbox"' + (isChecked ? ' checked' : '') + 
+            ' onchange="handleFilter(\'' + key + '\',' + i + ',this.checked)"> ' +
+            esc(val) +
+            '<span class="count">(' + count + ')</span>' +
+            '</label>';
+    }
+    container.innerHTML = html;
+}
+
+function updateAllDropdowns() {
+    updateDropdownOptions('make');
+    updateDropdownOptions('model');
+    updateDropdownOptions('caliber');
+    updateDropdownOptions('classification');
+}
+
+function handleFilter(key, idx, checked) {
+    const val = OPTIONS[key][idx];
+    if (checked) {
+        filters[key].add(val);
+    } else {
+        filters[key].delete(val);
+    }
+    updateBadge(key);
+    applyFilters();
+    updateAllDropdowns();
+}
+
+function toggleDropdown(key) {
+    const dropdown = document.getElementById('filter-' + key);
+    const wasOpen = dropdown.classList.contains('open');
+    document.querySelectorAll('.filter-dropdown').forEach(function(d) { d.classList.remove('open'); });
+    if (!wasOpen) {
+        dropdown.classList.add('open');
+        updateDropdownOptions(key);
+    }
+}
+
+function searchInDropdown(key, query) {
+    searchTerms[key] = query;
+    updateDropdownOptions(key);
+}
+
+function selectAllVisible(key) {
+    const options = document.querySelectorAll('#options-' + key + ' .dropdown-option input');
+    options.forEach(function(cb) {
+        if (!cb.checked) {
+            cb.checked = true;
+            const idx = parseInt(cb.parentElement.getAttribute('data-idx'));
+            filters[key].add(OPTIONS[key][idx]);
+        }
+    });
+    updateBadge(key);
+    applyFilters();
+    updateAllDropdowns();
+}
+
+function clearFilter(key) {
+    filters[key].clear();
+    updateBadge(key);
+    applyFilters();
+    updateAllDropdowns();
+}
+
+function updateBadge(key) {
+    const badge = document.getElementById('badge-' + key);
+    const btn = document.querySelector('#filter-' + key + ' .dropdown-btn');
+    const count = filters[key].size;
+    if (count > 0) {
+        badge.textContent = count;
+        badge.style.display = '';
+        btn.classList.add('active');
+    } else {
+        badge.style.display = 'none';
+        btn.classList.remove('active');
+    }
+}
+
+function toggleCondition(type) {
+    const btn = document.getElementById('cond-' + type);
+    if (filters.condition.has(type)) {
+        filters.condition.delete(type);
+        btn.classList.remove('active');
+    } else {
+        filters.condition.add(type);
+        btn.classList.add('active');
+    }
+    applyFilters();
+    updateAllDropdowns();
+}
+
+function clearSearch() {
+    document.getElementById('search').value = '';
+    searchQuery = '';
+    applyFilters();
+    updateAllDropdowns();
+}
+
+function clearAllFilters() {
+    filters.make.clear();
+    filters.model.clear();
+    filters.caliber.clear();
+    filters.classification.clear();
+    filters.condition.clear();
+    updateBadge('make');
+    updateBadge('model');
+    updateBadge('caliber');
+    updateBadge('classification');
+    document.querySelectorAll('.condition-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById('search').value = '';
+    searchQuery = '';
+    applyFilters();
+    updateAllDropdowns();
+}
+
+function removeFilterTag(key, idx) {
+    const val = OPTIONS[key][idx];
+    filters[key].delete(val);
+    updateBadge(key);
+    applyFilters();
+    updateAllDropdowns();
+}
+
+function updateActiveFilters() {
+    const container = document.getElementById('active-filters');
+    let html = '';
+    
+    ['make', 'model', 'caliber', 'classification'].forEach(function(key) {
+        filters[key].forEach(function(val) {
+            const idx = OPTIONS[key].indexOf(val);
+            html += '<span class="filter-tag">' + esc(val) + ' <span class="remove" onclick="removeFilterTag(\'' + key + '\',' + idx + ')">×</span></span>';
+        });
+    });
+    
+    if (filters.condition.has('new')) {
+        html += '<span class="filter-tag">Factory New <span class="remove" onclick="toggleCondition(\'new\')">×</span></span>';
+    }
+    if (filters.condition.has('used')) {
+        html += '<span class="filter-tag">Used <span class="remove" onclick="toggleCondition(\'used\')">×</span></span>';
+    }
+    
+    if (html) {
+        html += '<button class="clear-all-filters" onclick="clearAllFilters()">Clear All</button>';
+    }
+    
+    container.innerHTML = html;
+}
+
+function applyFilters() {
+    searchQuery = document.getElementById('search').value.trim().toLowerCase();
+    
+    filteredItems = ITEMS.filter(function(item) {
+        if (searchQuery) {
+            const searchText = [item.title, item.make, item.model, item.caliber, item.description, item.classification].join(' ').toLowerCase();
+            if (searchText.indexOf(searchQuery) === -1) return false;
+        }
+        
+        if (filters.make.size > 0 && !filters.make.has(item.make)) return false;
+        if (filters.model.size > 0 && !filters.model.has(item.model)) return false;
+        if (filters.caliber.size > 0 && !filters.caliber.has(item.caliber)) return false;
+        if (filters.classification.size > 0 && !filters.classification.has(item.classification)) return false;
+        
+        if (filters.condition.size > 0) {
+            const itemCond = (item.condition || '').toLowerCase();
+            const isNew = itemCond === 'factory new';
+            const isUsed = itemCond === 'used';
+            const wantNew = filters.condition.has('new');
+            const wantUsed = filters.condition.has('used');
+            if (wantNew && wantUsed) { /* both */ }
+            else if (wantNew && !isNew) return false;
+            else if (wantUsed && !isUsed) return false;
+        }
+        
+        return true;
+    });
+    
+    currentPage = 1;
+    renderPage();
+    renderPagination();
+    updateActiveFilters();
+    
+    document.getElementById('result-count').textContent = filteredItems.length + ' items';
+}
+
+// ============================================================
+// RENDERING
+// ============================================================
+function renderPagination() {
+    const totalItems = filteredItems.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const $paginationTop = document.getElementById('pagination-top');
+    const $paginationBottom = document.getElementById('pagination-bottom');
+    const $itemsInfoTop = document.getElementById('items-info-top');
+    const $itemsInfoBottom = document.getElementById('items-info-bottom');
+    
+    if (totalPages <= 1) {
+        $paginationTop.innerHTML = '';
+        $paginationBottom.innerHTML = '';
+        $itemsInfoTop.innerHTML = '';
+        $itemsInfoBottom.innerHTML = '';
+        return;
+    }
+    
+    const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
+    const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
+    const itemsInfo = 'Showing items ' + startItem + '-' + endItem + ' of ' + totalItems;
+    $itemsInfoTop.innerHTML = itemsInfo;
+    $itemsInfoBottom.innerHTML = itemsInfo;
+    
+    let html = '<button onclick="changePage(' + (currentPage - 1) + ')"' + (currentPage === 1 ? ' disabled' : '') + '>‹ Prev</button>';
+    
+    if (totalPages <= 7) {
+        for (let i = 1; i <= totalPages; i++) {
+            html += '<button onclick="changePage(' + i + ')" class="' + (i === currentPage ? 'active' : '') + '">' + i + '</button>';
+        }
+    } else {
+        html += '<button onclick="changePage(1)" class="' + (1 === currentPage ? 'active' : '') + '">1</button>';
+        if (currentPage > 3) html += '<button disabled>...</button>';
+        for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+            html += '<button onclick="changePage(' + i + ')" class="' + (i === currentPage ? 'active' : '') + '">' + i + '</button>';
+        }
+        if (currentPage < totalPages - 2) html += '<button disabled>...</button>';
+        html += '<button onclick="changePage(' + totalPages + ')" class="' + (totalPages === currentPage ? 'active' : '') + '">' + totalPages + '</button>';
+    }
+    
+    html += '<button onclick="changePage(' + (currentPage + 1) + ')"' + (currentPage === totalPages ? ' disabled' : '') + '>Next ›</button>';
+    html += '<span class="page-info">Page ' + currentPage + ' of ' + totalPages + '</span>';
+    
+    $paginationTop.innerHTML = html;
+    $paginationBottom.innerHTML = html;
+}
+
+function changePage(page) {
+    const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+    if (page < 1 || page > totalPages) return;
+    currentPage = page;
+    renderPage();
+    renderPagination();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderPage() {
+    const $catalog = document.getElementById('catalog');
+    const $empty = document.getElementById('empty');
+    const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+    const pageItems = filteredItems.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+    
+    if (!pageItems.length) {
+        $catalog.innerHTML = '';
+        $empty.style.display = 'block';
+        return;
+    }
+    
+    $empty.style.display = 'none';
+    let html = '';
+    
+    for (let i = 0; i < pageItems.length; i++) {
+        const it = pageItems[i];
+        const slug = generateSlug(it.seoSlug || it.title || '');
+        const imgUrl = it.imageURL ? toImageUrl(it.imageURL) : '';
+        const cond = formatCondition(it);
+        
+        html += '<a class="catalog-item" href="/' + slug + '">';
+        if (imgUrl) {
+            html += '<div class="thumb"><img referrerpolicy="no-referrer" src="' + imgUrl + '" alt="' + esc(it.title) + '" loading="lazy"></div>';
+        } else {
+            html += '<div class="thumb"></div>';
+        }
+        html += '<div class="pad"><h3>' + esc(it.title) + '</h3>';
+        html += '<div class="meta">' + (cond ? 'Condition: ' + esc(cond) : '') + '</div>';
+        html += '<div class="card-bottom">';
+        if (it.currentHighBid) {
+            html += '<div class="high-bid"><span class="high-bid-label">GEA Live High Bid</span><span class="high-bid-amount">' + esc(it.currentHighBid) + '</span></div>';
+        }
+        html += '<div class="btn-row"><span class="btn">View Details</span></div></div></div></a>';
+    }
+    
+    $catalog.innerHTML = html;
+}
+
+// ============================================================
+// EVENT LISTENERS
+// ============================================================
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.filter-dropdown')) {
+        document.querySelectorAll('.filter-dropdown').forEach(function(d) { d.classList.remove('open'); });
+    }
+});
+
+document.getElementById('search').addEventListener('input', function() {
+    applyFilters();
+    updateAllDropdowns();
+});
+
+// ============================================================
+// INITIALIZE
+// ============================================================
+loadCatalogData();
+</script>
+
+</body>
+</html>
