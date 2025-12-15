@@ -1009,7 +1009,8 @@
             navigation: navigation,
             ctaUrl: row['CTA URL'] || ctaUrl,  // Item-specific CTA URL with fallback to global
             currentHighBid: row['Current High Bid'] || '',
-            proxibidHighBid: row['Proxibid High Bid'] || ''
+            proxibidHighBid: row['Proxibid High Bid'] || '',
+            hammerPrice: row['Hammer Price'] || ''
         };
         
         return getProductTemplate(productData);
@@ -1434,6 +1435,49 @@
             color: #666;
         }
 
+        .sold-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auction-closed-badge {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hammer-price-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 20px 32px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 12px;
+            border: 2px solid var(--color-gold);
+        }
+
+        .hammer-price-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-gold);
+        }
+
+        .hammer-price-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+        }
+
         .btn {
             display: inline-block;
             padding: 14px 32px;
@@ -1764,6 +1808,17 @@
 
         <!-- Top CTA -->
         <section class="cta-section" id="cta-top">
+            ${data.hammerPrice ? `
+            <!-- Auction Closed - Show Sold Price -->
+            <div class="sold-display">
+                <span class="auction-closed-badge">Auction Closed</span>
+                <div class="hammer-price-display">
+                    <span class="hammer-price-label">Sold For</span>
+                    <span class="hammer-price-amount">${escapeHtml(data.hammerPrice)}</span>
+                </div>
+            </div>
+            ` : `
+            <!-- Active Auction - Show Current Bids -->
             <div class="high-bid-row">
                 <div class="high-bid-display" id="high-bid-top">
                     <span class="high-bid-label">GEA Live High Bid</span>
@@ -1782,6 +1837,7 @@
                 </a>
                 ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-top" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now on GEA Live</a>'}
             </div>
+            `}
         </section>
 
         <!-- Overview -->
@@ -1877,6 +1933,17 @@
 
         <!-- Bottom CTA -->
         <section class="cta-section bottom" id="cta-bottom">
+            ${data.hammerPrice ? `
+            <!-- Auction Closed - Show Sold Price -->
+            <div class="sold-display">
+                <span class="auction-closed-badge">Auction Closed</span>
+                <div class="hammer-price-display">
+                    <span class="hammer-price-label">Sold For</span>
+                    <span class="hammer-price-amount">${escapeHtml(data.hammerPrice)}</span>
+                </div>
+            </div>
+            ` : `
+            <!-- Active Auction - Show Current Bids -->
             <div class="high-bid-row">
                 <div class="high-bid-display" id="high-bid-bottom">
                     <span class="high-bid-label">GEA Live High Bid</span>
@@ -1895,6 +1962,7 @@
                 </a>
                 ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-bottom" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now on GEA Live</a>'}
             </div>
+            `}
         </section>
 
         <!-- Bottom Navigation -->
@@ -2209,6 +2277,26 @@
                 const highBid = item['Current High Bid'];
                 const proxibidBid = item['Proxibid High Bid'];
                 const ctaUrl = item['CTA URL'];
+                const hammerPrice = item['Hammer Price'];
+                
+                const ctaTop = document.getElementById('cta-top');
+                const ctaBottom = document.getElementById('cta-bottom');
+                
+                // If hammer price exists, replace content with sold display
+                if (hammerPrice) {
+                    const soldHTML = \`
+                        <div class="sold-display">
+                            <span class="auction-closed-badge">Auction Closed</span>
+                            <div class="hammer-price-display">
+                                <span class="hammer-price-label">Sold For</span>
+                                <span class="hammer-price-amount">\${hammerPrice}</span>
+                            </div>
+                        </div>
+                    \`;
+                    if (ctaTop) ctaTop.innerHTML = soldHTML;
+                    if (ctaBottom) ctaBottom.innerHTML = soldHTML;
+                    return;
+                }
                 
                 // Update GEA Live bid displays - always show, default to $0.00
                 const bidTop = document.getElementById('bid-amount-top');
@@ -2233,8 +2321,6 @@
                 if (proxibidDisplayBottom) proxibidDisplayBottom.style.display = '';
                 
                 // Always show CTA sections
-                const ctaTop = document.getElementById('cta-top');
-                const ctaBottom = document.getElementById('cta-bottom');
                 if (ctaTop) ctaTop.classList.remove('empty');
                 if (ctaBottom) ctaBottom.classList.remove('empty');
                 
