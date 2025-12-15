@@ -2298,8 +2298,52 @@
                     return;
                 }
                 
+                // Check if bid containers exist - if not, page was generated with hammer price
+                // and we need to rebuild the active auction display
+                let bidTop = document.getElementById('bid-amount-top');
+                if (!bidTop) {
+                    const activeHTML = \`
+                        <div class="high-bid-row">
+                            <div class="high-bid-display" id="high-bid-top">
+                                <span class="high-bid-label">GEA Live High Bid</span>
+                                <span class="high-bid-amount" id="bid-amount-top">\${highBid || '$0.00'}</span>
+                            </div>
+                            <div class="high-bid-display proxibid" id="proxibid-bid-top">
+                                <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
+                                <span class="high-bid-amount" id="proxibid-amount-top">\${proxibidBid || '$0.00'}</span>
+                            </div>
+                        </div>
+                        <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
+                        <div class="cta-buttons">
+                            <a href="\${ctaUrl || '#'}" class="btn btn-primary cta-btn" id="cta-btn-top" target="_blank" \${ctaUrl ? '' : 'style="display:none;"'}>
+                                <i class="fa fa-gavel"></i> Bid Now on GEA Live
+                            </a>
+                        </div>
+                    \`;
+                    const activeHTMLBottom = \`
+                        <div class="high-bid-row">
+                            <div class="high-bid-display" id="high-bid-bottom">
+                                <span class="high-bid-label">GEA Live High Bid</span>
+                                <span class="high-bid-amount" id="bid-amount-bottom">\${highBid || '$0.00'}</span>
+                            </div>
+                            <div class="high-bid-display proxibid" id="proxibid-bid-bottom">
+                                <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
+                                <span class="high-bid-amount" id="proxibid-amount-bottom">\${proxibidBid || '$0.00'}</span>
+                            </div>
+                        </div>
+                        <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
+                        <div class="cta-buttons">
+                            <a href="\${ctaUrl || '#'}" class="btn btn-primary cta-btn" id="cta-btn-bottom" target="_blank" \${ctaUrl ? '' : 'style="display:none;"'}>
+                                <i class="fa fa-gavel"></i> Bid Now on GEA Live
+                            </a>
+                        </div>
+                    \`;
+                    if (ctaTop) ctaTop.innerHTML = activeHTML;
+                    if (ctaBottom) ctaBottom.innerHTML = activeHTMLBottom;
+                    return;
+                }
+                
                 // Update GEA Live bid displays - always show, default to $0.00
-                const bidTop = document.getElementById('bid-amount-top');
                 const bidBottom = document.getElementById('bid-amount-bottom');
                 const displayTop = document.getElementById('high-bid-top');
                 const displayBottom = document.getElementById('high-bid-bottom');
