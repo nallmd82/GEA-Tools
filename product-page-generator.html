@@ -1196,11 +1196,12 @@
         .main-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             transform-origin: center center;
             transition: transform 0.1s ease-out;
             user-select: none;
             -webkit-user-drag: none;
+            background: #f9f9f9;
         }
 
         /* Zoom Controls */
@@ -1237,6 +1238,21 @@
         .zoom-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
+        }
+
+        .zoom-level {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+            height: 44px;
+            padding: 0 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-black);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         /* Image Navigation Arrows */
@@ -1779,7 +1795,7 @@
                 </div>
                 <div class="image-counter" id="image-counter">1 / ${data.images.length}</div>
                 <div class="main-image-wrapper" id="main-image-wrapper">
-                    <img src="${data.images.length > 0 ? toImageUrl(data.images[0], 'original') : ''}" alt="${escapeHtml(data.title)}" class="main-image" id="main-image" draggable="false">
+                    <img src="${data.images.length > 0 ? toImageUrl(data.images[0], 'w2560') : ''}" alt="${escapeHtml(data.title)}" class="main-image" id="main-image" draggable="false">
                 </div>
                 <!-- Image Navigation Arrows -->
                 <div class="image-nav-controls">
@@ -1792,6 +1808,7 @@
                 </div>
                 <!-- Zoom Controls -->
                 <div class="zoom-controls">
+                    <span class="zoom-level" id="zoom-level">100%</span>
                     <button class="zoom-btn" id="zoom-out" title="Zoom out">−</button>
                     <button class="zoom-btn" id="zoom-in" title="Zoom in">+</button>
                     <button class="zoom-btn" id="zoom-reset" title="Reset zoom">↺</button>
@@ -2027,7 +2044,7 @@
     function setActiveImage(index) {
         if (index < 0 || index >= PRODUCT_IMAGES.length) return;
         currentImageIndex = index;
-        mainImage.src = toImageUrl(PRODUCT_IMAGES[index], 'original');
+        mainImage.src = toImageUrl(PRODUCT_IMAGES[index], 'w2560');
         resetZoom();
         thumbnailStrip.querySelectorAll('.thumbnail').forEach((thumb, i) => {
             thumb.classList.toggle('active', i === index);
@@ -2082,6 +2099,8 @@
     function updateZoomUI() {
         zoomInBtn.disabled = scale >= MAX_SCALE;
         zoomOutBtn.disabled = scale <= MIN_SCALE;
+        const zoomLevelEl = document.getElementById('zoom-level');
+        if (zoomLevelEl) zoomLevelEl.textContent = Math.round(scale * 100) + '%';
     }
 
     function clampTranslation() {
