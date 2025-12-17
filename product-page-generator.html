@@ -1200,7 +1200,6 @@
         .main-image {
             max-width: 100%;
             max-height: 100%;
-            object-fit: contain;
             transform-origin: center center;
             transition: transform 0.1s ease-out;
             user-select: none;
@@ -2135,30 +2134,20 @@
         
         const wrapperRect = mainImageWrapper.getBoundingClientRect();
         
-        // Calculate actual displayed image dimensions (accounting for object-fit: contain)
-        let imgDisplayWidth, imgDisplayHeight;
-        const imgNaturalRatio = mainImage.naturalWidth / mainImage.naturalHeight;
-        const wrapperRatio = wrapperRect.width / wrapperRect.height;
+        // Without object-fit, the image element IS the visible size
+        // After scaling, calculate how much we can pan
+        const imgWidth = mainImage.offsetWidth;
+        const imgHeight = mainImage.offsetHeight;
         
-        if (imgNaturalRatio > wrapperRatio) {
-            // Image is wider than container - width constrained
-            imgDisplayWidth = wrapperRect.width;
-            imgDisplayHeight = wrapperRect.width / imgNaturalRatio;
-        } else {
-            // Image is taller than container - height constrained
-            imgDisplayHeight = wrapperRect.height;
-            imgDisplayWidth = wrapperRect.height * imgNaturalRatio;
-        }
+        const scaledWidth = imgWidth * scale;
+        const scaledHeight = imgHeight * scale;
         
-        // Calculate max pan distance based on scaled image size vs container
-        const scaledWidth = imgDisplayWidth * scale;
-        const scaledHeight = imgDisplayHeight * scale;
+        // Max pan before edge of image reaches edge of container
+        const maxPanX = Math.max(0, (scaledWidth - wrapperRect.width) / 2);
+        const maxPanY = Math.max(0, (scaledHeight - wrapperRect.height) / 2);
         
-        const maxX = Math.max(0, (scaledWidth - wrapperRect.width) / 2);
-        const maxY = Math.max(0, (scaledHeight - wrapperRect.height) / 2);
-        
-        translateX = Math.max(-maxX, Math.min(maxX, translateX));
-        translateY = Math.max(-maxY, Math.min(maxY, translateY));
+        translateX = Math.max(-maxPanX, Math.min(maxPanX, translateX));
+        translateY = Math.max(-maxPanY, Math.min(maxPanY, translateY));
     }
 
     zoomInBtn.addEventListener('click', () => zoom(SCALE_STEP));
