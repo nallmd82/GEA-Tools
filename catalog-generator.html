@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auction Catalog Generator - Golden Eagle Auctions</title>
+    <title>Product Page Generator | Golden Eagle Auctions</title>
+    
+    <!-- JSZip for creating ZIP files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
     <style>
         :root {
             --color-black: #242424;
@@ -11,116 +15,285 @@
             --color-gray-light: #F5F5F5;
             --color-gray-medium: #DDDDDD;
             --color-gray-text: #555555;
+            --color-white: #FFFFFF;
         }
         
-        * { box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
         body {
             font-family: Arial, sans-serif;
-            background: var(--color-gray-light);
-            margin: 0;
-            padding: 24px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-black);
+            background-color: var(--color-gray-light);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
             color: var(--color-black);
         }
         
-        .container { max-width: 900px; margin: 0 auto; }
-        h1 { text-align: center; margin-bottom: 8px; }
-        .subtitle { text-align: center; color: var(--color-gray-text); margin-bottom: 32px; }
-        
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        .subtitle {
+            color: var(--color-gray-text);
+            margin-bottom: 30px;
         }
         
-        .card h2 { margin-top: 0; margin-bottom: 20px; font-size: 20px; }
+        .card {
+            background: var(--color-white);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
         
-        label { display: block; font-weight: 600; margin-bottom: 6px; margin-top: 16px; }
-        label:first-of-type { margin-top: 0; }
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--color-black);
+        }
         
-        input[type="url"], input[type="text"], input[type="number"], input[type="file"] {
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-black);
+        }
+        
+        input[type="text"],
+        input[type="url"] {
             width: 100%;
-            padding: 12px;
+            padding: 12px 16px;
             border: 1px solid var(--color-gray-medium);
             border-radius: 8px;
             font-size: 14px;
+            margin-bottom: 16px;
         }
         
-        .help-text { font-size: 13px; color: var(--color-gray-text); margin-top: 6px; }
+        input:focus {
+            outline: none;
+            border-color: var(--color-gold);
+        }
         
         .btn {
             display: inline-block;
-            padding: 12px 24px;
-            border-radius: 999px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
             text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
         }
         
-        .btn-primary { background: var(--color-gold); color: var(--color-black); }
-        .btn-primary:hover { background: var(--color-black); color: #fff; }
-        .btn-secondary { background: var(--color-gray-medium); color: var(--color-black); }
-        .btn-secondary:hover { background: #ccc; }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-primary {
+            background-color: var(--color-gold);
+            color: var(--color-black);
+        }
         
-        .button-group { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+        .btn-primary:hover {
+            background-color: var(--color-black);
+            color: var(--color-white);
+        }
         
-        .status { padding: 12px 16px; border-radius: 8px; margin-top: 16px; display: none; }
-        .status.info { background: #e3f2fd; color: #1565c0; display: block; }
-        .status.success { background: #e8f5e9; color: #2e7d32; display: block; }
-        .status.error { background: #ffebee; color: #c62828; display: block; }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
         
-        .hidden { display: none !important; }
+        .btn-secondary {
+            background-color: var(--color-gray-light);
+            color: var(--color-black);
+        }
         
-        .preview-stats { background: var(--color-gray-light); padding: 16px; border-radius: 8px; margin-top: 16px; }
-        .preview-stats h3 { margin: 0 0 12px 0; font-size: 16px; }
-        .stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--color-gray-medium); }
-        .stat-row:last-child { border-bottom: none; }
+        .btn-secondary:hover {
+            background-color: var(--color-gray-medium);
+        }
         
-        .code-output { margin-top: 20px; }
-        .code-output textarea {
+        .status {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .status.info {
+            background: #e3f2fd;
+            color: #1565c0;
+            display: block;
+        }
+        
+        .status.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            display: block;
+        }
+        
+        .status.error {
+            background: #ffebee;
+            color: #c62828;
+            display: block;
+        }
+        
+        .progress-bar {
             width: 100%;
-            height: 200px;
-            font-family: monospace;
-            font-size: 12px;
-            padding: 12px;
+            height: 8px;
+            background: var(--color-gray-medium);
+            border-radius: 4px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--color-gold);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .preview-list {
+            max-height: 400px;
+            overflow-y: auto;
             border: 1px solid var(--color-gray-medium);
             border-radius: 8px;
-            resize: vertical;
+            margin-top: 16px;
         }
         
-        .copy-feedback {
-            display: inline-block;
-            margin-left: 12px;
-            color: #2e7d32;
-            font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .preview-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .copy-feedback.show { opacity: 1; }
+        
+        .preview-item label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            flex: 1;
+            margin: 0;
+        }
+        
+        .preview-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--color-gold);
+        }
+        
+        .preview-item:last-child {
+            border-bottom: none;
+        }
+        
+        .preview-item .title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .preview-item .slug {
+            font-size: 12px;
+            color: var(--color-gray-text);
+        }
+        
+        .preview-item .status-icon {
+            font-size: 18px;
+            min-width: 90px;
+            text-align: right;
+        }
+        
+        .preview-item .status-icon.pending {
+            color: var(--color-gray-medium);
+        }
+        
+        .preview-item .status-icon.complete {
+            color: #2e7d32;
+        }
+        
+        .preview-item .status-icon.done {
+            color: #2e7d32;
+        }
+        
+        .help-text {
+            font-size: 13px;
+            color: var(--color-gray-text);
+            margin-top: 8px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .step {
+            flex: 1;
+            padding: 12px;
+            background: var(--color-gray-light);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-gray-text);
+        }
+        
+        .step.active {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+        
+        .step.complete {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🦅 Catalog Page Generator</h1>
-        <p class="subtitle">Generate the auction catalog page with filters for Golden Eagle Auctions</p>
+        <h1>🦅 Product Page Generator</h1>
+        <p class="subtitle">Generate standalone product pages from your Google Sheet</p>
+        
+        <div class="step-indicator">
+            <div class="step active" id="step1">1. Load Data</div>
+            <div class="step" id="step2">2. Preview</div>
+            <div class="step" id="step3">3. Generate</div>
+        </div>
         
         <!-- Step 1: Load Data -->
         <div class="card" id="card-load">
-            <h2>1. Load Your Auction Data</h2>
+            <h2>Load Your Auction Data</h2>
             
             <div style="margin-bottom: 20px;">
                 <label style="font-weight: 600; margin-bottom: 8px; display: block;">Choose how to load data:</label>
                 <div style="display: flex; gap: 16px; margin-bottom: 16px;">
-                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: normal;">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
                         <input type="radio" name="load-method" value="file" checked onchange="toggleLoadMethod()"> Upload CSV file
                     </label>
-                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-weight: normal;">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
                         <input type="radio" name="load-method" value="url" onchange="toggleLoadMethod()"> Load from URL
                     </label>
                 </div>
@@ -128,64 +301,247 @@
             
             <div id="file-upload-section">
                 <label for="csv-file">Select CSV File</label>
-                <input type="file" id="csv-file" accept=".csv">
+                <input type="file" id="csv-file" accept=".csv" style="padding: 12px; border: 2px dashed var(--color-gray-medium); border-radius: 8px; width: 100%; box-sizing: border-box; cursor: pointer;">
                 <p class="help-text">Export your Google Sheet as CSV: File → Download → Comma-separated values (.csv)</p>
             </div>
             
             <div id="url-load-section" style="display: none;">
                 <label for="csv-url">Google Sheet CSV URL</label>
-                <input type="url" id="csv-url" placeholder="https://docs.google.com/spreadsheets/d/.../export?format=csv" value="https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384">
+                <input type="url" id="csv-url" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv" value="https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384">
                 <p class="help-text">Paste the URL from your browser when viewing the Google Sheet. <strong>Note:</strong> URL loading only works when this page is hosted on a web server. If opening locally, use "Upload CSV file" instead.</p>
             </div>
             
-            <label for="items-per-page">Items Per Page</label>
-            <input type="number" id="items-per-page" value="48" min="10" max="200">
-            <p class="help-text">Number of items to show per page (default: 48, divisible by 4 for even rows)</p>
+            <label for="catalog-url">Catalog Page URL (for "Back to Catalog" links)</label>
+            <input type="text" id="catalog-url" placeholder="/auction-catalog" value="/auction-catalog">
+            
+            <label for="base-url">Product Pages Base URL (folder where pages will live)</label>
+            <input type="text" id="base-url" placeholder="/" value="/">
+            <p class="help-text">Example: If you enter "/", links will be like "/lot-110-browning-a5"</p>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-gray-medium);">
+                <label>Auction CTA Link (for "Bid Now" buttons)</label>
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <select id="saved-auctions" onchange="loadSavedAuction()" style="flex: 1; padding: 12px; border: 1px solid var(--color-gray-medium); border-radius: 8px; font-size: 14px;">
+                        <option value="">-- Select saved auction --</option>
+                    </select>
+                    <button type="button" class="btn btn-secondary" onclick="deleteSavedAuction()" title="Delete selected">🗑️</button>
+                </div>
+                <input type="url" id="cta-url" placeholder="https://goldeneaglelive.auctiontechs.com/auction/123">
+                <p class="help-text">Link to the current auction on AuctionTechs. Leave empty to hide CTA buttons.</p>
+                <div style="display: flex; gap: 8px; margin-top: 8px;">
+                    <input type="text" id="auction-name" placeholder="Auction name (e.g., Q1 2025 Auction)" style="flex: 1;">
+                    <button type="button" class="btn btn-secondary" onclick="saveAuction()">💾 Save</button>
+                </div>
+            </div>
             
             <button class="btn btn-primary" id="btn-load" onclick="loadData()">Load Data</button>
             
             <div class="status" id="status-load"></div>
         </div>
         
-        <!-- Step 2: Preview & Generate -->
+        <!-- Step 2: Preview -->
         <div class="card hidden" id="card-preview">
-            <h2>2. Preview & Generate</h2>
+            <h2>Select Items to Generate (<span id="item-count">0</span> products found)</h2>
             
-            <div class="preview-stats" id="preview-stats">
-                <h3>Data Summary</h3>
-                <div class="stat-row"><span>Total Items:</span><strong id="stat-total">0</strong></div>
-                <div class="stat-row"><span>Factory New:</span><strong id="stat-new">0</strong></div>
-                <div class="stat-row"><span>Used:</span><strong id="stat-used">0</strong></div>
-                <div class="stat-row"><span>Unique Makes:</span><strong id="stat-makes">0</strong></div>
-                <div class="stat-row"><span>Classifications:</span><strong id="stat-class">0</strong></div>
+            <div style="margin-bottom: 16px; display: flex; gap: 12px; align-items: center;">
+                <button class="btn btn-secondary" onclick="selectAll()">Select All</button>
+                <button class="btn btn-secondary" onclick="selectNone()">Select None</button>
+                <span id="selected-count" style="color: var(--color-gray-text); font-size: 14px;">0 selected</span>
+            </div>
+            
+            <div class="preview-list" id="preview-list">
+                <!-- Items will be inserted here -->
             </div>
             
             <div class="button-group">
                 <button class="btn btn-secondary" onclick="goBack()">← Back</button>
-                <button class="btn btn-primary" onclick="generateCatalog()">Generate Catalog Page</button>
+                <button class="btn btn-primary" id="btn-generate" onclick="generatePages()">Generate Selected Pages</button>
             </div>
-            
-            <div class="status" id="status-generate"></div>
         </div>
         
-        <!-- Step 3: Output -->
-        <div class="card hidden" id="card-output">
-            <h2>3. Copy Code to Orchid</h2>
-            <p>Your catalog page has been generated! Copy the code below and paste it into Orchid's Source Code view.</p>
-            <div class="code-output">
-                <textarea id="code-output" readonly></textarea>
+        <!-- Step 3: Generate -->
+        <div class="card hidden" id="card-generate">
+            <h2>Generating Pages...</h2>
+            
+            <div class="status info" id="status-generate">
+                <span id="generate-status-text">Preparing files...</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
             </div>
-            <div class="button-group">
+            
+            <div class="preview-list" id="generate-list">
+                <!-- Progress will be shown here -->
+            </div>
+            
+            <div class="button-group hidden" id="download-buttons">
                 <button class="btn btn-secondary" onclick="startOver()">Start Over</button>
-                <button class="btn btn-primary" onclick="copyCode()">📋 Copy Code</button>
-                <span class="copy-feedback" id="copy-feedback">Copied!</span>
+                <button class="btn btn-primary" id="btn-download" onclick="downloadZip()">📦 Download ZIP</button>
+            </div>
+            
+            <div class="hidden" id="instructions" style="margin-top: 20px; padding: 16px; background: #fff3cd; border-radius: 8px; font-size: 14px;">
+                <strong>📋 How to add pages to Orchid:</strong>
+                <ol style="margin: 12px 0 0 20px; line-height: 1.8;">
+                    <li>Click <strong>Copy Code</strong> next to an item above</li>
+                    <li>In Orchid, create a new page with the <strong>slug shown above</strong></li>
+                    <li>Switch to <strong>Source Code</strong> view</li>
+                    <li>Paste (Ctrl+V) and save</li>
+                    <li>Repeat for each item</li>
+                </ol>
+                <p style="margin-top: 12px; font-size: 13px; color: #666;">You can also download all files as a ZIP if you prefer.</p>
             </div>
         </div>
     </div>
 
     <script>
+    // Global state
     let csvData = [];
-    let generatedCode = '';
+    let generatedFiles = [];
+    let generatedZip = null;
+    
+    // Configuration
+    let catalogUrl = '/auction-catalog';
+    let baseUrl = '/';
+    let ctaUrl = '';
+    
+    /* ==========================================================================
+       SAVED AUCTIONS MANAGEMENT
+       ========================================================================== */
+    
+    function loadSavedAuctions() {
+        const saved = JSON.parse(localStorage.getItem('gea_saved_auctions') || '[]');
+        const select = document.getElementById('saved-auctions');
+        select.innerHTML = '<option value="">-- Select saved auction --</option>';
+        saved.forEach((auction, idx) => {
+            const opt = document.createElement('option');
+            opt.value = idx;
+            opt.textContent = auction.name;
+            select.appendChild(opt);
+        });
+    }
+    
+    function loadSavedAuction() {
+        const select = document.getElementById('saved-auctions');
+        const idx = select.value;
+        if (idx === '') return;
+        
+        const saved = JSON.parse(localStorage.getItem('gea_saved_auctions') || '[]');
+        if (saved[idx]) {
+            document.getElementById('cta-url').value = saved[idx].url;
+            document.getElementById('auction-name').value = saved[idx].name;
+        }
+    }
+    
+    function saveAuction() {
+        const url = document.getElementById('cta-url').value.trim();
+        const name = document.getElementById('auction-name').value.trim();
+        
+        if (!url || !name) {
+            alert('Please enter both a URL and a name for this auction.');
+            return;
+        }
+        
+        const saved = JSON.parse(localStorage.getItem('gea_saved_auctions') || '[]');
+        
+        // Check if name already exists
+        const existingIdx = saved.findIndex(a => a.name === name);
+        if (existingIdx >= 0) {
+            if (confirm(`"${name}" already exists. Update it with the new URL?`)) {
+                saved[existingIdx].url = url;
+            } else {
+                return;
+            }
+        } else {
+            saved.push({ name, url });
+        }
+        
+        localStorage.setItem('gea_saved_auctions', JSON.stringify(saved));
+        loadSavedAuctions();
+        
+        // Select the newly saved auction
+        const select = document.getElementById('saved-auctions');
+        const newIdx = saved.findIndex(a => a.name === name);
+        select.value = newIdx;
+        
+        alert(`Auction "${name}" saved!`);
+    }
+    
+    function deleteSavedAuction() {
+        const select = document.getElementById('saved-auctions');
+        const idx = select.value;
+        if (idx === '') {
+            alert('Please select a saved auction to delete.');
+            return;
+        }
+        
+        const saved = JSON.parse(localStorage.getItem('gea_saved_auctions') || '[]');
+        const name = saved[idx]?.name;
+        
+        if (confirm(`Delete "${name}"?`)) {
+            saved.splice(idx, 1);
+            localStorage.setItem('gea_saved_auctions', JSON.stringify(saved));
+            loadSavedAuctions();
+            document.getElementById('cta-url').value = '';
+            document.getElementById('auction-name').value = '';
+        }
+    }
+    
+    // Initialize saved auctions on page load
+    document.addEventListener('DOMContentLoaded', loadSavedAuctions);
+    
+    /* ==========================================================================
+       CSV PARSING
+       ========================================================================== */
+    
+    function parseCSV(text) {
+        const rows = [];
+        let i = 0, field = '', row = [], inQuotes = false;
+        
+        while (i < text.length) {
+            const c = text[i], n = text[i + 1];
+            
+            if (inQuotes) {
+                if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
+                if (c === '"') { inQuotes = false; i++; continue; }
+                field += c; i++; continue;
+            }
+            
+            if (c === '"') { inQuotes = true; i++; continue; }
+            if (c === ',') { row.push(field); field = ''; i++; continue; }
+            if (c === '\n') { row.push(field); rows.push(row); field = ''; row = []; i++; continue; }
+            if (c === '\r') { i++; continue; }
+            
+            field += c; i++;
+        }
+        
+        if (field.length || row.length) { row.push(field); rows.push(row); }
+        
+        return rows;
+    }
+    
+    function csvToObjects(rows) {
+        if (rows.length < 2) return [];
+        
+        const headers = rows[0].map(h => h.trim());
+        const objects = [];
+        
+        for (let i = 1; i < rows.length; i++) {
+            const obj = {};
+            headers.forEach((header, idx) => {
+                obj[header] = rows[i][idx] || '';
+            });
+            // Only include rows that have a title
+            if (obj['Title'] && obj['Title'].trim()) {
+                objects.push(obj);
+            }
+        }
+        
+        return objects;
+    }
+    
+    /* ==========================================================================
+       STEP 1: LOAD DATA
+       ========================================================================== */
     
     function toggleLoadMethod() {
         const method = document.querySelector('input[name="load-method"]:checked').value;
@@ -193,54 +549,37 @@
         document.getElementById('url-load-section').style.display = method === 'url' ? 'block' : 'none';
     }
     
-    function parseCSV(text) {
-        const rows = [];
-        let i = 0, field = "", row = [], inQuotes = false;
-        while (i < text.length) {
-            const c = text[i], n = text[i + 1];
-            if (inQuotes) {
-                if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
-                if (c === '"') { inQuotes = false; i++; continue; }
-                field += c; i++; continue;
-            }
-            if (c === '"') { inQuotes = true; i++; continue; }
-            if (c === ',') { row.push(field); field = ""; i++; continue; }
-            if (c === '\n') { row.push(field); rows.push(row); field = ""; row = []; i++; continue; }
-            if (c === '\r') { i++; continue; }
-            field += c; i++;
-        }
-        if (field.length || row.length) { row.push(field); rows.push(row); }
-        return rows;
-    }
-    
-    function csvToObjects(rows) {
-        if (rows.length < 2) return [];
-        const headers = rows[0].map(h => h.trim());
-        return rows.slice(1).map(row => {
-            const obj = {};
-            headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
-            return obj;
-        }).filter(obj => obj['Title'] && obj['Title'].trim());
-    }
-    
     async function loadData() {
         const method = document.querySelector('input[name="load-method"]:checked').value;
         const statusEl = document.getElementById('status-load');
         const btnLoad = document.getElementById('btn-load');
+        
+        // Get configuration
+        catalogUrl = document.getElementById('catalog-url').value.trim() || '/auction-catalog';
+        baseUrl = document.getElementById('base-url').value.trim() || '/';
+        if (!baseUrl.endsWith('/')) baseUrl += '/';
+        ctaUrl = document.getElementById('cta-url').value.trim();
         
         btnLoad.disabled = true;
         statusEl.className = 'status info';
         
         try {
             let csvText;
+            
             if (method === 'file') {
                 const fileInput = document.getElementById('csv-file');
-                if (!fileInput.files || fileInput.files.length === 0) throw new Error('Please select a CSV file');
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    throw new Error('Please select a CSV file');
+                }
+                
                 statusEl.textContent = 'Reading file...';
                 csvText = await fileInput.files[0].text();
+                
             } else {
                 let csvUrl = document.getElementById('csv-url').value.trim();
-                if (!csvUrl) throw new Error('Please enter a CSV URL');
+                if (!csvUrl) {
+                    throw new Error('Please enter a CSV URL');
+                }
                 
                 // Convert edit URL to export URL if needed
                 csvUrl = convertToExportUrl(csvUrl);
@@ -252,19 +591,23 @@
                 
                 statusEl.textContent = 'Loading data from Google Sheets...';
                 const response = await fetch(csvUrl, { cache: 'no-store' });
-                if (!response.ok) throw new Error('Failed to fetch CSV. If opening this file locally, use "Upload CSV file" instead (CORS restriction).');
+                if (!response.ok) throw new Error('Failed to fetch CSV. Make sure the sheet is publicly accessible or use "Upload CSV file" instead.');
                 csvText = await response.text();
             }
             
             const rows = parseCSV(csvText);
             csvData = csvToObjects(rows);
             
-            if (csvData.length === 0) throw new Error('No valid items found in spreadsheet');
+            if (csvData.length === 0) {
+                throw new Error('No valid products found in spreadsheet');
+            }
             
             statusEl.className = 'status success';
-            statusEl.textContent = `Successfully loaded ${csvData.length} items!`;
+            statusEl.textContent = `Successfully loaded ${csvData.length} products!`;
             
+            // Move to step 2
             setTimeout(() => showPreview(), 500);
+            
         } catch (error) {
             statusEl.className = 'status error';
             statusEl.textContent = 'Error: ' + error.message;
@@ -289,94 +632,202 @@
         return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
     }
     
+    /* ==========================================================================
+       STEP 2: PREVIEW
+       ========================================================================== */
+    
     function showPreview() {
         document.getElementById('card-load').classList.add('hidden');
         document.getElementById('card-preview').classList.remove('hidden');
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step1').classList.add('complete');
+        document.getElementById('step2').classList.add('active');
         
-        const total = csvData.length;
-        const factoryNew = csvData.filter(r => (r['Condition'] || '').toLowerCase() === 'factory new').length;
-        const used = csvData.filter(r => (r['Condition'] || '').toLowerCase() === 'used').length;
-        const makes = new Set(csvData.map(r => r['Make']).filter(Boolean)).size;
-        const classifications = new Set(csvData.map(r => r['Classification']).filter(Boolean)).size;
+        document.getElementById('item-count').textContent = csvData.length;
         
-        document.getElementById('stat-total').textContent = total;
-        document.getElementById('stat-new').textContent = factoryNew;
-        document.getElementById('stat-used').textContent = used;
-        document.getElementById('stat-makes').textContent = makes;
-        document.getElementById('stat-class').textContent = classifications;
+        const listEl = document.getElementById('preview-list');
+        listEl.innerHTML = csvData.map((item, idx) => {
+            const slug = getSlug(item, idx);
+            return `
+                <div class="preview-item">
+                    <label>
+                        <input type="checkbox" class="item-checkbox" data-index="${idx}" checked onchange="updateSelectedCount()">
+                        <div>
+                            <div class="title">${escapeHtml(item['Title'] || 'Untitled')}</div>
+                            <div class="slug">Orchid slug: <strong>${slug}</strong></div>
+                        </div>
+                    </label>
+                </div>
+            `;
+        }).join('');
+        
+        updateSelectedCount();
+    }
+    
+    function selectAll() {
+        document.querySelectorAll('.item-checkbox').forEach(cb => cb.checked = true);
+        updateSelectedCount();
+    }
+    
+    function selectNone() {
+        document.querySelectorAll('.item-checkbox').forEach(cb => cb.checked = false);
+        updateSelectedCount();
+    }
+    
+    function updateSelectedCount() {
+        const total = document.querySelectorAll('.item-checkbox').length;
+        const selected = document.querySelectorAll('.item-checkbox:checked').length;
+        document.getElementById('selected-count').textContent = `${selected} of ${total} selected`;
+        document.getElementById('btn-generate').disabled = selected === 0;
+    }
+    
+    function getSelectedIndices() {
+        const indices = [];
+        document.querySelectorAll('.item-checkbox:checked').forEach(cb => {
+            indices.push(parseInt(cb.dataset.index));
+        });
+        return indices;
     }
     
     function goBack() {
         document.getElementById('card-preview').classList.add('hidden');
         document.getElementById('card-load').classList.remove('hidden');
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step1').classList.remove('complete');
+        document.getElementById('step1').classList.add('active');
         document.getElementById('btn-load').disabled = false;
     }
     
-    function startOver() { location.reload(); }
+    /* ==========================================================================
+       STEP 3: GENERATE PAGES
+       ========================================================================== */
     
-    function generateCatalog() {
-        const statusEl = document.getElementById('status-generate');
-        statusEl.className = 'status info';
-        statusEl.textContent = 'Generating catalog page...';
+    async function generatePages() {
+        const selectedIndices = getSelectedIndices();
         
-        const itemsPerPage = parseInt(document.getElementById('items-per-page').value) || 50;
-        
-        // Build items with all needed fields
-        const itemsJson = JSON.stringify(csvData.map(row => ({
-            title: row['Title'] || '',
-            seoSlug: row['SEO Title/URL Slug'] || '',
-            make: row['Make'] || '',
-            model: row['Model'] || '',
-            condition: row['Condition'] || '',
-            conditionDesc: row['Condition Description'] || '',
-            caliber: row['Caliber/Gauge'] || '',
-            classification: row['Classification'] || '',
-            imageURL: row['ImageURL'] || '',
-            description: row['Overview'] || row['Description'] || '',
-            ctaUrl: row['CTA URL'] || '',
-            currentHighBid: row['Current High Bid'] || ''
-        })));
-        
-        // Extract unique values for filters
-        const makes = [...new Set(csvData.map(r => r['Make']).filter(Boolean))].sort();
-        const models = [...new Set(csvData.map(r => r['Model']).filter(Boolean))].sort();
-        const calibers = [...new Set(csvData.map(r => r['Caliber/Gauge']).filter(Boolean))].sort();
-        const classifications = [...new Set(csvData.map(r => r['Classification']).filter(Boolean))].sort();
-        
-        generatedCode = getCatalogTemplate(itemsJson, itemsPerPage, makes, models, calibers, classifications);
-        
-        statusEl.className = 'status success';
-        statusEl.textContent = 'Catalog page generated successfully!';
+        if (selectedIndices.length === 0) {
+            alert('Please select at least one item to generate.');
+            return;
+        }
         
         document.getElementById('card-preview').classList.add('hidden');
-        document.getElementById('card-output').classList.remove('hidden');
-        document.getElementById('code-output').value = generatedCode;
+        document.getElementById('card-generate').classList.remove('hidden');
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('step2').classList.add('complete');
+        document.getElementById('step3').classList.add('active');
+        
+        generatedFiles = [];
+        const zip = new JSZip();
+        
+        const listEl = document.getElementById('generate-list');
+        const progressFill = document.getElementById('progress-fill');
+        const statusText = document.getElementById('generate-status-text');
+        
+        // Build the list showing only selected items
+        listEl.innerHTML = selectedIndices.map((idx, listPosition) => {
+            const item = csvData[idx];
+            const slug = getSlug(item, idx);
+            return `
+                <div class="preview-item" id="gen-item-${listPosition}">
+                    <div>
+                        <div class="title">${escapeHtml(item['Title'] || 'Untitled')}</div>
+                        <div class="slug">Orchid slug: <strong>${slug}</strong></div>
+                    </div>
+                    <div class="status-icon pending" id="gen-status-${listPosition}">○</div>
+                </div>
+            `;
+        }).join('');
+        
+        // Generate each selected file
+        for (let listPosition = 0; listPosition < selectedIndices.length; listPosition++) {
+            const idx = selectedIndices[listPosition];
+            const item = csvData[idx];
+            const slug = getSlug(item, idx);
+            const filename = `${slug}.html`;
+            
+            // Determine prev/next based on FULL spreadsheet order (not just selected items)
+            const prevItem = idx > 0 ? csvData[idx - 1] : null;
+            const nextItem = idx < csvData.length - 1 ? csvData[idx + 1] : null;
+            
+            const prevSlug = prevItem ? getSlug(prevItem, idx - 1) : null;
+            const nextSlug = nextItem ? getSlug(nextItem, idx + 1) : null;
+            
+            const navigation = {
+                prevURL: prevSlug ? `${baseUrl}${prevSlug}` : null,
+                prevTitle: prevItem ? prevItem['Title'] : null,
+                nextURL: nextSlug ? `${baseUrl}${nextSlug}` : null,
+                nextTitle: nextItem ? nextItem['Title'] : null,
+                catalogURL: catalogUrl
+            };
+            
+            // Generate HTML content
+            const htmlContent = generateProductHTML(item, navigation);
+            
+            // Add to zip
+            zip.file(filename, htmlContent);
+            generatedFiles.push({ filename, content: htmlContent });
+            
+            // Update UI
+            document.getElementById(`gen-status-${listPosition}`).innerHTML = `<button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="copyCode(${listPosition})">Copy Code</button>`;
+            document.getElementById(`gen-status-${listPosition}`).classList.remove('pending');
+            document.getElementById(`gen-status-${listPosition}`).classList.add('complete');
+            
+            const progress = ((listPosition + 1) / selectedIndices.length) * 100;
+            progressFill.style.width = progress + '%';
+            statusText.textContent = `Processing ${listPosition + 1} of ${selectedIndices.length}...`;
+            
+            // Small delay for UI update
+            await new Promise(r => setTimeout(r, 10));
+        }
+        
+        // Store zip for download
+        generatedZip = zip;
+        
+        // Complete
+        statusText.textContent = `✓ Successfully generated ${selectedIndices.length} product pages!`;
+        document.getElementById('status-generate').classList.remove('info');
+        document.getElementById('status-generate').classList.add('success');
+        document.getElementById('download-buttons').classList.remove('hidden');
+        document.getElementById('instructions').classList.remove('hidden');
+        document.getElementById('step3').classList.remove('active');
+        document.getElementById('step3').classList.add('complete');
     }
     
-    function copyCode() {
+    function downloadZip() {
+        if (!generatedZip) return;
+        
+        generatedZip.generateAsync({ type: 'blob' }).then(blob => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'product-pages.zip';
+            link.click();
+            URL.revokeObjectURL(link.href);
+        });
+    }
+    
+    function copyCode(index) {
+        const content = generatedFiles[index].content;
+        
         // Try modern clipboard API first
         if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(generatedCode).then(() => {
-                showCopySuccess();
+            navigator.clipboard.writeText(content).then(() => {
+                showCopySuccess(index);
             }).catch(err => {
-                fallbackCopy();
+                // Fallback for iframe/security restrictions
+                fallbackCopy(content, index);
             });
         } else {
-            fallbackCopy();
+            fallbackCopy(content, index);
         }
     }
     
-    function showCopySuccess() {
-        const feedback = document.getElementById('copy-feedback');
-        feedback.classList.add('show');
-        setTimeout(() => feedback.classList.remove('show'), 2000);
-    }
-    
-    function fallbackCopy() {
+    function fallbackCopy(content, index) {
+        // Create a temporary textarea
         const textarea = document.createElement('textarea');
-        textarea.value = generatedCode;
+        textarea.value = content;
         textarea.style.position = 'fixed';
         textarea.style.left = '-9999px';
+        textarea.style.top = '0';
         document.body.appendChild(textarea);
         textarea.focus();
         textarea.select();
@@ -384,706 +835,1713 @@
         try {
             const successful = document.execCommand('copy');
             if (successful) {
-                showCopySuccess();
+                showCopySuccess(index);
             } else {
-                showCopyModal();
+                showCopyModal(content);
             }
         } catch (err) {
-            showCopyModal();
+            showCopyModal(content);
         }
         
         document.body.removeChild(textarea);
     }
     
-    function showCopyModal() {
+    function showCopySuccess(index) {
+        const btn = document.querySelector(`#gen-status-${index} button`);
+        if (btn) {
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.style.background = '#4CAF50';
+            btn.style.color = 'white';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.style.color = '';
+            }, 1500);
+        }
+    }
+    
+    function showCopyModal(content) {
+        // Create modal for manual copy
         const modal = document.createElement('div');
         modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;';
         modal.innerHTML = `
             <div style="background:#fff;border-radius:12px;padding:24px;max-width:600px;width:100%;max-height:80vh;display:flex;flex-direction:column;">
                 <h3 style="margin:0 0 12px;">Copy Code Manually</h3>
                 <p style="margin:0 0 12px;color:#666;font-size:14px;">Select all text below (Ctrl+A) and copy it (Ctrl+C):</p>
-                <textarea style="flex:1;min-height:200px;font-family:monospace;font-size:11px;padding:12px;border:1px solid #ddd;border-radius:8px;resize:none;" readonly>${generatedCode.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
+                <textarea style="flex:1;min-height:200px;font-family:monospace;font-size:11px;padding:12px;border:1px solid #ddd;border-radius:8px;resize:none;" readonly>${content.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</textarea>
                 <button onclick="this.parentElement.parentElement.remove()" style="margin-top:12px;padding:12px 24px;background:#BAA342;color:#242424;border:none;border-radius:999px;font-weight:700;cursor:pointer;">Close</button>
             </div>
         `;
         document.body.appendChild(modal);
-        modal.querySelector('textarea').focus();
-        modal.querySelector('textarea').select();
+        
+        // Auto-select the textarea content
+        const textarea = modal.querySelector('textarea');
+        textarea.focus();
+        textarea.select();
     }
     
-    function getCatalogTemplate(itemsJson, itemsPerPage, makes, models, calibers, classifications) {
-        return `<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Auction Catalog</title>
-<meta property="og:title" content="Auction Catalog" />
-<meta property="og:description" content="Browse our auction inventory" />
-<style type="text/css">
-  :root { 
-    --gap: 20px; 
-    --card-radius: 14px; 
-    --max: 1200px;
-    --color-black: #242424;
-    --color-gold: #BAA342;
-    --color-gray-light: #F5F5F5;
-    --color-gray-medium: #DDDDDD;
-    --color-gray-text: #555555;
-  }
-  * { box-sizing: border-box; }
-  body { font-family: Arial, sans-serif; margin: 0; padding: 24px; background: #fafafa; }
-  
-  /* Search and Filter Bar */
-  .filter-section { max-width: var(--max); margin: 0 auto 20px; padding-top: 30px; }
-  .search-row { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
-  .search-row input[type="search"] { flex: 1 1 300px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; }
-  .search-row .clear-btn { padding: 12px 20px; border: 1px solid #ddd; background: #fff; border-radius: 10px; cursor: pointer; font-size: 14px; }
-  .search-row .clear-btn:hover { background: #f5f5f5; }
-  .result-count { font-size: 14px; color: var(--color-gray-text); padding: 0 8px; }
-  
-  .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
-  
-  /* Multi-select dropdown */
-  .filter-dropdown { position: relative; min-width: 160px; flex: 1 1 160px; max-width: 220px; }
-  .filter-dropdown .dropdown-btn {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .filter-dropdown .dropdown-btn:hover { border-color: #999; }
-  .filter-dropdown .dropdown-btn.active { border-color: var(--color-gold); background: #fffdf5; }
-  .filter-dropdown .dropdown-btn .arrow { transition: transform 0.2s; }
-  .filter-dropdown.open .dropdown-btn .arrow { transform: rotate(180deg); }
-  .filter-dropdown .badge { background: var(--color-gold); color: var(--color-black); font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 10px; margin-left: 6px; }
-  
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 100;
-    max-height: 280px;
-    overflow: hidden;
-    flex-direction: column;
-  }
-  .filter-dropdown.open .dropdown-menu { display: flex; }
-  
-  .dropdown-search { padding: 8px; border-bottom: 1px solid #eee; }
-  .dropdown-search input { width: 100%; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
-  
-  .dropdown-options { overflow-y: auto; max-height: 220px; padding: 4px 0; }
-  .dropdown-option { display: flex; align-items: center; padding: 8px 12px; cursor: pointer; font-size: 13px; }
-  .dropdown-option:hover { background: #f5f5f5; }
-  .dropdown-option input { margin-right: 8px; cursor: pointer; }
-  .dropdown-option.selected { background: #fffdf5; }
-  .dropdown-option .count { margin-left: auto; font-size: 11px; color: #999; }
-  
-  .dropdown-actions { display: flex; justify-content: space-between; padding: 8px; border-top: 1px solid #eee; }
-  .dropdown-actions button { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; background: #eee; }
-  .dropdown-actions button:hover { background: #ddd; }
-  
-  /* Condition toggle buttons */
-  .condition-filter { display: flex; gap: 8px; align-items: center; }
-  .condition-filter span.label { font-size: 14px; font-weight: 600; margin-right: 4px; }
-  .condition-btn {
-    padding: 10px 16px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fff;
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.2s;
-  }
-  .condition-btn:hover { border-color: #999; }
-  .condition-btn.active { background: var(--color-gold); border-color: var(--color-gold); font-weight: 600; }
-  
-  /* Active filters display */
-  .active-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-  .active-filters:empty { display: none; }
-  .filter-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 10px;
-    background: var(--color-gray-light);
-    border-radius: 20px;
-    font-size: 12px;
-  }
-  .filter-tag .remove { cursor: pointer; font-weight: bold; opacity: 0.6; }
-  .filter-tag .remove:hover { opacity: 1; }
-  .clear-all-filters { padding: 6px 12px; background: none; border: 1px solid #ddd; border-radius: 20px; font-size: 12px; cursor: pointer; }
-  .clear-all-filters:hover { background: #f5f5f5; }
-  
-  /* Pagination */
-  .pagination { max-width: var(--max); margin: 20px auto; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .pagination button { padding: 8px 12px; border: 1px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s ease; min-width: 40px; }
-  .pagination button:hover:not(:disabled) { background: #f5f5f5; border-color: #999; }
-  .pagination button.active { background: var(--color-black); color: #fff; border-color: var(--color-black); }
-  .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
-  .pagination .page-info { padding: 0 12px; font-size: 14px; color: #666; }
-  .items-info { max-width: var(--max); margin: 10px auto; text-align: center; font-size: 14px; color: #666; }
-  
-  /* Catalog grid */
-  .catalog-container { max-width: var(--max); margin: 0 auto; display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .catalog-item { background: #fff; border: 1px solid #e9e9e9; border-radius: var(--card-radius); overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,.06); transition: transform .2s ease; display: flex; flex-direction: column; text-decoration: none; color: inherit; max-width: 320px; }
-  .catalog-item:hover { transform: translateY(-3px); }
-  .catalog-item .thumb { width: 100%; aspect-ratio: 4/3; background:#fff; position: relative; overflow: hidden; }
-  .thumb img { width: 100%; height: 100%; object-fit: contain; background:#fff; }
-  .catalog-item .pad { padding: 14px; display: flex; flex-direction: column; flex: 1; }
-  .catalog-item h3 { margin: 6px 0 8px; font-size: 18px; color: var(--color-black); }
-  .meta { font-size: 14px; color: var(--color-gray-text); margin-bottom: 10px; flex-grow: 1; }
-  .high-bid { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px; margin-bottom: 12px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 8px; border: 1px solid var(--color-gold); }
-  .high-bid-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-gold); }
-  .high-bid-amount { font-size: 18px; font-weight: 700; color: #fff; }
-  .card-bottom { margin-top: auto; }
-  .btn-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-  .btn { display: inline-block; background: var(--color-gold); color: var(--color-black); text-decoration: none; padding: 12px 24px; border-radius: 999px; font-weight: 700; font-size: 14px; transition: all 0.2s ease; border: none; cursor: pointer; }
-  .btn:hover { background: var(--color-black); color: #fff; }
-  .empty { max-width: var(--max); margin: 30px auto; color:#666; text-align:center; }
-  
-  @media (max-width: 768px) {
-    .filter-bar { flex-direction: column; }
-    .filter-dropdown { max-width: none; }
-    .condition-filter { width: 100%; justify-content: flex-start; }
-  }
-  @media (max-width: 600px){
-    body { padding: 12px; }
-    .catalog-container { gap: 14px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-    .catalog-item { max-width: none; }
-    .pagination button { padding: 6px 10px; font-size: 13px; min-width: 35px; }
-    .catalog-item h3 { font-size: 16px; }
-    .btn { padding: 10px 20px; font-size: 13px; }
-    .high-bid { padding: 8px; }
-    .high-bid-label { font-size: 9px; }
-    .high-bid-amount { font-size: 16px; }
-  }
-</style>
-
-<div class="filter-section">
-  <div class="search-row">
-    <input id="search" placeholder="Search by title, make, model, caliber..." type="search" />
-    <button class="clear-btn" onclick="clearSearch()">Clear</button>
-    <span class="result-count" id="result-count"></span>
-  </div>
-  
-  <div class="filter-bar">
-    <div class="filter-dropdown" id="filter-make">
-      <button class="dropdown-btn" onclick="toggleDropdown('make')">
-        <span>Make <span class="badge" id="badge-make" style="display:none">0</span></span>
-        <span class="arrow">▼</span>
-      </button>
-      <div class="dropdown-menu">
-        <div class="dropdown-search"><input type="text" placeholder="Search makes..." oninput="searchInDropdown('make', this.value)"></div>
-        <div class="dropdown-options" id="options-make"></div>
-        <div class="dropdown-actions">
-          <button onclick="selectAllVisible('make')">Select All</button>
-          <button onclick="clearFilter('make')">Clear</button>
-        </div>
-      </div>
-    </div>
-    
-    <div class="filter-dropdown" id="filter-model">
-      <button class="dropdown-btn" onclick="toggleDropdown('model')">
-        <span>Model <span class="badge" id="badge-model" style="display:none">0</span></span>
-        <span class="arrow">▼</span>
-      </button>
-      <div class="dropdown-menu">
-        <div class="dropdown-search"><input type="text" placeholder="Search models..." oninput="searchInDropdown('model', this.value)"></div>
-        <div class="dropdown-options" id="options-model"></div>
-        <div class="dropdown-actions">
-          <button onclick="selectAllVisible('model')">Select All</button>
-          <button onclick="clearFilter('model')">Clear</button>
-        </div>
-      </div>
-    </div>
-    
-    <div class="filter-dropdown" id="filter-caliber">
-      <button class="dropdown-btn" onclick="toggleDropdown('caliber')">
-        <span>Caliber <span class="badge" id="badge-caliber" style="display:none">0</span></span>
-        <span class="arrow">▼</span>
-      </button>
-      <div class="dropdown-menu">
-        <div class="dropdown-search"><input type="text" placeholder="Search calibers..." oninput="searchInDropdown('caliber', this.value)"></div>
-        <div class="dropdown-options" id="options-caliber"></div>
-        <div class="dropdown-actions">
-          <button onclick="selectAllVisible('caliber')">Select All</button>
-          <button onclick="clearFilter('caliber')">Clear</button>
-        </div>
-      </div>
-    </div>
-    
-    <div class="filter-dropdown" id="filter-classification">
-      <button class="dropdown-btn" onclick="toggleDropdown('classification')">
-        <span>Type <span class="badge" id="badge-classification" style="display:none">0</span></span>
-        <span class="arrow">▼</span>
-      </button>
-      <div class="dropdown-menu">
-        <div class="dropdown-search"><input type="text" placeholder="Search types..." oninput="searchInDropdown('classification', this.value)"></div>
-        <div class="dropdown-options" id="options-classification"></div>
-        <div class="dropdown-actions">
-          <button onclick="selectAllVisible('classification')">Select All</button>
-          <button onclick="clearFilter('classification')">Clear</button>
-        </div>
-      </div>
-    </div>
-    
-    <div class="condition-filter">
-      <span class="label">Condition:</span>
-      <button class="condition-btn" id="cond-new" onclick="toggleCondition('new')">Factory New</button>
-      <button class="condition-btn" id="cond-used" onclick="toggleCondition('used')">Used</button>
-    </div>
-  </div>
-  
-  <div class="active-filters" id="active-filters"></div>
-</div>
-
-<div class="pagination" id="pagination-top"></div>
-<div class="items-info" id="items-info-top"></div>
-<div aria-live="polite" class="catalog-container" id="catalog"></div>
-<div class="empty" id="empty" style="display:none;">No items match your filters.</div>
-<div class="items-info" id="items-info-bottom"></div>
-<div class="pagination" id="pagination-bottom"></div>
-
-<script>
-(function() {
-  const ITEMS = ${itemsJson};
-  const ITEMS_PER_PAGE = ${itemsPerPage};
-  
-  // All unique values for each filter (stored as arrays for index-based access)
-  const OPTIONS = {
-    make: ${JSON.stringify(makes)},
-    model: ${JSON.stringify(models)},
-    caliber: ${JSON.stringify(calibers)},
-    classification: ${JSON.stringify(classifications)}
-  };
-
-  // State - store selected values as Sets for fast lookup
-  const filters = {
-    make: new Set(),
-    model: new Set(),
-    caliber: new Set(),
-    classification: new Set(),
-    condition: new Set()
-  };
-  
-  let searchQuery = '';
-  let searchTerms = { make: '', model: '', caliber: '', classification: '' };
-  let filteredItems = [...ITEMS];
-  let currentPage = 1;
-
-  // Escape HTML for display
-  function esc(s) {
-    const div = document.createElement('div');
-    div.textContent = s || '';
-    return div.innerHTML;
-  }
-
-  function generateSlug(text) {
-    if (!text) return '';
-    return String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-  }
-
-  function toImageUrl(token, size) {
-    size = size || 'w400';
-    if (!token) return "";
-    const t = String(token).trim();
-    if (/^https?:\\/\\//i.test(t)) {
-      const m = t.match(/(?:\\/d\\/|[?&]id=)([A-Za-z0-9_-]{20,})/);
-      if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=' + size;
-      return t;
+    function startOver() {
+        location.reload();
     }
-    return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(t) + '&sz=' + size;
-  }
+    
+    /* ==========================================================================
+       HTML GENERATION
+       ========================================================================== */
+    
+    function getSlug(item, idx) {
+        // Use the exact SEO Title/URL Slug value if present, otherwise generate from title
+        const seoSlug = (item['SEO Title/URL Slug'] || '').trim();
+        if (seoSlug) return seoSlug
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        // Fallback: generate slug from title
+        return (item['Title'] || `item-${idx}`)
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function toImageUrl(token, size = 'w1600') {
+        if (!token) return "";
+        const t = String(token).trim();
+        
+        if (/^https?:\/\//i.test(t)) {
+            if (/(?:\/folders\/)/i.test(t)) return t;
+            
+            let id = null;
+            const m = t.match(/(?:\/d\/|[?&]id=)([A-Za-z0-9_-]{20,})/);
+            if (m) id = m[1];
+            if (!id) { 
+                try { id = new URL(t).searchParams.get("id"); } catch(e) {} 
+            }
+            
+            if (id) {
+                if (size === 'original') {
+                    return `https://drive.google.com/uc?export=view&id=${id}`;
+                }
+                return `https://drive.google.com/thumbnail?id=${id}&sz=${size}`;
+            }
+            return t;
+        }
+        
+        if (size === 'original') {
+            return `https://drive.google.com/uc?export=view&id=${encodeURIComponent(t)}`;
+        }
+        return `https://drive.google.com/thumbnail?id=${encodeURIComponent(t)}&sz=${size}`;
+    }
+    
+    function collectImages(row) {
+        const images = [];
+        for (let i = 1; i <= 15; i++) {
+            const col = i === 1 ? 'ImageURL' : `ImageURL${i}`;
+            if (row[col] && row[col].trim()) {
+                images.push(row[col].trim());
+            }
+        }
+        return images;
+    }
+    
+    function generateProductHTML(row, navigation) {
+        const images = collectImages(row);
+        
+        // Parse arrays from newline-separated text
+        const featureHighlights = row['Feature Highlights'] 
+            ? row['Feature Highlights'].split(/\r?\n/).filter(line => line.trim())
+            : [];
+        
+        const accessories = row['Accessories & Paperwork']
+            ? row['Accessories & Paperwork'].split(/\r?\n/).filter(line => line.trim())
+            : [];
+        
+        // Build the product data object as a string for embedding
+        const productData = {
+            seoSlug: row['SEO Title/URL Slug'] || '',
+            title: row['Title'] || '',
+            itemURL: row['ItemURL'] || '',
+            images: images,
+            overview: row['Overview'] || '',
+            identification: {
+                upc: row['UPC'] || '',
+                make: row['Make'] || '',
+                model: row['Model'] || '',
+                serialNumber: row['SerialNumber'] || '',
+                caliber: row['Caliber/Gauge'] || '',
+                barrelLength: row['BarrelLength'] || '',
+                origin: row['Origin'] || '',
+                barrelMarkings: row['Barrel Markings'] || '',
+                condition: (row['Condition'] || '').trim().toLowerCase() === 'used' 
+                    ? `Used - ${(row['Condition Description'] || 'Unknown').trim()}` 
+                    : (row['Condition'] || '').trim(),
+                included: row['Included'] || ''
+            },
+            ipSummary: row['I&P Summary'] || '',
+            conditionGrade: (row['Condition'] || '').trim().toLowerCase() === 'used' 
+                ? `Used - ${(row['Condition Description'] || 'Unknown').trim()}` 
+                : (row['Condition'] || '').trim(),
+            conditionScale: parseFloat(row['Condition Scale']) || null,
+            conditionParagraph: row['Condition Summary'] || '',
+            mechanics: row['Mechanics'] || '',
+            boreRating: parseFloat(row['Bore Rating']) || null,
+            specs: {
+                caliber: row['Caliber/Gauge'] || '',
+                barrelLength: row['BarrelLength'] || '',
+                actionType: row['Action Type'] || '',
+                overallLength: row['Overal Length'] || '',
+                chamber: row['Chamber'] || '',
+                gasSystem: row['Gas System'] || '',
+                sights: row['Sights'] || '',
+                stock: row['Stock'] || '',
+                receiver: row['Receiver'] || '',
+                magazineCapacity: row['Magazine Capacity'] || ''
+            },
+            accessories: accessories,
+            notesForBuyers: row['Notes For Buyers'] || '',
+            featureHighlights: featureHighlights,
+            marketNote: row['Market Note'] || '',
+            navigation: navigation,
+            ctaUrl: row['CTA URL'] || ctaUrl,  // Item-specific CTA URL with fallback to global
+            currentHighBid: row['Current High Bid'] || '',
+            proxibidHighBid: row['Proxibid High Bid'] || '',
+            hammerPrice: row['Hammer Price'] || ''
+        };
+        
+        return getProductTemplate(productData);
+    }
+    
+    function getProductTemplate(data) {
+        // Build navigation HTML
+        const prevDisabled = !data.navigation.prevURL ? 'disabled' : '';
+        const nextDisabled = !data.navigation.nextURL ? 'disabled' : '';
+        const prevHref = data.navigation.prevURL || '#';
+        const nextHref = data.navigation.nextURL || '#';
+        
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escapeHtml(data.title)} | Golden Eagle Auctions</title>
+    
+    <!-- Open Graph meta tags for link previews -->
+    <meta property="og:title" content="${escapeHtml(data.title)}">
+    <meta property="og:description" content="${escapeHtml(data.overview).substring(0, 200)}">
+    <meta property="og:image" content="${data.images.length > 0 ? toImageUrl(data.images[0], 'w1200') : ''}">
+    <meta property="og:url" content="">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --color-black: #242424;
+            --color-gold: #BAA342;
+            --color-gray-light: #F5F5F5;
+            --color-gray-medium: #DDDDDD;
+            --color-gray-text: #555555;
+            --color-gray-muted: #777777;
+            --color-white: #FFFFFF;
+            --max-width: 1200px;
+        }
 
-  function formatCondition(item) {
-    const condition = (item.condition || '').trim();
-    const conditionDesc = (item.conditionDesc || '').trim();
-    if (condition.toLowerCase() === 'used' && conditionDesc) return 'Used - ' + conditionDesc;
-    return condition;
-  }
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  // Get items matching all filters EXCEPT the specified one (for cascading counts)
-  function getFilteredItemsExcept(exceptKey) {
-    return ITEMS.filter(function(item) {
-      if (searchQuery) {
-        const searchText = [item.title, item.make, item.model, item.caliber, item.description, item.classification].join(' ').toLowerCase();
-        if (searchText.indexOf(searchQuery) === -1) return false;
-      }
-      
-      if (exceptKey !== 'make' && filters.make.size > 0) {
-        if (!filters.make.has(item.make)) return false;
-      }
-      if (exceptKey !== 'model' && filters.model.size > 0) {
-        if (!filters.model.has(item.model)) return false;
-      }
-      if (exceptKey !== 'caliber' && filters.caliber.size > 0) {
-        if (!filters.caliber.has(item.caliber)) return false;
-      }
-      if (exceptKey !== 'classification' && filters.classification.size > 0) {
-        if (!filters.classification.has(item.classification)) return false;
-      }
-      if (exceptKey !== 'condition' && filters.condition.size > 0) {
-        const itemCond = (item.condition || '').toLowerCase();
-        const isNew = itemCond === 'factory new';
-        const isUsed = itemCond === 'used';
-        const wantNew = filters.condition.has('new');
-        const wantUsed = filters.condition.has('used');
-        if (wantNew && wantUsed) { /* both selected, show all */ }
-        else if (wantNew && !isNew) return false;
-        else if (wantUsed && !isUsed) return false;
-      }
-      
-      return true;
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-black);
+            background-color: var(--color-white);
+        }
+
+        a {
+            color: var(--color-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-black);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ========== TOP NAVIGATION BAR ========== */
+        .page-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-gray-medium);
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .page-nav.bottom {
+            margin-top: 30px;
+            margin-bottom: 0;
+            padding-top: 24px;
+            padding-bottom: 0;
+            border-bottom: none;
+            border-top: 1px solid var(--color-gray-medium);
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--color-gray-light);
+            border-radius: 8px;
+            color: var(--color-black);
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .nav-btn i {
+            font-size: 12px;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--color-gray-medium);
+        }
+
+        .back-btn:hover {
+            background: var(--color-gray-light);
+            border-color: var(--color-gray-medium);
+            color: var(--color-black);
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* ========== LOT TITLE ========== */
+        .lot-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+
+        /* ========== IMAGE GALLERY ========== */
+        .gallery-section {
+            margin-bottom: 30px;
+        }
+
+        .main-image-container {
+            position: relative;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-medium);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .main-image-wrapper {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+            cursor: default;
+            touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+
+        .main-image-wrapper:active {
+            cursor: default;
+        }
+
+        .main-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transform-origin: center center;
+            transition: transform 0.1s ease-out;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Zoom Controls */
+        .zoom-controls {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .zoom-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+        }
+
+        .zoom-btn:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .zoom-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .zoom-level {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+            height: 44px;
+            padding: 0 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-black);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Image Navigation Arrows */
+        .image-nav-controls {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .image-nav-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            color: var(--color-black);
+        }
+
+        .image-nav-btn:hover {
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .zoom-hint {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            z-index: 10;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .zoom-hint.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Image Counter */
+        .image-counter {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        /* Thumbnail Strip */
+        .thumbnail-strip {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 8px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-gray-medium) transparent;
+        }
+
+        .thumbnail-strip::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .thumbnail-strip::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .thumbnail-strip::-webkit-scrollbar-thumb {
+            background: var(--color-gray-medium);
+            border-radius: 3px;
+        }
+
+        .thumbnail {
+            flex: 0 0 80px;
+            width: 80px;
+            height: 80px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--color-white);
+        }
+
+        .thumbnail:hover {
+            border-color: var(--color-gray-medium);
+            transform: scale(1.05);
+        }
+
+        .thumbnail.active {
+            border-color: var(--color-gold);
+            box-shadow: 0 0 0 2px var(--color-gold);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ========== CTA BUTTONS ========== */
+        .cta-section {
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cta-section.bottom {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-top: 30px;
+            border-top: 1px solid var(--color-gray-medium);
+        }
+
+        .cta-section.empty {
+            display: none;
+        }
+
+        .high-bid-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .high-bid-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 12px;
+            border: 2px solid var(--color-gold);
+            min-width: 180px;
+        }
+
+        .high-bid-display.proxibid {
+            border-color: var(--color-gold);
+        }
+
+        .high-bid-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-gold);
+        }
+
+        .high-bid-display.proxibid .high-bid-label {
+            color: #fff;
+        }
+
+        .high-bid-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .bid-disclaimer {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.5;
+            margin-top: 4px;
+        }
+
+        .bid-disclaimer sup {
+            color: #666;
+        }
+
+        .sold-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .auction-closed-badge {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hammer-price-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 20px 32px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 12px;
+            border: 2px solid var(--color-gold);
+        }
+
+        .hammer-price-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-gold);
+        }
+
+        .hammer-price-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--color-gold);
+            color: var(--color-black);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-gold);
+            color: var(--color-black);
+            opacity: 0.85;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        /* ========== CONTENT SECTIONS ========== */
+        .content-section {
+            background: var(--color-gray-light);
+            border-radius: 10px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--color-gray-medium);
+        }
+
+        .section-content p {
+            color: var(--color-gray-text);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== SPECS TABLE ========== */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px 32px;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .spec-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-gray-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-value {
+            font-size: 15px;
+            color: var(--color-black);
+        }
+
+        .spec-paragraph {
+            grid-column: 1 / -1;
+            margin-top: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-gray-medium);
+        }
+
+        .spec-paragraph p {
+            color: var(--color-gray-text);
+            font-size: 15px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* ========== CONDITION DISPLAY ========== */
+        .condition-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .condition-grade {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-black);
+        }
+
+        .condition-scale {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scale-bar {
+            width: 120px;
+            height: 10px;
+            background: var(--color-gray-medium);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .scale-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-gold), #d4c36a);
+            border-radius: 5px;
+        }
+
+        .scale-number {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-gold);
+        }
+
+        /* ========== BORE RATING ========== */
+        .bore-rating-display {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .bore-scale {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bore-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-gold);
+        }
+
+        .bore-max {
+            font-size: 18px;
+            color: var(--color-gray-muted);
+        }
+
+        /* ========== BULLET LISTS ========== */
+        .bullet-list {
+            list-style: disc;
+            margin-left: 20px;
+        }
+
+        .bullet-list li {
+            color: var(--color-gray-text);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .bullet-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-image-wrapper {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lot-title {
+                font-size: 24px;
+            }
+
+            .main-image-wrapper {
+                height: 300px;
+            }
+
+            .thumbnail {
+                flex: 0 0 60px;
+                width: 60px;
+                height: 60px;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .condition-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .page-nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-group {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .zoom-controls {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .zoom-level {
+                min-width: 40px;
+                height: 38px;
+                padding: 0 8px;
+                font-size: 11px;
+            }
+
+            .image-nav-controls {
+                bottom: 10px;
+                left: 10px;
+            }
+
+            .zoom-btn,
+            .image-nav-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 20px 15px;
+            }
+        }
+
+        /* ========== HIDDEN UTILITY ========== */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content">
+        
+        <!-- Top Navigation -->
+        <nav class="page-nav">
+            <a href="${escapeHtml(data.navigation.catalogURL)}" id="back-to-catalog-top" class="nav-btn back-btn">
+                <i class="fa fa-arrow-left"></i>
+                <span>Back to Catalog</span>
+            </a>
+            <div class="nav-group">
+                <a href="${escapeHtml(prevHref)}" class="nav-btn ${prevDisabled}">
+                    <i class="fa fa-chevron-left"></i>
+                    <span>Previous</span>
+                </a>
+                <a href="${escapeHtml(nextHref)}" class="nav-btn ${nextDisabled}">
+                    <span>Next</span>
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Lot Title -->
+        <h1 class="lot-title">${escapeHtml(data.title)}</h1>
+
+        <!-- Image Gallery -->
+        <section class="gallery-section">
+            <div class="main-image-container">
+                <div class="zoom-hint" id="zoom-hint">
+                    <i class="fa fa-search-plus"></i> Double-click to zoom, drag to pan
+                </div>
+                <div class="image-counter" id="image-counter">1 / ${data.images.length}</div>
+                <div class="main-image-wrapper" id="main-image-wrapper">
+                    <img src="${data.images.length > 0 ? toImageUrl(data.images[0], 'w2048') : ''}" alt="${escapeHtml(data.title)}" class="main-image" id="main-image" draggable="false">
+                </div>
+                <!-- Image Navigation Arrows -->
+                <div class="image-nav-controls">
+                    <button class="image-nav-btn" id="image-prev" title="Previous image">
+                        <i class="fa fa-chevron-left"></i>
+                    </button>
+                    <button class="image-nav-btn" id="image-next" title="Next image">
+                        <i class="fa fa-chevron-right"></i>
+                    </button>
+                </div>
+                <!-- Zoom Controls -->
+                <div class="zoom-controls">
+                    <span class="zoom-level" id="zoom-level">100%</span>
+                    <button class="zoom-btn" id="zoom-out" title="Zoom out">−</button>
+                    <button class="zoom-btn" id="zoom-in" title="Zoom in">+</button>
+                    <button class="zoom-btn" id="zoom-reset" title="Reset zoom">↺</button>
+                </div>
+            </div>
+            <div class="thumbnail-strip" id="thumbnail-strip">
+                ${data.images.map((img, idx) => `
+                    <button class="thumbnail ${idx === 0 ? 'active' : ''}" data-index="${idx}">
+                        <img src="${toImageUrl(img, 'w400')}" alt="Thumbnail ${idx + 1}" loading="lazy">
+                    </button>
+                `).join('')}
+            </div>
+        </section>
+
+        <!-- Top CTA -->
+        <section class="cta-section" id="cta-top">
+            ${data.hammerPrice ? `
+            <!-- Auction Closed - Show Sold Price -->
+            <div class="sold-display">
+                <span class="auction-closed-badge">Auction Closed</span>
+                <div class="hammer-price-display">
+                    <span class="hammer-price-label">Sold For</span>
+                    <span class="hammer-price-amount">${escapeHtml(data.hammerPrice)}</span>
+                </div>
+            </div>
+            ` : `
+            <!-- Active Auction - Show Current Bids -->
+            <div class="high-bid-row">
+                <div class="high-bid-display" id="high-bid-top">
+                    <span class="high-bid-label">GEA Live High Bid</span>
+                    <span class="high-bid-amount" id="bid-amount-top">${escapeHtml(data.currentHighBid || '$0.00')}</span>
+                </div>
+                <div class="high-bid-display proxibid" id="proxibid-bid-top">
+                    <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
+                    <span class="high-bid-amount" id="proxibid-amount-top">${escapeHtml(data.proxibidHighBid || '$0.00')}</span>
+                </div>
+            </div>
+            <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
+            <div class="cta-buttons">
+                ${data.ctaUrl ? `
+                <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
+                    <i class="fa fa-gavel"></i> Bid Now on GEA Live
+                </a>
+                ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-top" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now on GEA Live</a>'}
+            </div>
+            `}
+        </section>
+
+        <!-- Overview -->
+        ${data.overview ? `
+        <section class="content-section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>${escapeHtml(data.overview)}</p>
+            </div>
+        </section>
+        ` : ''}
+
+        <!-- Identification & Provenance -->
+        ${generateIdentificationSection(data)}
+
+        <!-- Condition Summary -->
+        ${generateConditionSection(data)}
+
+        <!-- Mechanics -->
+        ${data.mechanics ? `
+        <section class="content-section">
+            <h2 class="section-title">Mechanics</h2>
+            <div class="section-content">
+                <p>${escapeHtml(data.mechanics)}</p>
+            </div>
+        </section>
+        ` : ''}
+
+        <!-- Bore Rating -->
+        ${data.boreRating ? `
+        <section class="content-section">
+            <h2 class="section-title">Bore Rating</h2>
+            <div class="section-content">
+                <div class="bore-rating-display">
+                    <div class="bore-scale">
+                        <span class="bore-number">${data.boreRating}</span>
+                        <span class="bore-max">/ 10</span>
+                    </div>
+                    <div class="scale-bar" style="width: 200px;">
+                        <div class="scale-fill" style="width: ${(data.boreRating / 10) * 100}%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        ` : ''}
+
+        <!-- Specs & Measurements -->
+        ${generateSpecsSection(data)}
+
+        <!-- Accessories & Paperwork -->
+        ${data.accessories.length > 0 ? `
+        <section class="content-section">
+            <h2 class="section-title">Accessories & Paperwork</h2>
+            <div class="section-content">
+                <ul class="bullet-list">
+                    ${data.accessories.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+                </ul>
+            </div>
+        </section>
+        ` : ''}
+
+        <!-- Notes for Buyers -->
+        ${data.notesForBuyers ? `
+        <section class="content-section">
+            <h2 class="section-title">Notes for Buyers</h2>
+            <div class="section-content">
+                <p>${escapeHtml(data.notesForBuyers)}</p>
+            </div>
+        </section>
+        ` : ''}
+
+        <!-- Feature Highlights -->
+        ${data.featureHighlights.length > 0 ? `
+        <section class="content-section">
+            <h2 class="section-title">Feature Highlights</h2>
+            <div class="section-content">
+                <ul class="bullet-list">
+                    ${data.featureHighlights.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+                </ul>
+            </div>
+        </section>
+        ` : ''}
+
+        <!-- Market Note -->
+        ${data.marketNote ? `
+        <section class="content-section">
+            <h2 class="section-title">Market Note</h2>
+            <div class="section-content">
+                <p>${escapeHtml(data.marketNote)}</p>
+            </div>
+        </section>
+        ` : ''}
+
+        <!-- Bottom CTA -->
+        <section class="cta-section bottom" id="cta-bottom">
+            ${data.hammerPrice ? `
+            <!-- Auction Closed - Show Sold Price -->
+            <div class="sold-display">
+                <span class="auction-closed-badge">Auction Closed</span>
+                <div class="hammer-price-display">
+                    <span class="hammer-price-label">Sold For</span>
+                    <span class="hammer-price-amount">${escapeHtml(data.hammerPrice)}</span>
+                </div>
+            </div>
+            ` : `
+            <!-- Active Auction - Show Current Bids -->
+            <div class="high-bid-row">
+                <div class="high-bid-display" id="high-bid-bottom">
+                    <span class="high-bid-label">GEA Live High Bid</span>
+                    <span class="high-bid-amount" id="bid-amount-bottom">${escapeHtml(data.currentHighBid || '$0.00')}</span>
+                </div>
+                <div class="high-bid-display proxibid" id="proxibid-bid-bottom">
+                    <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
+                    <span class="high-bid-amount" id="proxibid-amount-bottom">${escapeHtml(data.proxibidHighBid || '$0.00')}</span>
+                </div>
+            </div>
+            <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
+            <div class="cta-buttons">
+                ${data.ctaUrl ? `
+                <a href="${escapeHtml(data.ctaUrl)}" class="btn btn-primary cta-btn" target="_blank">
+                    <i class="fa fa-gavel"></i> Bid Now on GEA Live
+                </a>
+                ` : '<a href="#" class="btn btn-primary cta-btn" id="cta-btn-bottom" style="display:none;" target="_blank"><i class="fa fa-gavel"></i> Bid Now on GEA Live</a>'}
+            </div>
+            `}
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="page-nav bottom">
+            <a href="${escapeHtml(data.navigation.catalogURL)}" id="back-to-catalog-bottom" class="nav-btn back-btn">
+                <i class="fa fa-arrow-left"></i>
+                <span>Back to Catalog</span>
+            </a>
+            <div class="nav-group">
+                <a href="${escapeHtml(prevHref)}" class="nav-btn ${prevDisabled}">
+                    <i class="fa fa-chevron-left"></i>
+                    <span>Previous</span>
+                </a>
+                <a href="${escapeHtml(nextHref)}" class="nav-btn ${nextDisabled}">
+                    <span>Next</span>
+                    <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+        </nav>
+
+    </main>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+    const PRODUCT_IMAGES = ${JSON.stringify(data.images)};
+    
+    function toImageUrl(token, size) {
+        if (!token) return "";
+        const t = String(token).trim();
+        if (/^https?:\\/\\//i.test(t)) {
+            let id = null;
+            const m = t.match(/(?:\\/d\\/|[?&]id=)([A-Za-z0-9_-]{20,})/);
+            if (m) id = m[1];
+            if (!id) { try { id = new URL(t).searchParams.get("id"); } catch(e) {} }
+            if (id) {
+                if (size === 'original') return "https://drive.google.com/uc?export=view&id=" + id;
+                return "https://drive.google.com/thumbnail?id=" + id + "&sz=" + size;
+            }
+            return t;
+        }
+        if (size === 'original') return "https://drive.google.com/uc?export=view&id=" + encodeURIComponent(t);
+        return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(t) + "&sz=" + size;
+    }
+
+    let currentImageIndex = 0;
+    let scale = 1, translateX = 0, translateY = 0;
+    let isDragging = false, startX, startY, startTranslateX, startTranslateY;
+    const MIN_SCALE = 1, MAX_SCALE = 10, SCALE_STEP = 0.5;
+
+    const mainImage = document.getElementById('main-image');
+    const mainImageWrapper = document.getElementById('main-image-wrapper');
+    const thumbnailStrip = document.getElementById('thumbnail-strip');
+    const imageCounter = document.getElementById('image-counter');
+    const zoomInBtn = document.getElementById('zoom-in');
+    const zoomOutBtn = document.getElementById('zoom-out');
+    const zoomResetBtn = document.getElementById('zoom-reset');
+    const zoomHint = document.getElementById('zoom-hint');
+    const imagePrevBtn = document.getElementById('image-prev');
+    const imageNextBtn = document.getElementById('image-next');
+    
+    // Adjust container height based on image aspect ratio
+    function adjustContainerHeight() {
+        if (!mainImage.naturalWidth || !mainImage.naturalHeight) return;
+        const containerWidth = mainImageWrapper.clientWidth;
+        const aspectRatio = mainImage.naturalWidth / mainImage.naturalHeight;
+        const idealHeight = containerWidth / aspectRatio;
+        // Clamp between min and max heights
+        const minHeight = 400;
+        const maxHeight = 800;
+        const newHeight = Math.max(minHeight, Math.min(maxHeight, idealHeight));
+        mainImageWrapper.style.height = newHeight + 'px';
+    }
+    
+    mainImage.addEventListener('load', adjustContainerHeight);
+    window.addEventListener('resize', adjustContainerHeight);
+
+    // Image navigation
+    function setActiveImage(index) {
+        if (index < 0 || index >= PRODUCT_IMAGES.length) return;
+        currentImageIndex = index;
+        mainImage.src = toImageUrl(PRODUCT_IMAGES[index], 'w2048');
+        resetZoom();
+        thumbnailStrip.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+            thumb.classList.toggle('active', i === index);
+        });
+        const activeThumb = thumbnailStrip.querySelector('.thumbnail.active');
+        if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        imageCounter.textContent = (currentImageIndex + 1) + ' / ' + PRODUCT_IMAGES.length;
+    }
+
+    function navigateImage(direction) {
+        let newIndex = currentImageIndex + direction;
+        if (newIndex < 0) newIndex = PRODUCT_IMAGES.length - 1;
+        if (newIndex >= PRODUCT_IMAGES.length) newIndex = 0;
+        setActiveImage(newIndex);
+    }
+
+    imagePrevBtn.addEventListener('click', () => navigateImage(-1));
+    imageNextBtn.addEventListener('click', () => navigateImage(1));
+
+    thumbnailStrip.querySelectorAll('.thumbnail').forEach(thumb => {
+        thumb.addEventListener('click', function() {
+            setActiveImage(parseInt(this.dataset.index));
+        });
     });
-  }
 
-  // Get counts for each option value based on current filters
-  function getOptionCounts(key) {
-    const relevantItems = getFilteredItemsExcept(key);
-    const counts = {};
-    for (let i = 0; i < relevantItems.length; i++) {
-      const val = relevantItems[i][key];
-      if (val) counts[val] = (counts[val] || 0) + 1;
-    }
-    return counts;
-  }
-
-  // Update dropdown options with counts - hide unavailable options
-  function updateDropdownOptions(key) {
-    const container = document.getElementById('options-' + key);
-    const counts = getOptionCounts(key);
-    const searchTerm = searchTerms[key].toLowerCase();
-    const options = OPTIONS[key];
-    
-    let html = '';
-    for (let i = 0; i < options.length; i++) {
-      const val = options[i];
-      const count = counts[val] || 0;
-      const isChecked = filters[key].has(val);
-      const matchesSearch = !searchTerm || val.toLowerCase().indexOf(searchTerm) !== -1;
-      
-      // Hide options with 0 count unless they're already selected
-      // Also hide if doesn't match search term
-      if ((count === 0 && !isChecked) || !matchesSearch) continue;
-      
-      html += '<label class="dropdown-option' + 
-        (isChecked ? ' selected' : '') + 
-        '" data-idx="' + i + '">' +
-        '<input type="checkbox"' + (isChecked ? ' checked' : '') + 
-        ' onchange="handleFilter(\\'' + key + '\\',' + i + ',this.checked)"> ' +
-        esc(val) +
-        '<span class="count">(' + count + ')</span>' +
-        '</label>';
-    }
-    container.innerHTML = html;
-  }
-
-  function updateAllDropdowns() {
-    updateDropdownOptions('make');
-    updateDropdownOptions('model');
-    updateDropdownOptions('caliber');
-    updateDropdownOptions('classification');
-  }
-
-  // Handle filter checkbox change
-  window.handleFilter = function(key, idx, checked) {
-    const val = OPTIONS[key][idx];
-    if (checked) {
-      filters[key].add(val);
-    } else {
-      filters[key].delete(val);
-    }
-    updateBadge(key);
-    applyFilters();
-    updateAllDropdowns();
-  };
-
-  window.toggleDropdown = function(key) {
-    const dropdown = document.getElementById('filter-' + key);
-    const wasOpen = dropdown.classList.contains('open');
-    document.querySelectorAll('.filter-dropdown').forEach(function(d) { d.classList.remove('open'); });
-    if (!wasOpen) {
-      dropdown.classList.add('open');
-      updateDropdownOptions(key);
-    }
-  };
-
-  window.searchInDropdown = function(key, query) {
-    searchTerms[key] = query;
-    updateDropdownOptions(key);
-  };
-
-  window.selectAllVisible = function(key) {
-    const options = document.querySelectorAll('#options-' + key + ' .dropdown-option input');
-    options.forEach(function(cb) {
-      if (!cb.checked) {
-        cb.checked = true;
-        const idx = parseInt(cb.parentElement.getAttribute('data-idx'));
-        filters[key].add(OPTIONS[key][idx]);
-      }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') navigateImage(-1);
+        else if (e.key === 'ArrowRight') navigateImage(1);
     });
-    updateBadge(key);
-    applyFilters();
-    updateAllDropdowns();
-  };
 
-  window.clearFilter = function(key) {
-    filters[key].clear();
-    updateBadge(key);
-    applyFilters();
-    updateAllDropdowns();
-  };
-
-  function updateBadge(key) {
-    const badge = document.getElementById('badge-' + key);
-    const btn = document.querySelector('#filter-' + key + ' .dropdown-btn');
-    const count = filters[key].size;
-    if (count > 0) {
-      badge.textContent = count;
-      badge.style.display = '';
-      btn.classList.add('active');
-    } else {
-      badge.style.display = 'none';
-      btn.classList.remove('active');
+    // Zoom functions
+    function zoom(delta) {
+        const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale + delta));
+        if (newScale !== scale) {
+            scale = newScale;
+            if (scale === 1) { translateX = 0; translateY = 0; }
+            applyTransform();
+            updateZoomUI();
+        }
     }
-  }
 
-  window.toggleCondition = function(type) {
-    const btn = document.getElementById('cond-' + type);
-    if (filters.condition.has(type)) {
-      filters.condition.delete(type);
-      btn.classList.remove('active');
-    } else {
-      filters.condition.add(type);
-      btn.classList.add('active');
+    function resetZoom() {
+        scale = 1; translateX = 0; translateY = 0;
+        applyTransform();
+        updateZoomUI();
     }
-    applyFilters();
-    updateAllDropdowns();
-  };
 
-  window.clearSearch = function() {
-    document.getElementById('search').value = '';
-    searchQuery = '';
-    applyFilters();
-    updateAllDropdowns();
-  };
+    function applyTransform() {
+        mainImage.style.transform = 'translate(' + translateX + 'px, ' + translateY + 'px) scale(' + scale + ')';
+    }
 
-  window.clearAllFilters = function() {
-    filters.make.clear();
-    filters.model.clear();
-    filters.caliber.clear();
-    filters.classification.clear();
-    filters.condition.clear();
-    updateBadge('make');
-    updateBadge('model');
-    updateBadge('caliber');
-    updateBadge('classification');
-    document.querySelectorAll('.condition-btn').forEach(function(b) { b.classList.remove('active'); });
-    document.getElementById('search').value = '';
-    searchQuery = '';
-    applyFilters();
-    updateAllDropdowns();
-  };
+    function updateZoomUI() {
+        zoomInBtn.disabled = scale >= MAX_SCALE;
+        zoomOutBtn.disabled = scale <= MIN_SCALE;
+        const zoomLevelEl = document.getElementById('zoom-level');
+        if (zoomLevelEl) zoomLevelEl.textContent = Math.round(scale * 100) + '%';
+    }
 
-  window.removeFilterTag = function(key, idx) {
-    const val = OPTIONS[key][idx];
-    filters[key].delete(val);
-    updateBadge(key);
-    applyFilters();
-    updateAllDropdowns();
-  };
+    function clampTranslation() {
+        if (scale <= 1) { translateX = 0; translateY = 0; return; }
+        const rect = mainImageWrapper.getBoundingClientRect();
+        const maxX = (rect.width * (scale - 1)) / 2;
+        const maxY = (rect.height * (scale - 1)) / 2;
+        translateX = Math.max(-maxX, Math.min(maxX, translateX));
+        translateY = Math.max(-maxY, Math.min(maxY, translateY));
+    }
 
-  function updateActiveFilters() {
-    const container = document.getElementById('active-filters');
-    let html = '';
-    
-    ['make', 'model', 'caliber', 'classification'].forEach(function(key) {
-      filters[key].forEach(function(val) {
-        const idx = OPTIONS[key].indexOf(val);
-        html += '<span class="filter-tag">' + esc(val) + ' <span class="remove" onclick="removeFilterTag(\\'' + key + '\\',' + idx + ')">×</span></span>';
-      });
+    zoomInBtn.addEventListener('click', () => zoom(SCALE_STEP));
+    zoomOutBtn.addEventListener('click', () => zoom(-SCALE_STEP));
+    zoomResetBtn.addEventListener('click', resetZoom);
+
+    // Double-click to zoom
+    mainImageWrapper.addEventListener('dblclick', function(e) {
+        if (scale === 1) {
+            const rect = mainImageWrapper.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            scale = 2.5;
+            translateX = (centerX - clickX) * (scale - 1) / scale;
+            translateY = (centerY - clickY) * (scale - 1) / scale;
+            clampTranslation();
+            applyTransform();
+            updateZoomUI();
+        } else {
+            resetZoom();
+        }
     });
-    
-    if (filters.condition.has('new')) {
-      html += '<span class="filter-tag">Factory New <span class="remove" onclick="toggleCondition(\\'new\\')">×</span></span>';
-    }
-    if (filters.condition.has('used')) {
-      html += '<span class="filter-tag">Used <span class="remove" onclick="toggleCondition(\\'used\\')">×</span></span>';
-    }
-    
-    if (html) {
-      html += '<button class="clear-all-filters" onclick="clearAllFilters()">Clear All</button>';
-    }
-    
-    container.innerHTML = html;
-  }
 
-  function applyFilters() {
-    searchQuery = document.getElementById('search').value.trim().toLowerCase();
-    
-    filteredItems = ITEMS.filter(function(item) {
-      // Search
-      if (searchQuery) {
-        const searchText = [item.title, item.make, item.model, item.caliber, item.description, item.classification].join(' ').toLowerCase();
-        if (searchText.indexOf(searchQuery) === -1) return false;
-      }
-      
-      // Make filter
-      if (filters.make.size > 0 && !filters.make.has(item.make)) return false;
-      
-      // Model filter
-      if (filters.model.size > 0 && !filters.model.has(item.model)) return false;
-      
-      // Caliber filter
-      if (filters.caliber.size > 0 && !filters.caliber.has(item.caliber)) return false;
-      
-      // Classification filter
-      if (filters.classification.size > 0 && !filters.classification.has(item.classification)) return false;
-      
-      // Condition filter
-      if (filters.condition.size > 0) {
-        const itemCond = (item.condition || '').toLowerCase();
-        const isNew = itemCond === 'factory new';
-        const isUsed = itemCond === 'used';
-        const wantNew = filters.condition.has('new');
-        const wantUsed = filters.condition.has('used');
-        if (wantNew && wantUsed) { /* both, show all */ }
-        else if (wantNew && !isNew) return false;
-        else if (wantUsed && !isUsed) return false;
-      }
-      
-      return true;
+    // Mouse drag for panning
+    function startDrag(e) {
+        if (scale <= 1) return;
+        isDragging = true;
+        startX = e.clientX; startY = e.clientY;
+        startTranslateX = translateX; startTranslateY = translateY;
+        mainImageWrapper.style.cursor = 'grabbing';
+        e.preventDefault();
+    }
+
+    function drag(e) {
+        if (!isDragging) return;
+        translateX = startTranslateX + (e.clientX - startX);
+        translateY = startTranslateY + (e.clientY - startY);
+        clampTranslation();
+        applyTransform();
+    }
+
+    function endDrag() {
+        isDragging = false;
+        mainImageWrapper.style.cursor = scale > 1 ? 'grab' : 'default';
+    }
+
+    mainImageWrapper.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', endDrag);
+
+    // Touch handlers
+    let touchStartDistance = null, touchStartScale = 1;
+    let touchStartX = null, touchStartY = null, isSwiping = false;
+
+    function getTouchDistance(touches) {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.hypot(dx, dy);
+    }
+
+    mainImageWrapper.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 2) {
+            touchStartDistance = getTouchDistance(e.touches);
+            touchStartScale = scale;
+            isSwiping = false;
+            e.preventDefault();
+        } else if (e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            if (scale > 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                startTranslateX = translateX;
+                startTranslateY = translateY;
+                isSwiping = false;
+            } else {
+                isSwiping = true;
+            }
+        }
+    }, { passive: false });
+
+    mainImageWrapper.addEventListener('touchmove', function(e) {
+        if (e.touches.length === 2 && touchStartDistance) {
+            e.preventDefault();
+            const currentDistance = getTouchDistance(e.touches);
+            scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, touchStartScale * (currentDistance / touchStartDistance)));
+            clampTranslation();
+            applyTransform();
+            updateZoomUI();
+        } else if (e.touches.length === 1 && isDragging && scale > 1) {
+            e.preventDefault();
+            translateX = startTranslateX + (e.touches[0].clientX - startX);
+            translateY = startTranslateY + (e.touches[0].clientY - startY);
+            clampTranslation();
+            applyTransform();
+        }
+    }, { passive: false });
+
+    mainImageWrapper.addEventListener('touchend', function(e) {
+        if (isSwiping && touchStartX !== null && scale <= 1 && e.changedTouches && e.changedTouches.length > 0) {
+            const deltaX = e.changedTouches[0].clientX - touchStartX;
+            const deltaY = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+                navigateImage(deltaX > 0 ? -1 : 1);
+            }
+        }
+        isDragging = false;
+        isSwiping = false;
+        touchStartDistance = null;
+        touchStartX = null;
+        touchStartY = null;
     });
-    
-    currentPage = 1;
-    renderPage();
-    renderPagination();
-    updateActiveFilters();
-    
-    document.getElementById('result-count').textContent = filteredItems.length + ' items';
-  }
 
-  function renderPagination() {
-    const totalItems = filteredItems.length;
-    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-    const $paginationTop = document.getElementById('pagination-top');
-    const $paginationBottom = document.getElementById('pagination-bottom');
-    const $itemsInfoTop = document.getElementById('items-info-top');
-    const $itemsInfoBottom = document.getElementById('items-info-bottom');
-    
-    if (totalPages <= 1) {
-      $paginationTop.innerHTML = "";
-      $paginationBottom.innerHTML = "";
-      $itemsInfoTop.innerHTML = "";
-      $itemsInfoBottom.innerHTML = "";
-      return;
+    // Wheel zoom
+    mainImageWrapper.addEventListener('wheel', function(e) {
+        if (e.ctrlKey) {
+            e.preventDefault();
+            zoom(e.deltaY > 0 ? -SCALE_STEP : SCALE_STEP);
+        }
+    }, { passive: false });
+
+    // Hide zoom hint
+    mainImageWrapper.addEventListener('click', function() {
+        zoomHint.classList.add('hidden');
+    });
+    zoomInBtn.addEventListener('click', function() {
+        zoomHint.classList.add('hidden');
+    });
+    <\/script>
+
+    <!-- Live Bid Update Script -->
+    <script>
+    (function() {
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384';
+        const PRODUCT_TITLE = ${JSON.stringify(data.title)};
+        
+        function parseCSV(text) {
+            const rows = [];
+            let i = 0, field = '', row = [], inQuotes = false;
+            while (i < text.length) {
+                const c = text[i], n = text[i + 1];
+                if (inQuotes) {
+                    if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
+                    if (c === '"') { inQuotes = false; i++; continue; }
+                    field += c; i++; continue;
+                }
+                if (c === '"') { inQuotes = true; i++; continue; }
+                if (c === ',') { row.push(field); field = ''; i++; continue; }
+                if (c === '\\n') { row.push(field); rows.push(row); field = ''; row = []; i++; continue; }
+                if (c === '\\r') { i++; continue; }
+                field += c; i++;
+            }
+            if (field.length || row.length) { row.push(field); rows.push(row); }
+            return rows;
+        }
+        
+        function csvToObjects(rows) {
+            if (rows.length < 2) return [];
+            const headers = rows[0].map(h => h.trim());
+            return rows.slice(1).map(row => {
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
+                return obj;
+            });
+        }
+        
+        async function updateLiveBid() {
+            try {
+                const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(SHEET_URL);
+                const response = await fetch(proxyUrl, { cache: 'no-store' });
+                if (!response.ok) return;
+                
+                const csvText = await response.text();
+                const rows = parseCSV(csvText);
+                const items = csvToObjects(rows);
+                
+                // Find matching item by title
+                const item = items.find(i => i['Title'] === PRODUCT_TITLE);
+                if (!item) return;
+                
+                const highBid = item['Current High Bid'];
+                const proxibidBid = item['Proxibid High Bid'];
+                const ctaUrl = item['CTA URL'];
+                const hammerPrice = item['Hammer Price'];
+                
+                const ctaTop = document.getElementById('cta-top');
+                const ctaBottom = document.getElementById('cta-bottom');
+                
+                // If hammer price exists, replace content with sold display
+                if (hammerPrice) {
+                    const soldHTML = \`
+                        <div class="sold-display">
+                            <span class="auction-closed-badge">Auction Closed</span>
+                            <div class="hammer-price-display">
+                                <span class="hammer-price-label">Sold For</span>
+                                <span class="hammer-price-amount">\${hammerPrice}</span>
+                            </div>
+                        </div>
+                    \`;
+                    if (ctaTop) ctaTop.innerHTML = soldHTML;
+                    if (ctaBottom) ctaBottom.innerHTML = soldHTML;
+                    return;
+                }
+                
+                // Check if bid containers exist - if not, page was generated with hammer price
+                // and we need to rebuild the active auction display
+                let bidTop = document.getElementById('bid-amount-top');
+                if (!bidTop) {
+                    const activeHTML = \`
+                        <div class="high-bid-row">
+                            <div class="high-bid-display" id="high-bid-top">
+                                <span class="high-bid-label">GEA Live High Bid</span>
+                                <span class="high-bid-amount" id="bid-amount-top">\${highBid || '$0.00'}</span>
+                            </div>
+                            <div class="high-bid-display proxibid" id="proxibid-bid-top">
+                                <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
+                                <span class="high-bid-amount" id="proxibid-amount-top">\${proxibidBid || '$0.00'}</span>
+                            </div>
+                        </div>
+                        <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
+                        <div class="cta-buttons">
+                            <a href="\${ctaUrl || '#'}" class="btn btn-primary cta-btn" id="cta-btn-top" target="_blank" \${ctaUrl ? '' : 'style="display:none;"'}>
+                                <i class="fa fa-gavel"></i> Bid Now on GEA Live
+                            </a>
+                        </div>
+                    \`;
+                    const activeHTMLBottom = \`
+                        <div class="high-bid-row">
+                            <div class="high-bid-display" id="high-bid-bottom">
+                                <span class="high-bid-label">GEA Live High Bid</span>
+                                <span class="high-bid-amount" id="bid-amount-bottom">\${highBid || '$0.00'}</span>
+                            </div>
+                            <div class="high-bid-display proxibid" id="proxibid-bid-bottom">
+                                <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
+                                <span class="high-bid-amount" id="proxibid-amount-bottom">\${proxibidBid || '$0.00'}</span>
+                            </div>
+                        </div>
+                        <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
+                        <div class="cta-buttons">
+                            <a href="\${ctaUrl || '#'}" class="btn btn-primary cta-btn" id="cta-btn-bottom" target="_blank" \${ctaUrl ? '' : 'style="display:none;"'}>
+                                <i class="fa fa-gavel"></i> Bid Now on GEA Live
+                            </a>
+                        </div>
+                    \`;
+                    if (ctaTop) ctaTop.innerHTML = activeHTML;
+                    if (ctaBottom) ctaBottom.innerHTML = activeHTMLBottom;
+                    return;
+                }
+                
+                // Update GEA Live bid displays - always show, default to $0.00
+                const bidBottom = document.getElementById('bid-amount-bottom');
+                const displayTop = document.getElementById('high-bid-top');
+                const displayBottom = document.getElementById('high-bid-bottom');
+                
+                if (bidTop) bidTop.textContent = highBid || '$0.00';
+                if (bidBottom) bidBottom.textContent = highBid || '$0.00';
+                if (displayTop) displayTop.style.display = '';
+                if (displayBottom) displayBottom.style.display = '';
+                
+                // Update Proxibid bid displays - always show, default to $0.00
+                const proxibidTop = document.getElementById('proxibid-amount-top');
+                const proxibidBottom = document.getElementById('proxibid-amount-bottom');
+                const proxibidDisplayTop = document.getElementById('proxibid-bid-top');
+                const proxibidDisplayBottom = document.getElementById('proxibid-bid-bottom');
+                
+                if (proxibidTop) proxibidTop.textContent = proxibidBid || '$0.00';
+                if (proxibidBottom) proxibidBottom.textContent = proxibidBid || '$0.00';
+                if (proxibidDisplayTop) proxibidDisplayTop.style.display = '';
+                if (proxibidDisplayBottom) proxibidDisplayBottom.style.display = '';
+                
+                // Always show CTA sections
+                if (ctaTop) ctaTop.classList.remove('empty');
+                if (ctaBottom) ctaBottom.classList.remove('empty');
+                
+                // Update CTA buttons if URL exists
+                if (ctaUrl) {
+                    const btnTop = document.getElementById('cta-btn-top');
+                    const btnBottom = document.getElementById('cta-btn-bottom');
+                    if (btnTop) { btnTop.href = ctaUrl; btnTop.style.display = ''; }
+                    if (btnBottom) { btnBottom.href = ctaUrl; btnBottom.style.display = ''; }
+                }
+                
+            } catch (e) {
+                console.log('Live bid update skipped:', e.message);
+            }
+        }
+        
+        // Update on page load
+        updateLiveBid();
+        
+        // Update Back to Catalog buttons with saved URL from sessionStorage
+        (function() {
+            try {
+                var savedUrl = sessionStorage.getItem('gea_catalog_url');
+                if (savedUrl) {
+                    var backBtnTop = document.getElementById('back-to-catalog-top');
+                    var backBtnBottom = document.getElementById('back-to-catalog-bottom');
+                    if (backBtnTop) backBtnTop.href = savedUrl;
+                    if (backBtnBottom) backBtnBottom.href = savedUrl;
+                }
+            } catch(e) {}
+        })();
+    })();
+    <\/script>
+</body>
+</html>`;
     }
     
-    const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
-    const endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
-    const itemsInfo = 'Showing items ' + startItem + '-' + endItem + ' of ' + totalItems;
-    $itemsInfoTop.innerHTML = itemsInfo;
-    $itemsInfoBottom.innerHTML = itemsInfo;
-    
-    let html = '<button onclick="changePage(' + (currentPage - 1) + ')"' + (currentPage === 1 ? ' disabled' : '') + '>‹ Prev</button>';
-    
-    if (totalPages <= 7) {
-      for (let i = 1; i <= totalPages; i++) {
-        html += '<button onclick="changePage(' + i + ')" class="' + (i === currentPage ? 'active' : '') + '">' + i + '</button>';
-      }
-    } else {
-      html += '<button onclick="changePage(1)" class="' + (1 === currentPage ? 'active' : '') + '">1</button>';
-      if (currentPage > 3) html += '<button disabled>...</button>';
-      for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
-        html += '<button onclick="changePage(' + i + ')" class="' + (i === currentPage ? 'active' : '') + '">' + i + '</button>';
-      }
-      if (currentPage < totalPages - 2) html += '<button disabled>...</button>';
-      html += '<button onclick="changePage(' + totalPages + ')" class="' + (totalPages === currentPage ? 'active' : '') + '">' + totalPages + '</button>';
+    function generateIdentificationSection(data) {
+        const fields = [
+            { key: 'upc', label: 'UPC/Stock Number' },
+            { key: 'make', label: 'Make' },
+            { key: 'model', label: 'Model' },
+            { key: 'serialNumber', label: 'Serial Number' },
+            { key: 'caliber', label: 'Caliber' },
+            { key: 'barrelLength', label: 'Barrel Length' },
+            { key: 'origin', label: 'Origin' },
+            { key: 'barrelMarkings', label: 'Barrel Markings' },
+            { key: 'condition', label: 'Condition' },
+            { key: 'included', label: 'Included' }
+        ];
+        
+        const validFields = fields.filter(f => data.identification[f.key] && data.identification[f.key].trim());
+        if (validFields.length === 0 && !data.ipSummary) return '';
+        
+        return `
+        <section class="content-section">
+            <h2 class="section-title">Identification & Provenance</h2>
+            <div class="section-content">
+                <div class="specs-grid">
+                    ${validFields.map(f => `
+                        <div class="spec-item">
+                            <span class="spec-label">${f.label}</span>
+                            <span class="spec-value">${escapeHtml(data.identification[f.key])}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                ${data.ipSummary ? `
+                <div class="spec-paragraph">
+                    <p>${escapeHtml(data.ipSummary)}</p>
+                </div>
+                ` : ''}
+            </div>
+        </section>
+        `;
     }
     
-    html += '<button onclick="changePage(' + (currentPage + 1) + ')"' + (currentPage === totalPages ? ' disabled' : '') + '>Next ›</button>';
-    html += '<span class="page-info">Page ' + currentPage + ' of ' + totalPages + '</span>';
-    
-    $paginationTop.innerHTML = html;
-    $paginationBottom.innerHTML = html;
-  }
-
-  window.changePage = function(page) {
-    const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
-    if (page < 1 || page > totalPages) return;
-    currentPage = page;
-    renderPage();
-    renderPagination();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  function renderPage() {
-    const $catalog = document.getElementById('catalog');
-    const $empty = document.getElementById('empty');
-    const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-    const pageItems = filteredItems.slice(startIdx, startIdx + ITEMS_PER_PAGE);
-    
-    if (!pageItems.length) {
-      $catalog.innerHTML = "";
-      $empty.style.display = "block";
-      return;
+    function generateConditionSection(data) {
+        if (!data.conditionGrade && !data.conditionScale && !data.conditionParagraph) return '';
+        
+        return `
+        <section class="content-section">
+            <h2 class="section-title">Condition Summary</h2>
+            <div class="section-content">
+                <div class="condition-header">
+                    ${data.conditionGrade ? `<span class="condition-grade">${escapeHtml(data.conditionGrade)}</span>` : ''}
+                    ${data.conditionScale ? `
+                    <div class="condition-scale">
+                        <div class="scale-bar">
+                            <div class="scale-fill" style="width: ${(data.conditionScale / 10) * 100}%;"></div>
+                        </div>
+                        <span class="scale-number">${data.conditionScale}/10</span>
+                    </div>
+                    ` : ''}
+                </div>
+                ${data.conditionParagraph ? `<p>${escapeHtml(data.conditionParagraph)}</p>` : ''}
+            </div>
+        </section>
+        `;
     }
     
-    $empty.style.display = "none";
-    let html = '';
-    
-    for (let i = 0; i < pageItems.length; i++) {
-      const it = pageItems[i];
-      const slug = generateSlug(it.seoSlug || it.title || '');
-      const imgUrl = it.imageURL ? toImageUrl(it.imageURL) : '';
-      const cond = formatCondition(it);
-      
-      html += '<a class="catalog-item" href="/' + slug + '">';
-      if (imgUrl) {
-        html += '<div class="thumb"><img referrerpolicy="no-referrer" src="' + imgUrl + '" alt="' + esc(it.title) + '" loading="lazy"></div>';
-      } else {
-        html += '<div class="thumb"></div>';
-      }
-      html += '<div class="pad"><h3>' + esc(it.title) + '</h3>';
-      html += '<div class="meta">' + (cond ? 'Condition: ' + esc(cond) : '') + '</div>';
-      html += '<div class="card-bottom">';
-      if (it.currentHighBid) {
-        html += '<div class="high-bid"><span class="high-bid-label">GEA Live High Bid</span><span class="high-bid-amount">' + esc(it.currentHighBid) + '</span></div>';
-      }
-      html += '<div class="btn-row"><span class="btn">View Details</span></div></div></div></a>';
-    }
-    
-    $catalog.innerHTML = html;
-  }
-
-  // Close dropdowns when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.filter-dropdown')) {
-      document.querySelectorAll('.filter-dropdown').forEach(function(d) { d.classList.remove('open'); });
-    }
-  });
-
-  // Search on input
-  document.getElementById('search').addEventListener('input', function() {
-    applyFilters();
-    updateAllDropdowns();
-  });
-
-  // Initialize
-  updateAllDropdowns();
-  applyFilters();
-})();
-<` + `/script>`;
+    function generateSpecsSection(data) {
+        const fields = [
+            { key: 'caliber', label: 'Caliber' },
+            { key: 'barrelLength', label: 'Barrel Length' },
+            { key: 'actionType', label: 'Action Type' },
+            { key: 'overallLength', label: 'Overall Length' },
+            { key: 'chamber', label: 'Chamber' },
+            { key: 'gasSystem', label: 'Gas System' },
+            { key: 'sights', label: 'Sights / Optics' },
+            { key: 'stock', label: 'Stock' },
+            { key: 'receiver', label: 'Receiver' },
+            { key: 'magazineCapacity', label: 'Magazine Capacity' }
+        ];
+        
+        const validFields = fields.filter(f => data.specs[f.key] && data.specs[f.key].trim());
+        if (validFields.length === 0) return '';
+        
+        return `
+        <section class="content-section">
+            <h2 class="section-title">Specs & Measurements</h2>
+            <div class="section-content">
+                <div class="specs-grid">
+                    ${validFields.map(f => `
+                        <div class="spec-item">
+                            <span class="spec-label">${f.label}</span>
+                            <span class="spec-value">${escapeHtml(data.specs[f.key])}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </section>
+        `;
     }
     </script>
 </body>
