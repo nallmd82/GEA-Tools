@@ -1187,6 +1187,10 @@
             position: relative;
             cursor: default;
             touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
         }
 
         .main-image-wrapper:active {
@@ -1194,14 +1198,13 @@
         }
 
         .main-image {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
             transform-origin: center center;
             transition: transform 0.1s ease-out;
             user-select: none;
             -webkit-user-drag: none;
-            background: #f9f9f9;
         }
 
         /* Zoom Controls */
@@ -1735,6 +1738,13 @@
                 bottom: 10px;
                 right: 10px;
             }
+            
+            .zoom-level {
+                min-width: 40px;
+                height: 38px;
+                padding: 0 8px;
+                font-size: 11px;
+            }
 
             .image-nav-controls {
                 bottom: 10px;
@@ -1768,7 +1778,7 @@
         
         <!-- Top Navigation -->
         <nav class="page-nav">
-            <a href="${escapeHtml(data.navigation.catalogURL)}" onclick="if(history.length > 1) { history.back(); return false; }" class="nav-btn back-btn">
+            <a href="${escapeHtml(data.navigation.catalogURL)}" id="back-to-catalog-top" class="nav-btn back-btn">
                 <i class="fa fa-arrow-left"></i>
                 <span>Back to Catalog</span>
             </a>
@@ -1795,7 +1805,7 @@
                 </div>
                 <div class="image-counter" id="image-counter">1 / ${data.images.length}</div>
                 <div class="main-image-wrapper" id="main-image-wrapper">
-                    <img src="${data.images.length > 0 ? toImageUrl(data.images[0], 'w2560') : ''}" alt="${escapeHtml(data.title)}" class="main-image" id="main-image" draggable="false">
+                    <img src="${data.images.length > 0 ? toImageUrl(data.images[0], 'w2048') : ''}" alt="${escapeHtml(data.title)}" class="main-image" id="main-image" draggable="false">
                 </div>
                 <!-- Image Navigation Arrows -->
                 <div class="image-nav-controls">
@@ -1984,7 +1994,7 @@
 
         <!-- Bottom Navigation -->
         <nav class="page-nav bottom">
-            <a href="${escapeHtml(data.navigation.catalogURL)}" onclick="if(history.length > 1) { history.back(); return false; }" class="nav-btn back-btn">
+            <a href="${escapeHtml(data.navigation.catalogURL)}" id="back-to-catalog-bottom" class="nav-btn back-btn">
                 <i class="fa fa-arrow-left"></i>
                 <span>Back to Catalog</span>
             </a>
@@ -2027,7 +2037,7 @@
     let currentImageIndex = 0;
     let scale = 1, translateX = 0, translateY = 0;
     let isDragging = false, startX, startY, startTranslateX, startTranslateY;
-    const MIN_SCALE = 1, MAX_SCALE = 4, SCALE_STEP = 0.5;
+    const MIN_SCALE = 1, MAX_SCALE = 10, SCALE_STEP = 0.5;
 
     const mainImage = document.getElementById('main-image');
     const mainImageWrapper = document.getElementById('main-image-wrapper');
@@ -2039,12 +2049,28 @@
     const zoomHint = document.getElementById('zoom-hint');
     const imagePrevBtn = document.getElementById('image-prev');
     const imageNextBtn = document.getElementById('image-next');
+    
+    // Adjust container height based on image aspect ratio
+    function adjustContainerHeight() {
+        if (!mainImage.naturalWidth || !mainImage.naturalHeight) return;
+        const containerWidth = mainImageWrapper.clientWidth;
+        const aspectRatio = mainImage.naturalWidth / mainImage.naturalHeight;
+        const idealHeight = containerWidth / aspectRatio;
+        // Clamp between min and max heights
+        const minHeight = 400;
+        const maxHeight = 800;
+        const newHeight = Math.max(minHeight, Math.min(maxHeight, idealHeight));
+        mainImageWrapper.style.height = newHeight + 'px';
+    }
+    
+    mainImage.addEventListener('load', adjustContainerHeight);
+    window.addEventListener('resize', adjustContainerHeight);
 
     // Image navigation
     function setActiveImage(index) {
         if (index < 0 || index >= PRODUCT_IMAGES.length) return;
         currentImageIndex = index;
-        mainImage.src = toImageUrl(PRODUCT_IMAGES[index], 'w2560');
+        mainImage.src = toImageUrl(PRODUCT_IMAGES[index], 'w2048');
         resetZoom();
         thumbnailStrip.querySelectorAll('.thumbnail').forEach((thumb, i) => {
             thumb.classList.toggle('active', i === index);
@@ -2402,6 +2428,19 @@
         
         // Update on page load
         updateLiveBid();
+        
+        // Update Back to Catalog buttons with saved URL from sessionStorage
+        (function() {
+            try {
+                var savedUrl = sessionStorage.getItem('gea_catalog_url');
+                if (savedUrl) {
+                    var backBtnTop = document.getElementById('back-to-catalog-top');
+                    var backBtnBottom = document.getElementById('back-to-catalog-bottom');
+                    if (backBtnTop) backBtnTop.href = savedUrl;
+                    if (backBtnBottom) backBtnBottom.href = savedUrl;
+                }
+            } catch(e) {}
+        })();
     })();
     <\/script>
 </body>
