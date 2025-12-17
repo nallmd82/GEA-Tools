@@ -1752,7 +1752,7 @@
         
         <!-- Top Navigation -->
         <nav class="page-nav">
-            <a href="${escapeHtml(data.navigation.catalogURL)}" class="nav-btn back-btn">
+            <a href="${escapeHtml(data.navigation.catalogURL)}" onclick="if(history.length > 1) { history.back(); return false; }" class="nav-btn back-btn">
                 <i class="fa fa-arrow-left"></i>
                 <span>Back to Catalog</span>
             </a>
@@ -1779,7 +1779,7 @@
                 </div>
                 <div class="image-counter" id="image-counter">1 / ${data.images.length}</div>
                 <div class="main-image-wrapper" id="main-image-wrapper">
-                    <img src="${data.images.length > 0 ? toImageUrl(data.images[0], 'w1600') : ''}" alt="${escapeHtml(data.title)}" class="main-image" id="main-image" draggable="false">
+                    <img src="${data.images.length > 0 ? toImageUrl(data.images[0], 'original') : ''}" alt="${escapeHtml(data.title)}" class="main-image" id="main-image" draggable="false">
                 </div>
                 <!-- Image Navigation Arrows -->
                 <div class="image-nav-controls">
@@ -1967,7 +1967,7 @@
 
         <!-- Bottom Navigation -->
         <nav class="page-nav bottom">
-            <a href="${escapeHtml(data.navigation.catalogURL)}" class="nav-btn back-btn">
+            <a href="${escapeHtml(data.navigation.catalogURL)}" onclick="if(history.length > 1) { history.back(); return false; }" class="nav-btn back-btn">
                 <i class="fa fa-arrow-left"></i>
                 <span>Back to Catalog</span>
             </a>
@@ -2027,7 +2027,7 @@
     function setActiveImage(index) {
         if (index < 0 || index >= PRODUCT_IMAGES.length) return;
         currentImageIndex = index;
-        mainImage.src = toImageUrl(PRODUCT_IMAGES[index], 'w1600');
+        mainImage.src = toImageUrl(PRODUCT_IMAGES[index], 'original');
         resetZoom();
         thumbnailStrip.querySelectorAll('.thumbnail').forEach((thumb, i) => {
             thumb.classList.toggle('active', i === index);
