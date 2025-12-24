@@ -311,6 +311,12 @@
                 <p class="help-text">Paste the URL from your browser when viewing the Google Sheet. <strong>Note:</strong> URL loading only works when this page is hosted on a web server. If opening locally, use "Upload CSV file" instead.</p>
             </div>
             
+            <div style="margin-top: 20px; padding: 16px; background: #fff8e6; border: 1px solid #f0d77d; border-radius: 8px;">
+                <label for="api-url" style="color: #8a6d00; font-weight: 700;">📡 Live Bid API URL (Google Apps Script)</label>
+                <input type="url" id="api-url" placeholder="https://script.google.com/macros/s/.../exec" value="https://script.google.com/macros/s/AKfycbySsYncczJ3xGh6l9FJwqKNXcMgRgIq58-6DvHIOwXZM48Pjm9Z-tb0cSANJYPTrFfAAA/exec">
+                <p class="help-text" style="color: #8a6d00;">This URL powers the live bid updates on product pages. Get it from: Google Sheet → Extensions → Apps Script → Deploy → Web app</p>
+            </div>
+            
             <label for="catalog-url">Catalog Page URL (for "Back to Catalog" links)</label>
             <input type="text" id="catalog-url" placeholder="/auction-catalog" value="/auction-catalog">
             
@@ -403,6 +409,7 @@
     let catalogUrl = '/auction-catalog';
     let baseUrl = '/';
     let ctaUrl = '';
+    let apiUrl = 'https://script.google.com/macros/s/AKfycbySsYncczJ3xGh6l9FJwqKNXcMgRgIq58-6DvHIOwXZM48Pjm9Z-tb0cSANJYPTrFfAAA/exec';
     
     /* ==========================================================================
        SAVED AUCTIONS MANAGEMENT
@@ -559,6 +566,7 @@
         baseUrl = document.getElementById('base-url').value.trim() || '/';
         if (!baseUrl.endsWith('/')) baseUrl += '/';
         ctaUrl = document.getElementById('cta-url').value.trim();
+        apiUrl = document.getElementById('api-url').value.trim();
         
         btnLoad.disabled = true;
         statusEl.className = 'status info';
@@ -2337,65 +2345,16 @@
     <!-- Live Bid Update Script -->
     <script>
     (function() {
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384';
+        const API_URL = '${apiUrl}';
         const PRODUCT_TITLE = ${JSON.stringify(data.title)};
-        
-        function parseCSV(text) {
-            const rows = [];
-            let i = 0, field = '', row = [], inQuotes = false;
-            while (i < text.length) {
-                const c = text[i], n = text[i + 1];
-                if (inQuotes) {
-                    if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
-                    if (c === '"') { inQuotes = false; i++; continue; }
-                    field += c; i++; continue;
-                }
-                if (c === '"') { inQuotes = true; i++; continue; }
-                if (c === ',') { row.push(field); field = ''; i++; continue; }
-                if (c === '\\n') { row.push(field); rows.push(row); field = ''; row = []; i++; continue; }
-                if (c === '\\r') { i++; continue; }
-                field += c; i++;
-            }
-            if (field.length || row.length) { row.push(field); rows.push(row); }
-            return rows;
-        }
-        
-        function csvToObjects(rows) {
-            if (rows.length < 2) return [];
-            const headers = rows[0].map(h => h.trim());
-            return rows.slice(1).map(row => {
-                const obj = {};
-                headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
-                return obj;
-            });
-        }
         
         async function updateLiveBid() {
             try {
-                // Try multiple CORS proxies in case one fails
-                const proxies = [
-                    'https://api.allorigins.win/raw?url=',
-                    'https://corsproxy.io/?'
-                ];
+                const response = await fetch(API_URL, { cache: 'no-store' });
+                if (!response.ok) return;
                 
-                let csvText = null;
-                for (const proxy of proxies) {
-                    try {
-                        const proxyUrl = proxy + encodeURIComponent(SHEET_URL);
-                        const response = await fetch(proxyUrl, { cache: 'no-store' });
-                        if (response.ok) {
-                            csvText = await response.text();
-                            break;
-                        }
-                    } catch (e) {
-                        continue;
-                    }
-                }
-                
-                if (!csvText) return;
-                
-                const rows = parseCSV(csvText);
-                const items = csvToObjects(rows);
+                const items = await response.json();
+                if (!items || !Array.isArray(items)) return;
                 
                 // Find matching item by title
                 const item = items.find(i => i['Title'] === PRODUCT_TITLE);
