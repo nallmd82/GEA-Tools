@@ -1,0 +1,922 @@
+<div id="gea-catalog-widget">
+<style>
+#gea-catalog-widget {
+    --color-black: #242424;
+    --color-gold: #BAA342;
+    --color-gray-light: #F5F5F5;
+    --color-gray-medium: #DDDDDD;
+    --color-gray-text: #555555;
+    --gap: 20px;
+    --card-radius: 14px;
+    --max: 1200px;
+    font-family: Arial, sans-serif;
+    padding: 24px 0;
+}
+
+#gea-catalog-widget * { box-sizing: border-box; }
+
+#gea-catalog-widget .loading-container {
+    max-width: var(--max);
+    margin: 60px auto;
+    text-align: center;
+}
+#gea-catalog-widget .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--color-gray-medium);
+    border-top-color: var(--color-gold);
+    border-radius: 50%;
+    animation: gea-spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+@keyframes gea-spin {
+    to { transform: rotate(360deg); }
+}
+#gea-catalog-widget .loading-text {
+    font-size: 18px;
+    color: var(--color-gray-text);
+}
+
+#gea-catalog-widget .error-container {
+    max-width: 600px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 40px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#gea-catalog-widget .error-container h2 { color: #c62828; margin-bottom: 16px; }
+#gea-catalog-widget .error-container p { color: var(--color-gray-text); }
+#gea-catalog-widget .retry-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: var(--color-gold);
+    color: var(--color-black);
+    border: none;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+}
+#gea-catalog-widget .retry-btn:hover { background: var(--color-black); color: #fff; }
+
+#gea-catalog-widget .filter-section { max-width: var(--max); margin: 0 auto 20px; padding-top: 30px; }
+#gea-catalog-widget .search-row { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+#gea-catalog-widget .search-row input[type="search"] { flex: 1 1 300px; padding: 12px 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; }
+#gea-catalog-widget .search-row .clear-btn { padding: 12px 20px; border: 1px solid #ddd; background: #fff; border-radius: 10px; cursor: pointer; font-size: 14px; }
+#gea-catalog-widget .search-row .clear-btn:hover { background: #f5f5f5; }
+#gea-catalog-widget .result-count { font-size: 14px; color: var(--color-gray-text); padding: 0 8px; }
+
+#gea-catalog-widget .filter-bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
+
+#gea-catalog-widget .filter-dropdown { position: relative; min-width: 160px; flex: 1 1 160px; max-width: 220px; }
+#gea-catalog-widget .filter-dropdown .dropdown-btn {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#gea-catalog-widget .filter-dropdown .dropdown-btn:hover { border-color: #999; }
+#gea-catalog-widget .filter-dropdown .dropdown-btn.active { border-color: var(--color-gold); background: #fffdf5; }
+#gea-catalog-widget .filter-dropdown .dropdown-btn .arrow { transition: transform 0.2s; }
+#gea-catalog-widget .filter-dropdown.open .dropdown-btn .arrow { transform: rotate(180deg); }
+#gea-catalog-widget .filter-dropdown .badge { background: var(--color-gold); color: var(--color-black); font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 10px; margin-left: 6px; }
+
+#gea-catalog-widget .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 100;
+    max-height: 280px;
+    overflow: hidden;
+    flex-direction: column;
+}
+#gea-catalog-widget .filter-dropdown.open .dropdown-menu { display: flex; }
+
+#gea-catalog-widget .dropdown-search { padding: 8px; border-bottom: 1px solid #eee; }
+#gea-catalog-widget .dropdown-search input { width: 100%; padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
+
+#gea-catalog-widget .dropdown-options { overflow-y: auto; max-height: 220px; padding: 4px 0; }
+#gea-catalog-widget .dropdown-option { display: flex; align-items: center; padding: 8px 12px; cursor: pointer; font-size: 13px; }
+#gea-catalog-widget .dropdown-option:hover { background: #f5f5f5; }
+#gea-catalog-widget .dropdown-option input { margin-right: 8px; cursor: pointer; }
+#gea-catalog-widget .dropdown-option.selected { background: #fffdf5; }
+#gea-catalog-widget .dropdown-option .count { margin-left: auto; font-size: 11px; color: #999; }
+
+#gea-catalog-widget .dropdown-actions { display: flex; justify-content: space-between; padding: 8px; border-top: 1px solid #eee; }
+#gea-catalog-widget .dropdown-actions button { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; background: #eee; }
+#gea-catalog-widget .dropdown-actions button:hover { background: #ddd; }
+
+#gea-catalog-widget .condition-filter { display: flex; gap: 8px; align-items: center; }
+#gea-catalog-widget .condition-filter span.label { font-size: 14px; font-weight: 600; margin-right: 4px; }
+#gea-catalog-widget .condition-btn {
+    padding: 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+#gea-catalog-widget .condition-btn:hover { border-color: #999; }
+#gea-catalog-widget .condition-btn.active { background: var(--color-gold); border-color: var(--color-gold); font-weight: 600; }
+
+#gea-catalog-widget .active-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+#gea-catalog-widget .active-filters:empty { display: none; }
+#gea-catalog-widget .filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: var(--color-gray-light);
+    border-radius: 20px;
+    font-size: 12px;
+}
+#gea-catalog-widget .filter-tag .remove { cursor: pointer; font-weight: bold; opacity: 0.6; }
+#gea-catalog-widget .filter-tag .remove:hover { opacity: 1; }
+#gea-catalog-widget .clear-all-filters { padding: 6px 12px; background: none; border: 1px solid #ddd; border-radius: 20px; font-size: 12px; cursor: pointer; }
+#gea-catalog-widget .clear-all-filters:hover { background: #f5f5f5; }
+
+#gea-catalog-widget .pagination { max-width: var(--max); margin: 20px auto; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
+#gea-catalog-widget .pagination button { padding: 8px 12px; border: 1px solid #ddd; background: #fff; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.2s ease; min-width: 40px; }
+#gea-catalog-widget .pagination button:hover:not(:disabled) { background: #f5f5f5; border-color: #999; }
+#gea-catalog-widget .pagination button.active { background: var(--color-black); color: #fff; border-color: var(--color-black); }
+#gea-catalog-widget .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
+#gea-catalog-widget .pagination .page-info { padding: 0 12px; font-size: 14px; color: #666; }
+#gea-catalog-widget .items-info { max-width: var(--max); margin: 10px auto; text-align: center; font-size: 14px; color: #666; }
+
+#gea-catalog-widget .catalog-container { max-width: var(--max); margin: 0 auto; display: grid; gap: var(--gap); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+#gea-catalog-widget .catalog-item { background: #fff; border: 1px solid #e9e9e9; border-radius: var(--card-radius); overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,.06); transition: transform .2s ease; display: flex; flex-direction: column; text-decoration: none; color: inherit; max-width: 320px; }
+#gea-catalog-widget .catalog-item:hover { transform: translateY(-3px); }
+#gea-catalog-widget .catalog-item .thumb { width: 100%; aspect-ratio: 4/3; background:#fff; position: relative; overflow: hidden; }
+#gea-catalog-widget .thumb img { width: 100%; height: 100%; object-fit: contain; background:#fff; }
+#gea-catalog-widget .catalog-item .pad { padding: 14px; display: flex; flex-direction: column; flex: 1; }
+#gea-catalog-widget .catalog-item h3 { margin: 6px 0 8px; font-size: 18px; color: var(--color-black); }
+#gea-catalog-widget .meta { font-size: 14px; color: var(--color-gray-text); margin-bottom: 10px; flex-grow: 1; }
+#gea-catalog-widget .high-bid { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px; margin-bottom: 12px; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 8px; border: 1px solid var(--color-gold); }
+#gea-catalog-widget .high-bid.sold { border-color: #666; }
+#gea-catalog-widget .high-bid.sold .high-bid-label { color: #999; }
+#gea-catalog-widget .high-bid-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-gold); }
+#gea-catalog-widget .high-bid-amount { font-size: 18px; font-weight: 700; color: #fff; }
+#gea-catalog-widget .card-bottom { margin-top: auto; }
+#gea-catalog-widget .btn-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+#gea-catalog-widget .btn { display: inline-block; background: var(--color-gold); color: var(--color-black); text-decoration: none; padding: 12px 24px; border-radius: 999px; font-weight: 700; font-size: 14px; transition: all 0.2s ease; border: none; cursor: pointer; }
+#gea-catalog-widget .btn:hover { background: var(--color-black); color: #fff; }
+#gea-catalog-widget .empty { max-width: var(--max); margin: 30px auto; color:#666; text-align:center; }
+
+#gea-catalog-widget .hidden { display: none !important; }
+
+@media (max-width: 768px) {
+    #gea-catalog-widget .filter-bar { 
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    #gea-catalog-widget .filter-dropdown { max-width: none; min-width: 0; flex: none; }
+    #gea-catalog-widget .condition-filter { grid-column: span 2; justify-content: center; }
+}
+@media (max-width: 600px) {
+    #gea-catalog-widget { padding: 12px 0; }
+    #gea-catalog-widget .catalog-container { gap: 14px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    #gea-catalog-widget .catalog-item { max-width: none; }
+    #gea-catalog-widget .pagination button { padding: 6px 10px; font-size: 13px; min-width: 35px; }
+    #gea-catalog-widget .catalog-item h3 { font-size: 16px; }
+    #gea-catalog-widget .btn { padding: 10px 20px; font-size: 13px; }
+    #gea-catalog-widget .high-bid { padding: 8px; }
+    #gea-catalog-widget .high-bid-label { font-size: 9px; }
+    #gea-catalog-widget .high-bid-amount { font-size: 16px; }
+    #gea-catalog-widget .filter-dropdown .dropdown-btn { padding: 8px 10px; font-size: 13px; }
+}
+</style>
+
+<!-- Loading State -->
+<div class="loading-container" id="gea-loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading auction catalog...</div>
+</div>
+
+<!-- Error State -->
+<div class="error-container hidden" id="gea-error">
+    <h2>Unable to Load Catalog</h2>
+    <p id="gea-error-message">There was a problem loading the auction data. Please try again.</p>
+    <button class="retry-btn" onclick="GEACatalog.load()">Try Again</button>
+</div>
+
+<!-- Main Catalog -->
+<div class="hidden" id="gea-main">
+    <div class="filter-section">
+        <div class="search-row">
+            <input id="gea-search" placeholder="Search by title, make, model, caliber..." type="search">
+            <button class="clear-btn" onclick="GEACatalog.clearSearch()">Clear</button>
+            <span class="result-count" id="gea-result-count"></span>
+        </div>
+        
+        <div class="filter-bar">
+            <div class="filter-dropdown" id="gea-filter-make">
+                <button class="dropdown-btn" onclick="GEACatalog.toggleDropdown('make')">
+                    <span>Make <span class="badge" id="gea-badge-make" style="display:none">0</span></span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-search"><input type="text" placeholder="Search makes..." oninput="GEACatalog.searchInDropdown('make', this.value)"></div>
+                    <div class="dropdown-options" id="gea-options-make"></div>
+                    <div class="dropdown-actions">
+                        <button onclick="GEACatalog.selectAllVisible('make')">Select All</button>
+                        <button onclick="GEACatalog.clearFilter('make')">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-dropdown" id="gea-filter-model">
+                <button class="dropdown-btn" onclick="GEACatalog.toggleDropdown('model')">
+                    <span>Model <span class="badge" id="gea-badge-model" style="display:none">0</span></span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-search"><input type="text" placeholder="Search models..." oninput="GEACatalog.searchInDropdown('model', this.value)"></div>
+                    <div class="dropdown-options" id="gea-options-model"></div>
+                    <div class="dropdown-actions">
+                        <button onclick="GEACatalog.selectAllVisible('model')">Select All</button>
+                        <button onclick="GEACatalog.clearFilter('model')">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-dropdown" id="gea-filter-caliber">
+                <button class="dropdown-btn" onclick="GEACatalog.toggleDropdown('caliber')">
+                    <span>Caliber <span class="badge" id="gea-badge-caliber" style="display:none">0</span></span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-search"><input type="text" placeholder="Search calibers..." oninput="GEACatalog.searchInDropdown('caliber', this.value)"></div>
+                    <div class="dropdown-options" id="gea-options-caliber"></div>
+                    <div class="dropdown-actions">
+                        <button onclick="GEACatalog.selectAllVisible('caliber')">Select All</button>
+                        <button onclick="GEACatalog.clearFilter('caliber')">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-dropdown" id="gea-filter-classification">
+                <button class="dropdown-btn" onclick="GEACatalog.toggleDropdown('classification')">
+                    <span>Type <span class="badge" id="gea-badge-classification" style="display:none">0</span></span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    <div class="dropdown-search"><input type="text" placeholder="Search types..." oninput="GEACatalog.searchInDropdown('classification', this.value)"></div>
+                    <div class="dropdown-options" id="gea-options-classification"></div>
+                    <div class="dropdown-actions">
+                        <button onclick="GEACatalog.selectAllVisible('classification')">Select All</button>
+                        <button onclick="GEACatalog.clearFilter('classification')">Clear</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="condition-filter">
+                <span class="label">Condition:</span>
+                <button class="condition-btn" id="gea-cond-new" onclick="GEACatalog.toggleCondition('new')">Factory New</button>
+                <button class="condition-btn" id="gea-cond-used" onclick="GEACatalog.toggleCondition('used')">Used</button>
+            </div>
+        </div>
+        
+        <div class="active-filters" id="gea-active-filters"></div>
+    </div>
+
+    <div class="pagination" id="gea-pagination-top"></div>
+    <div class="items-info" id="gea-items-info-top"></div>
+    <div class="catalog-container" id="gea-catalog"></div>
+    <div class="empty" id="gea-empty" style="display:none;">No items match your filters.</div>
+    <div class="items-info" id="gea-items-info-bottom"></div>
+    <div class="pagination" id="gea-pagination-bottom"></div>
+</div>
+
+<script>
+var GEACatalog = (function() {
+    // Configuration
+    var GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384';
+    var ITEMS_PER_PAGE = 48;
+    var AUCTION_MODE = 'active'; // 'active' = show high bids, 'closed' = show hammer prices
+
+    // State
+    var ITEMS = [];
+    var OPTIONS = { make: [], model: [], caliber: [], classification: [] };
+    var filters = {
+        make: new Set(),
+        model: new Set(),
+        caliber: new Set(),
+        classification: new Set(),
+        condition: new Set()
+    };
+    var searchQuery = '';
+    var searchTerms = { make: '', model: '', caliber: '', classification: '' };
+    var filteredItems = [];
+    var currentPage = 1;
+
+    // URL State Management - preserves filters when navigating back
+    function saveStateToURL() {
+        var state = {};
+        if (searchQuery) state.q = searchQuery;
+        if (filters.make.size > 0) state.make = Array.from(filters.make).join('|');
+        if (filters.model.size > 0) state.model = Array.from(filters.model).join('|');
+        if (filters.caliber.size > 0) state.caliber = Array.from(filters.caliber).join('|');
+        if (filters.classification.size > 0) state.type = Array.from(filters.classification).join('|');
+        if (filters.condition.size > 0) state.cond = Array.from(filters.condition).join('|');
+        if (currentPage > 1) state.page = currentPage;
+        
+        var hash = Object.keys(state).length > 0 ? '#' + Object.keys(state).map(function(k) {
+            return k + '=' + encodeURIComponent(state[k]);
+        }).join('&') : '';
+        
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search + hash);
+        }
+    }
+    
+    function loadStateFromURL() {
+        var hash = window.location.hash.substring(1);
+        if (!hash) return false;
+        
+        var params = {};
+        hash.split('&').forEach(function(part) {
+            var kv = part.split('=');
+            if (kv.length === 2) params[kv[0]] = decodeURIComponent(kv[1]);
+        });
+        
+        if (params.q) {
+            searchQuery = params.q;
+            document.getElementById('gea-search').value = params.q;
+        }
+        if (params.make) params.make.split('|').forEach(function(v) { filters.make.add(v); });
+        if (params.model) params.model.split('|').forEach(function(v) { filters.model.add(v); });
+        if (params.caliber) params.caliber.split('|').forEach(function(v) { filters.caliber.add(v); });
+        if (params.type) params.type.split('|').forEach(function(v) { filters.classification.add(v); });
+        if (params.cond) params.cond.split('|').forEach(function(v) { filters.condition.add(v); });
+        if (params.page) currentPage = parseInt(params.page, 10) || 1;
+        
+        return Object.keys(params).length > 0;
+    }
+
+    // CSV Parsing
+    function parseCSV(text) {
+        var rows = [];
+        var i = 0, field = '', row = [], inQuotes = false;
+        while (i < text.length) {
+            var c = text[i], n = text[i + 1];
+            if (inQuotes) {
+                if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
+                if (c === '"') { inQuotes = false; i++; continue; }
+                field += c; i++; continue;
+            }
+            if (c === '"') { inQuotes = true; i++; continue; }
+            if (c === ',') { row.push(field); field = ''; i++; continue; }
+            if (c === '\n') { row.push(field); rows.push(row); field = ''; row = []; i++; continue; }
+            if (c === '\r') { i++; continue; }
+            field += c; i++;
+        }
+        if (field.length || row.length) { row.push(field); rows.push(row); }
+        return rows;
+    }
+
+    function csvToObjects(rows) {
+        if (rows.length < 2) return [];
+        var headers = rows[0].map(function(h) { return h.trim(); });
+        return rows.slice(1).map(function(row) {
+            var obj = {};
+            headers.forEach(function(h, i) { obj[h] = (row[i] || '').trim(); });
+            return obj;
+        }).filter(function(obj) { return obj['Title'] && obj['Title'].trim(); });
+    }
+
+    // Utilities
+    function esc(s) {
+        var div = document.createElement('div');
+        div.textContent = s || '';
+        return div.innerHTML;
+    }
+
+    function generateSlug(text) {
+        if (!text) return '';
+        return String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    }
+
+    function toImageUrl(token, size) {
+        size = size || 'w400';
+        if (!token) return '';
+        var t = String(token).trim();
+        if (/^https?:\/\//i.test(t)) {
+            var m = t.match(/(?:\/d\/|[?&]id=)([A-Za-z0-9_-]{20,})/);
+            if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=' + size;
+            return t;
+        }
+        return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(t) + '&sz=' + size;
+    }
+
+    function formatCondition(item) {
+        var condition = (item.condition || '').trim();
+        var conditionDesc = (item.conditionDesc || '').trim();
+        if (condition.toLowerCase() === 'used' && conditionDesc) return 'Used - ' + conditionDesc;
+        return condition;
+    }
+
+    // Data Loading
+    function load() {
+        document.getElementById('gea-loading').classList.remove('hidden');
+        document.getElementById('gea-error').classList.add('hidden');
+        document.getElementById('gea-main').classList.add('hidden');
+        
+        var proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(GOOGLE_SHEET_URL);
+        fetch(proxyUrl, { cache: 'no-store' })
+            .then(function(response) {
+                if (!response.ok) throw new Error('Failed to fetch data');
+                return response.text();
+            })
+            .then(function(csvText) {
+                var rows = parseCSV(csvText);
+                var data = csvToObjects(rows);
+                
+                if (data.length === 0) throw new Error('No items found');
+                
+                ITEMS = data.map(function(row) {
+                    return {
+                        title: row['Title'] || '',
+                        seoSlug: row['SEO Title/URL Slug'] || '',
+                        make: row['Make'] || '',
+                        model: row['Model'] || '',
+                        condition: row['Condition'] || '',
+                        conditionDesc: row['Condition Description'] || '',
+                        caliber: row['Caliber/Gauge'] || '',
+                        classification: row['Classification'] || '',
+                        imageURL: row['ImageURL'] || '',
+                        description: row['Overview'] || row['Description'] || '',
+                        ctaUrl: row['CTA URL'] || '',
+                        currentHighBid: row['Current High Bid'] || '',
+                        hammerPrice: row['Hammer Price'] || ''
+                    };
+                });
+                
+                OPTIONS.make = Array.from(new Set(ITEMS.map(function(i) { return i.make; }).filter(Boolean))).sort();
+                OPTIONS.model = Array.from(new Set(ITEMS.map(function(i) { return i.model; }).filter(Boolean))).sort();
+                OPTIONS.caliber = Array.from(new Set(ITEMS.map(function(i) { return i.caliber; }).filter(Boolean))).sort();
+                OPTIONS.classification = Array.from(new Set(ITEMS.map(function(i) { return i.classification; }).filter(Boolean))).sort();
+                
+                filteredItems = ITEMS.slice();
+                
+                document.getElementById('gea-loading').classList.add('hidden');
+                document.getElementById('gea-main').classList.remove('hidden');
+                
+                // Restore filter state from URL (for back button support)
+                var hasState = loadStateFromURL();
+                
+                updateAllDropdowns();
+                
+                if (hasState) {
+                    // Re-apply filters with restored state, but don't reset page
+                    var savedPage = currentPage;
+                    applyFiltersWithoutPageReset();
+                    currentPage = savedPage;
+                    renderPage();
+                    renderPagination();
+                } else {
+                    applyFilters();
+                }
+            })
+            .catch(function(error) {
+                console.error('Load error:', error);
+                document.getElementById('gea-loading').classList.add('hidden');
+                document.getElementById('gea-error').classList.remove('hidden');
+                document.getElementById('gea-error-message').textContent = error.message || 'There was a problem loading the auction data.';
+            });
+    }
+
+    // Filtering
+    function getFilteredItemsExcept(exceptKey) {
+        return ITEMS.filter(function(item) {
+            if (searchQuery) {
+                var searchText = [item.title, item.make, item.model, item.caliber, item.description, item.classification].join(' ').toLowerCase();
+                if (searchText.indexOf(searchQuery) === -1) return false;
+            }
+            
+            if (exceptKey !== 'make' && filters.make.size > 0) {
+                if (!filters.make.has(item.make)) return false;
+            }
+            if (exceptKey !== 'model' && filters.model.size > 0) {
+                if (!filters.model.has(item.model)) return false;
+            }
+            if (exceptKey !== 'caliber' && filters.caliber.size > 0) {
+                if (!filters.caliber.has(item.caliber)) return false;
+            }
+            if (exceptKey !== 'classification' && filters.classification.size > 0) {
+                if (!filters.classification.has(item.classification)) return false;
+            }
+            if (exceptKey !== 'condition' && filters.condition.size > 0) {
+                var itemCond = (item.condition || '').toLowerCase();
+                var isNew = itemCond === 'factory new';
+                var isUsed = itemCond === 'used';
+                var wantNew = filters.condition.has('new');
+                var wantUsed = filters.condition.has('used');
+                if (wantNew && wantUsed) { /* both */ }
+                else if (wantNew && !isNew) return false;
+                else if (wantUsed && !isUsed) return false;
+            }
+            
+            return true;
+        });
+    }
+
+    function getOptionCounts(key) {
+        var relevantItems = getFilteredItemsExcept(key);
+        var counts = {};
+        for (var i = 0; i < relevantItems.length; i++) {
+            var val = relevantItems[i][key];
+            if (val) counts[val] = (counts[val] || 0) + 1;
+        }
+        return counts;
+    }
+
+    function updateDropdownOptions(key) {
+        var container = document.getElementById('gea-options-' + key);
+        var counts = getOptionCounts(key);
+        var searchTerm = searchTerms[key].toLowerCase();
+        var options = OPTIONS[key];
+        
+        var html = '';
+        for (var i = 0; i < options.length; i++) {
+            var val = options[i];
+            var count = counts[val] || 0;
+            var isChecked = filters[key].has(val);
+            var matchesSearch = !searchTerm || val.toLowerCase().indexOf(searchTerm) !== -1;
+            
+            if ((count === 0 && !isChecked) || !matchesSearch) continue;
+            
+            html += '<label class="dropdown-option' + (isChecked ? ' selected' : '') + '" data-idx="' + i + '">' +
+                '<input type="checkbox"' + (isChecked ? ' checked' : '') + 
+                ' onchange="GEACatalog.handleFilter(\'' + key + '\',' + i + ',this.checked)"> ' +
+                esc(val) +
+                '<span class="count">(' + count + ')</span>' +
+                '</label>';
+        }
+        container.innerHTML = html;
+    }
+
+    function updateAllDropdowns() {
+        updateDropdownOptions('make');
+        updateDropdownOptions('model');
+        updateDropdownOptions('caliber');
+        updateDropdownOptions('classification');
+    }
+
+    function handleFilter(key, idx, checked) {
+        var val = OPTIONS[key][idx];
+        if (checked) {
+            filters[key].add(val);
+        } else {
+            filters[key].delete(val);
+        }
+        updateBadge(key);
+        applyFilters();
+        updateAllDropdowns();
+    }
+
+    function toggleDropdown(key) {
+        var dropdown = document.getElementById('gea-filter-' + key);
+        var wasOpen = dropdown.classList.contains('open');
+        document.querySelectorAll('#gea-catalog-widget .filter-dropdown').forEach(function(d) { d.classList.remove('open'); });
+        if (!wasOpen) {
+            dropdown.classList.add('open');
+            updateDropdownOptions(key);
+        }
+    }
+
+    function searchInDropdown(key, query) {
+        searchTerms[key] = query;
+        updateDropdownOptions(key);
+    }
+
+    function selectAllVisible(key) {
+        var options = document.querySelectorAll('#gea-options-' + key + ' .dropdown-option input');
+        options.forEach(function(cb) {
+            if (!cb.checked) {
+                cb.checked = true;
+                var idx = parseInt(cb.parentElement.getAttribute('data-idx'));
+                filters[key].add(OPTIONS[key][idx]);
+            }
+        });
+        updateBadge(key);
+        applyFilters();
+        updateAllDropdowns();
+    }
+
+    function clearFilter(key) {
+        filters[key].clear();
+        updateBadge(key);
+        applyFilters();
+        updateAllDropdowns();
+    }
+
+    function updateBadge(key) {
+        var badge = document.getElementById('gea-badge-' + key);
+        var btn = document.querySelector('#gea-filter-' + key + ' .dropdown-btn');
+        var count = filters[key].size;
+        if (count > 0) {
+            badge.textContent = count;
+            badge.style.display = '';
+            btn.classList.add('active');
+        } else {
+            badge.style.display = 'none';
+            btn.classList.remove('active');
+        }
+    }
+
+    function toggleCondition(type) {
+        var btn = document.getElementById('gea-cond-' + type);
+        if (filters.condition.has(type)) {
+            filters.condition.delete(type);
+            btn.classList.remove('active');
+        } else {
+            filters.condition.add(type);
+            btn.classList.add('active');
+        }
+        applyFilters();
+        updateAllDropdowns();
+    }
+
+    function clearSearch() {
+        document.getElementById('gea-search').value = '';
+        searchQuery = '';
+        applyFilters();
+        updateAllDropdowns();
+    }
+
+    function clearAllFilters() {
+        filters.make.clear();
+        filters.model.clear();
+        filters.caliber.clear();
+        filters.classification.clear();
+        filters.condition.clear();
+        updateBadge('make');
+        updateBadge('model');
+        updateBadge('caliber');
+        updateBadge('classification');
+        document.querySelectorAll('#gea-catalog-widget .condition-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.getElementById('gea-search').value = '';
+        searchQuery = '';
+        applyFilters();
+        updateAllDropdowns();
+    }
+
+    function removeFilterTag(key, idx) {
+        var val = OPTIONS[key][idx];
+        filters[key].delete(val);
+        updateBadge(key);
+        applyFilters();
+        updateAllDropdowns();
+    }
+
+    function updateActiveFilters() {
+        var container = document.getElementById('gea-active-filters');
+        var html = '';
+        
+        ['make', 'model', 'caliber', 'classification'].forEach(function(key) {
+            filters[key].forEach(function(val) {
+                var idx = OPTIONS[key].indexOf(val);
+                html += '<span class="filter-tag">' + esc(val) + ' <span class="remove" onclick="GEACatalog.removeFilterTag(\'' + key + '\',' + idx + ')">×</span></span>';
+            });
+        });
+        
+        if (filters.condition.has('new')) {
+            html += '<span class="filter-tag">Factory New <span class="remove" onclick="GEACatalog.toggleCondition(\'new\')">×</span></span>';
+        }
+        if (filters.condition.has('used')) {
+            html += '<span class="filter-tag">Used <span class="remove" onclick="GEACatalog.toggleCondition(\'used\')">×</span></span>';
+        }
+        
+        if (html) {
+            html += '<button class="clear-all-filters" onclick="GEACatalog.clearAllFilters()">Clear All</button>';
+        }
+        
+        container.innerHTML = html;
+    }
+
+    function applyFilters() {
+        searchQuery = document.getElementById('gea-search').value.trim().toLowerCase();
+        
+        filteredItems = ITEMS.filter(function(item) {
+            if (searchQuery) {
+                var searchText = [item.title, item.make, item.model, item.caliber, item.description, item.classification].join(' ').toLowerCase();
+                if (searchText.indexOf(searchQuery) === -1) return false;
+            }
+            
+            if (filters.make.size > 0 && !filters.make.has(item.make)) return false;
+            if (filters.model.size > 0 && !filters.model.has(item.model)) return false;
+            if (filters.caliber.size > 0 && !filters.caliber.has(item.caliber)) return false;
+            if (filters.classification.size > 0 && !filters.classification.has(item.classification)) return false;
+            
+            if (filters.condition.size > 0) {
+                var itemCond = (item.condition || '').toLowerCase();
+                var isNew = itemCond === 'factory new';
+                var isUsed = itemCond === 'used';
+                var wantNew = filters.condition.has('new');
+                var wantUsed = filters.condition.has('used');
+                if (wantNew && wantUsed) { /* both */ }
+                else if (wantNew && !isNew) return false;
+                else if (wantUsed && !isUsed) return false;
+            }
+            
+            return true;
+        });
+        
+        currentPage = 1;
+        renderPage();
+        renderPagination();
+        updateActiveFilters();
+        saveStateToURL();
+        
+        document.getElementById('gea-result-count').textContent = filteredItems.length + ' items';
+    }
+    
+    function applyFiltersWithoutPageReset() {
+        searchQuery = document.getElementById('gea-search').value.trim().toLowerCase();
+        
+        filteredItems = ITEMS.filter(function(item) {
+            if (searchQuery) {
+                var searchText = [item.title, item.make, item.model, item.caliber, item.description, item.classification].join(' ').toLowerCase();
+                if (searchText.indexOf(searchQuery) === -1) return false;
+            }
+            
+            if (filters.make.size > 0 && !filters.make.has(item.make)) return false;
+            if (filters.model.size > 0 && !filters.model.has(item.model)) return false;
+            if (filters.caliber.size > 0 && !filters.caliber.has(item.caliber)) return false;
+            if (filters.classification.size > 0 && !filters.classification.has(item.classification)) return false;
+            
+            if (filters.condition.size > 0) {
+                var itemCond = (item.condition || '').toLowerCase();
+                var isNew = itemCond === 'factory new';
+                var isUsed = itemCond === 'used';
+                var wantNew = filters.condition.has('new');
+                var wantUsed = filters.condition.has('used');
+                if (wantNew && wantUsed) { /* both */ }
+                else if (wantNew && !isNew) return false;
+                else if (wantUsed && !isUsed) return false;
+            }
+            
+            return true;
+        });
+        
+        updateActiveFilters();
+        document.getElementById('gea-result-count').textContent = filteredItems.length + ' items';
+    }
+
+    // Rendering
+    function renderPagination() {
+        var totalItems = filteredItems.length;
+        var totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+        var $paginationTop = document.getElementById('gea-pagination-top');
+        var $paginationBottom = document.getElementById('gea-pagination-bottom');
+        var $itemsInfoTop = document.getElementById('gea-items-info-top');
+        var $itemsInfoBottom = document.getElementById('gea-items-info-bottom');
+        
+        if (totalPages <= 1) {
+            $paginationTop.innerHTML = '';
+            $paginationBottom.innerHTML = '';
+            $itemsInfoTop.innerHTML = '';
+            $itemsInfoBottom.innerHTML = '';
+            return;
+        }
+        
+        var startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
+        var endItem = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
+        var itemsInfo = 'Showing items ' + startItem + '-' + endItem + ' of ' + totalItems;
+        $itemsInfoTop.innerHTML = itemsInfo;
+        $itemsInfoBottom.innerHTML = itemsInfo;
+        
+        var html = '<button onclick="GEACatalog.changePage(' + (currentPage - 1) + ')"' + (currentPage === 1 ? ' disabled' : '') + '>‹ Prev</button>';
+        
+        if (totalPages <= 7) {
+            for (var i = 1; i <= totalPages; i++) {
+                html += '<button onclick="GEACatalog.changePage(' + i + ')" class="' + (i === currentPage ? 'active' : '') + '">' + i + '</button>';
+            }
+        } else {
+            html += '<button onclick="GEACatalog.changePage(1)" class="' + (1 === currentPage ? 'active' : '') + '">1</button>';
+            if (currentPage > 3) html += '<button disabled>...</button>';
+            for (var i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+                html += '<button onclick="GEACatalog.changePage(' + i + ')" class="' + (i === currentPage ? 'active' : '') + '">' + i + '</button>';
+            }
+            if (currentPage < totalPages - 2) html += '<button disabled>...</button>';
+            html += '<button onclick="GEACatalog.changePage(' + totalPages + ')" class="' + (totalPages === currentPage ? 'active' : '') + '">' + totalPages + '</button>';
+        }
+        
+        html += '<button onclick="GEACatalog.changePage(' + (currentPage + 1) + ')"' + (currentPage === totalPages ? ' disabled' : '') + '>Next ›</button>';
+        html += '<span class="page-info">Page ' + currentPage + ' of ' + totalPages + '</span>';
+        
+        $paginationTop.innerHTML = html;
+        $paginationBottom.innerHTML = html;
+    }
+
+    function changePage(page) {
+        var totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
+        if (page < 1 || page > totalPages) return;
+        currentPage = page;
+        renderPage();
+        renderPagination();
+        saveStateToURL();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderPage() {
+        var $catalog = document.getElementById('gea-catalog');
+        var $empty = document.getElementById('gea-empty');
+        var startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+        var pageItems = filteredItems.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+        
+        if (!pageItems.length) {
+            $catalog.innerHTML = '';
+            $empty.style.display = 'block';
+            return;
+        }
+        
+        $empty.style.display = 'none';
+        var html = '';
+        
+        for (var i = 0; i < pageItems.length; i++) {
+            var it = pageItems[i];
+            var slug = generateSlug(it.seoSlug || it.title || '');
+            var imgUrl = it.imageURL ? toImageUrl(it.imageURL) : '';
+            var cond = formatCondition(it);
+            
+            html += '<a class="catalog-item" href="/' + slug + '">';
+            if (imgUrl) {
+                html += '<div class="thumb"><img referrerpolicy="no-referrer" src="' + imgUrl + '" alt="' + esc(it.title) + '" loading="lazy"></div>';
+            } else {
+                html += '<div class="thumb"></div>';
+            }
+            html += '<div class="pad"><h3>' + esc(it.title) + '</h3>';
+            html += '<div class="meta">' + (cond ? 'Condition: ' + esc(cond) : '') + '</div>';
+            html += '<div class="card-bottom">';
+            
+            // Show hammer price if auction is closed or if hammer price exists, otherwise show high bid
+            if (it.hammerPrice) {
+                html += '<div class="high-bid sold"><span class="high-bid-label">Sold For</span><span class="high-bid-amount">' + esc(it.hammerPrice) + '</span></div>';
+            } else if (AUCTION_MODE === 'active') {
+                html += '<div class="high-bid"><span class="high-bid-label">GEA Live High Bid</span><span class="high-bid-amount">' + esc(it.currentHighBid || '$0.00') + '</span></div>';
+            }
+            
+            html += '<div class="btn-row"><span class="btn">View Details</span></div></div></div></a>';
+        }
+        
+        $catalog.innerHTML = html;
+        
+        // Save catalog URL when clicking on an item (for "Back to Catalog" button)
+        $catalog.querySelectorAll('.catalog-item').forEach(function(link) {
+            link.addEventListener('click', function() {
+                try {
+                    sessionStorage.setItem('gea_catalog_url', window.location.href);
+                } catch(e) {}
+            });
+        });
+    }
+
+    // Event Listeners
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('#gea-catalog-widget .filter-dropdown')) {
+            document.querySelectorAll('#gea-catalog-widget .filter-dropdown').forEach(function(d) { d.classList.remove('open'); });
+        }
+    });
+
+    document.getElementById('gea-search').addEventListener('input', function() {
+        applyFilters();
+        updateAllDropdowns();
+    });
+
+    // Public API
+    return {
+        load: load,
+        toggleDropdown: toggleDropdown,
+        handleFilter: handleFilter,
+        searchInDropdown: searchInDropdown,
+        selectAllVisible: selectAllVisible,
+        clearFilter: clearFilter,
+        toggleCondition: toggleCondition,
+        clearSearch: clearSearch,
+        clearAllFilters: clearAllFilters,
+        removeFilterTag: removeFilterTag,
+        changePage: changePage
+    };
+})();
+
+// Initialize
+GEACatalog.load();
+</script>
+</div>
