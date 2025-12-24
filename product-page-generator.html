@@ -313,7 +313,7 @@
             
             <div style="margin-top: 20px; padding: 16px; background: #fff8e6; border: 1px solid #f0d77d; border-radius: 8px;">
                 <label for="api-url" style="color: #8a6d00; font-weight: 700;">📡 Live Bid API URL (Google Apps Script)</label>
-                <input type="url" id="api-url" placeholder="https://script.google.com/macros/s/.../exec" value="https://script.google.com/macros/s/AKfycbySsYncczJ3xGh6l9FJwqKNXcMgRgIq58-6DvHIOwXZM48Pjm9Z-tb0cSANJYPTrFfAAA/exec">
+                <input type="url" id="api-url" placeholder="https://script.google.com/macros/s/.../exec" value="https://script.google.com/macros/s/AKfycbzfHglVfgenLM4xZ8jdfQlDwI3Rs9zGK1KCaoirz8dWgppH9tYUGkVr75XqfIzxB4tbLA/exec">
                 <p class="help-text" style="color: #8a6d00;">This URL powers the live bid updates on product pages. Get it from: Google Sheet → Extensions → Apps Script → Deploy → Web app</p>
             </div>
             
@@ -409,7 +409,7 @@
     let catalogUrl = '/auction-catalog';
     let baseUrl = '/';
     let ctaUrl = '';
-    let apiUrl = 'https://script.google.com/macros/s/AKfycbySsYncczJ3xGh6l9FJwqKNXcMgRgIq58-6DvHIOwXZM48Pjm9Z-tb0cSANJYPTrFfAAA/exec';
+    let apiUrl = 'https://script.google.com/macros/s/AKfycbzfHglVfgenLM4xZ8jdfQlDwI3Rs9zGK1KCaoirz8dWgppH9tYUGkVr75XqfIzxB4tbLA/exec';
     
     /* ==========================================================================
        SAVED AUCTIONS MANAGEMENT
@@ -2346,24 +2346,90 @@
     <script>
     (function() {
         const API_URL = '${apiUrl}';
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384';
         const PRODUCT_TITLE = ${JSON.stringify(data.title)};
+        
+        function parseCSV(text) {
+            const rows = [];
+            let i = 0, field = '', row = [], inQuotes = false;
+            while (i < text.length) {
+                const c = text[i], n = text[i + 1];
+                if (inQuotes) {
+                    if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
+                    if (c === '"') { inQuotes = false; i++; continue; }
+                    field += c; i++; continue;
+                }
+                if (c === '"') { inQuotes = true; i++; continue; }
+                if (c === ',') { row.push(field); field = ''; i++; continue; }
+                if (c === '\\n') { row.push(field); rows.push(row); field = ''; row = []; i++; continue; }
+                if (c === '\\r') { i++; continue; }
+                field += c; i++;
+            }
+            if (field.length || row.length) { row.push(field); rows.push(row); }
+            return rows;
+        }
+        
+        function csvToObjects(rows) {
+            if (rows.length < 2) return [];
+            const headers = rows[0].map(h => h.trim());
+            return rows.slice(1).map(row => {
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
+                return obj;
+            });
+        }
+        
+        async function fetchWithFallback() {
+            // Try Apps Script API first
+            try {
+                const response = await fetch(API_URL, { cache: 'no-store', redirect: 'follow' });
+                if (response.ok) {
+                    const text = await response.text();
+                    if (!text.includes('<!DOCTYPE') && !text.includes('<html')) {
+                        return JSON.parse(text);
+                    }
+                }
+            } catch (e) { console.log('API failed, trying proxy...'); }
+            
+            // Fallback to CORS proxies
+            const proxies = ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?'];
+            for (const proxy of proxies) {
+                try {
+                    const response = await fetch(proxy + encodeURIComponent(CSV_URL), { cache: 'no-store' });
+                    if (response.ok) {
+                        const csvText = await response.text();
+                        return csvToObjects(parseCSV(csvText));
+                    }
+                } catch (e) { continue; }
+            }
+            return null;
+        }
+        
+        function formatCurrency(value) {
+            if (!value && value !== 0) return '$0.00';
+            var str = String(value).trim();
+            if (str.charAt(0) === '$') {
+                if (str.indexOf('.') === -1) return str + '.00';
+                return str;
+            }
+            var num = parseFloat(str.replace(/[^0-9.-]/g, ''));
+            if (isNaN(num)) return '$0.00';
+            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
         
         async function updateLiveBid() {
             try {
-                const response = await fetch(API_URL, { cache: 'no-store' });
-                if (!response.ok) return;
-                
-                const items = await response.json();
+                const items = await fetchWithFallback();
                 if (!items || !Array.isArray(items)) return;
                 
                 // Find matching item by title
                 const item = items.find(i => i['Title'] === PRODUCT_TITLE);
                 if (!item) return;
                 
-                const highBid = item['Current High Bid'];
-                const proxibidBid = item['Proxibid High Bid'];
+                const highBid = formatCurrency(item['Current High Bid']);
+                const proxibidBid = formatCurrency(item['Proxibid High Bid']);
                 const ctaUrl = item['CTA URL'];
-                const hammerPrice = item['Hammer Price'];
+                const hammerPrice = item['Hammer Price'] ? formatCurrency(item['Hammer Price']) : null;
                 
                 const ctaTop = document.getElementById('cta-top');
                 const ctaBottom = document.getElementById('cta-bottom');
@@ -2392,11 +2458,11 @@
                         <div class="high-bid-row">
                             <div class="high-bid-display" id="high-bid-top">
                                 <span class="high-bid-label">GEA Live High Bid</span>
-                                <span class="high-bid-amount" id="bid-amount-top">\${highBid || '$0.00'}</span>
+                                <span class="high-bid-amount" id="bid-amount-top">\${highBid}</span>
                             </div>
                             <div class="high-bid-display proxibid" id="proxibid-bid-top">
                                 <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
-                                <span class="high-bid-amount" id="proxibid-amount-top">\${proxibidBid || '$0.00'}</span>
+                                <span class="high-bid-amount" id="proxibid-amount-top">\${proxibidBid}</span>
                             </div>
                         </div>
                         <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
@@ -2410,11 +2476,11 @@
                         <div class="high-bid-row">
                             <div class="high-bid-display" id="high-bid-bottom">
                                 <span class="high-bid-label">GEA Live High Bid</span>
-                                <span class="high-bid-amount" id="bid-amount-bottom">\${highBid || '$0.00'}</span>
+                                <span class="high-bid-amount" id="bid-amount-bottom">\${highBid}</span>
                             </div>
                             <div class="high-bid-display proxibid" id="proxibid-bid-bottom">
                                 <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
-                                <span class="high-bid-amount" id="proxibid-amount-bottom">\${proxibidBid || '$0.00'}</span>
+                                <span class="high-bid-amount" id="proxibid-amount-bottom">\${proxibidBid}</span>
                             </div>
                         </div>
                         <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
@@ -2434,8 +2500,8 @@
                 const displayTop = document.getElementById('high-bid-top');
                 const displayBottom = document.getElementById('high-bid-bottom');
                 
-                if (bidTop) bidTop.textContent = highBid || '$0.00';
-                if (bidBottom) bidBottom.textContent = highBid || '$0.00';
+                if (bidTop) bidTop.textContent = highBid;
+                if (bidBottom) bidBottom.textContent = highBid;
                 if (displayTop) displayTop.style.display = '';
                 if (displayBottom) displayBottom.style.display = '';
                 
@@ -2445,8 +2511,8 @@
                 const proxibidDisplayTop = document.getElementById('proxibid-bid-top');
                 const proxibidDisplayBottom = document.getElementById('proxibid-bid-bottom');
                 
-                if (proxibidTop) proxibidTop.textContent = proxibidBid || '$0.00';
-                if (proxibidBottom) proxibidBottom.textContent = proxibidBid || '$0.00';
+                if (proxibidTop) proxibidTop.textContent = proxibidBid;
+                if (proxibidBottom) proxibidBottom.textContent = proxibidBid;
                 if (proxibidDisplayTop) proxibidDisplayTop.style.display = '';
                 if (proxibidDisplayBottom) proxibidDisplayBottom.style.display = '';
                 
