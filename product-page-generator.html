@@ -275,7 +275,7 @@
 <body>
     <div class="container">
         <h1>🦅 Product Page Generator</h1>
-        <p class="subtitle">Generate standalone product pages from your Google Sheet</p>
+        <p class="subtitle">Generate standalone product pages from your Google Sheet (v2 - Live bids from GitHub)</p>
         
         <div class="step-indicator">
             <div class="step active" id="step1">1. Load Data</div>
@@ -309,12 +309,6 @@
                 <label for="csv-url">Google Sheet CSV URL</label>
                 <input type="url" id="csv-url" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv" value="https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384">
                 <p class="help-text">Paste the URL from your browser when viewing the Google Sheet. <strong>Note:</strong> URL loading only works when this page is hosted on a web server. If opening locally, use "Upload CSV file" instead.</p>
-            </div>
-            
-            <div style="margin-top: 20px; padding: 16px; background: #fff8e6; border: 1px solid #f0d77d; border-radius: 8px;">
-                <label for="api-url" style="color: #8a6d00; font-weight: 700;">📡 Live Bid API URL (Google Apps Script)</label>
-                <input type="url" id="api-url" placeholder="https://script.google.com/macros/s/.../exec" value="https://script.google.com/macros/s/AKfycbzfHglVfgenLM4xZ8jdfQlDwI3Rs9zGK1KCaoirz8dWgppH9tYUGkVr75XqfIzxB4tbLA/exec">
-                <p class="help-text" style="color: #8a6d00;">This URL powers the live bid updates on product pages. Get it from: Google Sheet → Extensions → Apps Script → Deploy → Web app</p>
             </div>
             
             <label for="catalog-url">Catalog Page URL (for "Back to Catalog" links)</label>
@@ -409,7 +403,6 @@
     let catalogUrl = '/auction-catalog';
     let baseUrl = '/';
     let ctaUrl = '';
-    let apiUrl = 'https://script.google.com/macros/s/AKfycbzfHglVfgenLM4xZ8jdfQlDwI3Rs9zGK1KCaoirz8dWgppH9tYUGkVr75XqfIzxB4tbLA/exec';
     
     /* ==========================================================================
        SAVED AUCTIONS MANAGEMENT
@@ -450,7 +443,6 @@
         
         const saved = JSON.parse(localStorage.getItem('gea_saved_auctions') || '[]');
         
-        // Check if name already exists
         const existingIdx = saved.findIndex(a => a.name === name);
         if (existingIdx >= 0) {
             if (confirm(`"${name}" already exists. Update it with the new URL?`)) {
@@ -465,7 +457,6 @@
         localStorage.setItem('gea_saved_auctions', JSON.stringify(saved));
         loadSavedAuctions();
         
-        // Select the newly saved auction
         const select = document.getElementById('saved-auctions');
         const newIdx = saved.findIndex(a => a.name === name);
         select.value = newIdx;
@@ -493,7 +484,6 @@
         }
     }
     
-    // Initialize saved auctions on page load
     document.addEventListener('DOMContentLoaded', loadSavedAuctions);
     
     /* ==========================================================================
@@ -537,7 +527,6 @@
             headers.forEach((header, idx) => {
                 obj[header] = rows[i][idx] || '';
             });
-            // Only include rows that have a title
             if (obj['Title'] && obj['Title'].trim()) {
                 objects.push(obj);
             }
@@ -561,12 +550,10 @@
         const statusEl = document.getElementById('status-load');
         const btnLoad = document.getElementById('btn-load');
         
-        // Get configuration
         catalogUrl = document.getElementById('catalog-url').value.trim() || '/auction-catalog';
         baseUrl = document.getElementById('base-url').value.trim() || '/';
         if (!baseUrl.endsWith('/')) baseUrl += '/';
         ctaUrl = document.getElementById('cta-url').value.trim();
-        apiUrl = document.getElementById('api-url').value.trim();
         
         btnLoad.disabled = true;
         statusEl.className = 'status info';
@@ -589,10 +576,8 @@
                     throw new Error('Please enter a CSV URL');
                 }
                 
-                // Convert edit URL to export URL if needed
                 csvUrl = convertToExportUrl(csvUrl);
                 
-                // Use CORS proxy for Google Sheets
                 if (csvUrl.includes('docs.google.com')) {
                     csvUrl = 'https://corsproxy.io/?' + encodeURIComponent(csvUrl);
                 }
@@ -613,7 +598,6 @@
             statusEl.className = 'status success';
             statusEl.textContent = `Successfully loaded ${csvData.length} products!`;
             
-            // Move to step 2
             setTimeout(() => showPreview(), 500);
             
         } catch (error) {
@@ -623,20 +607,16 @@
         }
     }
     
-    // Convert Google Sheets edit URL to export CSV URL
     function convertToExportUrl(url) {
-        // Match Google Sheets URL patterns
         const match = url.match(/docs\.google\.com\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
-        if (!match) return url; // Not a Google Sheets URL, return as-is
+        if (!match) return url;
         
         const sheetId = match[1];
         
-        // Extract gid if present
         let gid = '0';
         const gidMatch = url.match(/[?&#]gid=(\d+)/);
         if (gidMatch) gid = gidMatch[1];
         
-        // Return proper export URL
         return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
     }
     
@@ -731,7 +711,6 @@
         const progressFill = document.getElementById('progress-fill');
         const statusText = document.getElementById('generate-status-text');
         
-        // Build the list showing only selected items
         listEl.innerHTML = selectedIndices.map((idx, listPosition) => {
             const item = csvData[idx];
             const slug = getSlug(item, idx);
@@ -746,14 +725,12 @@
             `;
         }).join('');
         
-        // Generate each selected file
         for (let listPosition = 0; listPosition < selectedIndices.length; listPosition++) {
             const idx = selectedIndices[listPosition];
             const item = csvData[idx];
             const slug = getSlug(item, idx);
             const filename = `${slug}.html`;
             
-            // Determine prev/next based on FULL spreadsheet order (not just selected items)
             const prevItem = idx > 0 ? csvData[idx - 1] : null;
             const nextItem = idx < csvData.length - 1 ? csvData[idx + 1] : null;
             
@@ -768,14 +745,11 @@
                 catalogURL: catalogUrl
             };
             
-            // Generate HTML content
             const htmlContent = generateProductHTML(item, navigation);
             
-            // Add to zip
             zip.file(filename, htmlContent);
             generatedFiles.push({ filename, content: htmlContent });
             
-            // Update UI
             document.getElementById(`gen-status-${listPosition}`).innerHTML = `<button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="copyCode(${listPosition})">Copy Code</button>`;
             document.getElementById(`gen-status-${listPosition}`).classList.remove('pending');
             document.getElementById(`gen-status-${listPosition}`).classList.add('complete');
@@ -784,14 +758,11 @@
             progressFill.style.width = progress + '%';
             statusText.textContent = `Processing ${listPosition + 1} of ${selectedIndices.length}...`;
             
-            // Small delay for UI update
             await new Promise(r => setTimeout(r, 10));
         }
         
-        // Store zip for download
         generatedZip = zip;
         
-        // Complete
         statusText.textContent = `✓ Successfully generated ${selectedIndices.length} product pages!`;
         document.getElementById('status-generate').classList.remove('info');
         document.getElementById('status-generate').classList.add('success');
@@ -816,12 +787,10 @@
     function copyCode(index) {
         const content = generatedFiles[index].content;
         
-        // Try modern clipboard API first
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(content).then(() => {
                 showCopySuccess(index);
             }).catch(err => {
-                // Fallback for iframe/security restrictions
                 fallbackCopy(content, index);
             });
         } else {
@@ -830,7 +799,6 @@
     }
     
     function fallbackCopy(content, index) {
-        // Create a temporary textarea
         const textarea = document.createElement('textarea');
         textarea.value = content;
         textarea.style.position = 'fixed';
@@ -870,7 +838,6 @@
     }
     
     function showCopyModal(content) {
-        // Create modal for manual copy
         const modal = document.createElement('div');
         modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;';
         modal.innerHTML = `
@@ -883,7 +850,6 @@
         `;
         document.body.appendChild(modal);
         
-        // Auto-select the textarea content
         const textarea = modal.querySelector('textarea');
         textarea.focus();
         textarea.select();
@@ -898,13 +864,11 @@
        ========================================================================== */
     
     function getSlug(item, idx) {
-        // Use the exact SEO Title/URL Slug value if present, otherwise generate from title
         const seoSlug = (item['SEO Title/URL Slug'] || '').trim();
         if (seoSlug) return seoSlug
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/^-+|-+$/g, '');
-        // Fallback: generate slug from title
         return (item['Title'] || `item-${idx}`)
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
@@ -960,7 +924,6 @@
     function generateProductHTML(row, navigation) {
         const images = collectImages(row);
         
-        // Parse arrays from newline-separated text
         const featureHighlights = row['Feature Highlights'] 
             ? row['Feature Highlights'].split(/\r?\n/).filter(line => line.trim())
             : [];
@@ -969,7 +932,6 @@
             ? row['Accessories & Paperwork'].split(/\r?\n/).filter(line => line.trim())
             : [];
         
-        // Build the product data object as a string for embedding
         const productData = {
             seoSlug: row['SEO Title/URL Slug'] || '',
             title: row['Title'] || '',
@@ -1015,7 +977,7 @@
             featureHighlights: featureHighlights,
             marketNote: row['Market Note'] || '',
             navigation: navigation,
-            ctaUrl: row['CTA URL'] || ctaUrl,  // Item-specific CTA URL with fallback to global
+            ctaUrl: row['CTA URL'] || ctaUrl,
             currentHighBid: row['Current High Bid'] || '',
             proxibidHighBid: row['Proxibid High Bid'] || '',
             hammerPrice: row['Hammer Price'] || ''
@@ -1025,7 +987,6 @@
     }
     
     function getProductTemplate(data) {
-        // Build navigation HTML
         const prevDisabled = !data.navigation.prevURL ? 'disabled' : '';
         const nextDisabled = !data.navigation.nextURL ? 'disabled' : '';
         const prevHref = data.navigation.prevURL || '#';
@@ -1038,17 +999,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${escapeHtml(data.title)} | Golden Eagle Auctions</title>
     
-    <!-- Open Graph meta tags for link previews -->
     <meta property="og:title" content="${escapeHtml(data.title)}">
     <meta property="og:description" content="${escapeHtml(data.overview).substring(0, 200)}">
     <meta property="og:image" content="${data.images.length > 0 ? toImageUrl(data.images[0], 'w1200') : ''}">
     <meta property="og:url" content="">
     
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <style>
-        /* ========== CSS VARIABLES ========== */
         :root {
             --color-black: #242424;
             --color-gold: #BAA342;
@@ -1060,12 +1018,7 @@
             --max-width: 1200px;
         }
 
-        /* ========== RESET & BASE ========== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: Arial, sans-serif;
@@ -1075,29 +1028,12 @@
             background-color: var(--color-white);
         }
 
-        a {
-            color: var(--color-gold);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+        a { color: var(--color-gold); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--color-black); }
+        img { max-width: 100%; height: auto; }
 
-        a:hover {
-            color: var(--color-black);
-        }
+        .main-content { max-width: var(--max-width); margin: 0 auto; padding: 40px 20px; }
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* ========== MAIN CONTENT ========== */
-        .main-content {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* ========== TOP NAVIGATION BAR ========== */
         .page-nav {
             display: flex;
             justify-content: space-between;
@@ -1134,50 +1070,16 @@
             text-decoration: none;
         }
 
-        .nav-btn:hover {
-            background: var(--color-gold);
-            color: var(--color-black);
-        }
+        .nav-btn:hover { background: var(--color-gold); color: var(--color-black); }
+        .nav-btn.disabled { opacity: 0.4; pointer-events: none; }
+        .nav-btn i { font-size: 12px; }
+        .back-btn { background: transparent; border: 1px solid var(--color-gray-medium); }
+        .back-btn:hover { background: var(--color-gray-light); border-color: var(--color-gray-medium); color: var(--color-black); }
+        .nav-group { display: flex; gap: 10px; align-items: center; }
 
-        .nav-btn.disabled {
-            opacity: 0.4;
-            pointer-events: none;
-        }
+        .lot-title { font-size: 32px; font-weight: 700; color: var(--color-black); margin-bottom: 24px; line-height: 1.3; }
 
-        .nav-btn i {
-            font-size: 12px;
-        }
-
-        .back-btn {
-            background: transparent;
-            border: 1px solid var(--color-gray-medium);
-        }
-
-        .back-btn:hover {
-            background: var(--color-gray-light);
-            border-color: var(--color-gray-medium);
-            color: var(--color-black);
-        }
-
-        .nav-group {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        /* ========== LOT TITLE ========== */
-        .lot-title {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--color-black);
-            margin-bottom: 24px;
-            line-height: 1.3;
-        }
-
-        /* ========== IMAGE GALLERY ========== */
-        .gallery-section {
-            margin-bottom: 30px;
-        }
+        .gallery-section { margin-bottom: 30px; }
 
         .main-image-container {
             position: relative;
@@ -1201,10 +1103,6 @@
             background: #fff;
         }
 
-        .main-image-wrapper:active {
-            cursor: default;
-        }
-
         .main-image {
             max-width: 100%;
             max-height: 100%;
@@ -1214,7 +1112,6 @@
             -webkit-user-drag: none;
         }
 
-        /* Zoom Controls */
         .zoom-controls {
             position: absolute;
             bottom: 16px;
@@ -1240,15 +1137,8 @@
             transition: all 0.2s ease;
         }
 
-        .zoom-btn:hover {
-            background: var(--color-black);
-            color: var(--color-white);
-        }
-
-        .zoom-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
+        .zoom-btn:hover { background: var(--color-black); color: var(--color-white); }
+        .zoom-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .zoom-level {
             display: flex;
@@ -1265,7 +1155,6 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
-        /* Image Navigation Arrows */
         .image-nav-controls {
             position: absolute;
             bottom: 16px;
@@ -1291,10 +1180,7 @@
             color: var(--color-black);
         }
 
-        .image-nav-btn:hover {
-            background: var(--color-black);
-            color: var(--color-white);
-        }
+        .image-nav-btn:hover { background: var(--color-black); color: var(--color-white); }
 
         .zoom-hint {
             position: absolute;
@@ -1310,12 +1196,8 @@
             transition: opacity 0.5s ease;
         }
 
-        .zoom-hint.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
+        .zoom-hint.hidden { opacity: 0; pointer-events: none; }
 
-        /* Image Counter */
         .image-counter {
             position: absolute;
             top: 16px;
@@ -1329,7 +1211,6 @@
             z-index: 10;
         }
 
-        /* Thumbnail Strip */
         .thumbnail-strip {
             display: flex;
             gap: 10px;
@@ -1339,18 +1220,9 @@
             scrollbar-color: var(--color-gray-medium) transparent;
         }
 
-        .thumbnail-strip::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .thumbnail-strip::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .thumbnail-strip::-webkit-scrollbar-thumb {
-            background: var(--color-gray-medium);
-            border-radius: 3px;
-        }
+        .thumbnail-strip::-webkit-scrollbar { height: 6px; }
+        .thumbnail-strip::-webkit-scrollbar-track { background: transparent; }
+        .thumbnail-strip::-webkit-scrollbar-thumb { background: var(--color-gray-medium); border-radius: 3px; }
 
         .thumbnail {
             flex: 0 0 80px;
@@ -1364,24 +1236,10 @@
             background: var(--color-white);
         }
 
-        .thumbnail:hover {
-            border-color: var(--color-gray-medium);
-            transform: scale(1.05);
-        }
+        .thumbnail:hover { border-color: var(--color-gray-medium); transform: scale(1.05); }
+        .thumbnail.active { border-color: var(--color-gold); box-shadow: 0 0 0 2px var(--color-gold); }
+        .thumbnail img { width: 100%; height: 100%; object-fit: contain; background: #f9f9f9; }
 
-        .thumbnail.active {
-            border-color: var(--color-gold);
-            box-shadow: 0 0 0 2px var(--color-gold);
-        }
-
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #f9f9f9;
-        }
-
-        /* ========== CTA BUTTONS ========== */
         .cta-section {
             margin-bottom: 30px;
             display: flex;
@@ -1397,16 +1255,9 @@
             border-top: 1px solid var(--color-gray-medium);
         }
 
-        .cta-section.empty {
-            display: none;
-        }
+        .cta-section.empty { display: none; }
 
-        .high-bid-row {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+        .high-bid-row { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 
         .high-bid-display {
             display: flex;
@@ -1420,9 +1271,7 @@
             min-width: 180px;
         }
 
-        .high-bid-display.proxibid {
-            border-color: var(--color-gold);
-        }
+        .high-bid-display.proxibid { border-color: var(--color-gold); }
 
         .high-bid-label {
             font-size: 12px;
@@ -1432,22 +1281,9 @@
             color: var(--color-gold);
         }
 
-        .high-bid-display.proxibid .high-bid-label {
-            color: #fff;
-        }
-
-        .high-bid-amount {
-            font-size: 28px;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+        .high-bid-display.proxibid .high-bid-label { color: #fff; }
+        .high-bid-amount { font-size: 28px; font-weight: 700; color: #fff; }
+        .cta-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
 
         .bid-disclaimer {
             font-size: 12px;
@@ -1458,16 +1294,9 @@
             margin-top: 4px;
         }
 
-        .bid-disclaimer sup {
-            color: #666;
-        }
+        .bid-disclaimer sup { color: #666; }
 
-        .sold-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
+        .sold-display { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 
         .auction-closed-badge {
             background: #1a1a1a;
@@ -1499,11 +1328,7 @@
             color: var(--color-gold);
         }
 
-        .hammer-price-amount {
-            font-size: 32px;
-            font-weight: 700;
-            color: #fff;
-        }
+        .hammer-price-amount { font-size: 32px; font-weight: 700; color: #fff; }
 
         .btn {
             display: inline-block;
@@ -1518,22 +1343,10 @@
             border: none;
         }
 
-        .btn-primary {
-            background-color: var(--color-gold);
-            color: var(--color-black);
-        }
+        .btn-primary { background-color: var(--color-gold); color: var(--color-black); }
+        .btn-primary:hover { background-color: var(--color-gold); color: var(--color-black); opacity: 0.85; }
+        .btn i { margin-right: 8px; }
 
-        .btn-primary:hover {
-            background-color: var(--color-gold);
-            color: var(--color-black);
-            opacity: 0.85;
-        }
-
-        .btn i {
-            margin-right: 8px;
-        }
-
-        /* ========== CONTENT SECTIONS ========== */
         .content-section {
             background: var(--color-gray-light);
             border-radius: 10px;
@@ -1557,22 +1370,10 @@
             margin-bottom: 16px;
         }
 
-        .section-content p:last-child {
-            margin-bottom: 0;
-        }
+        .section-content p:last-child { margin-bottom: 0; }
 
-        /* ========== SPECS TABLE ========== */
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px 32px;
-        }
-
-        .spec-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
+        .specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 32px; }
+        .spec-item { display: flex; flex-direction: column; gap: 4px; }
 
         .spec-label {
             font-size: 13px;
@@ -1582,10 +1383,7 @@
             letter-spacing: 0.5px;
         }
 
-        .spec-value {
-            font-size: 15px;
-            color: var(--color-black);
-        }
+        .spec-value { font-size: 15px; color: var(--color-black); }
 
         .spec-paragraph {
             grid-column: 1 / -1;
@@ -1594,33 +1392,11 @@
             border-top: 1px solid var(--color-gray-medium);
         }
 
-        .spec-paragraph p {
-            color: var(--color-gray-text);
-            font-size: 15px;
-            line-height: 1.8;
-            font-style: italic;
-        }
+        .spec-paragraph p { color: var(--color-gray-text); font-size: 15px; line-height: 1.8; font-style: italic; }
 
-        /* ========== CONDITION DISPLAY ========== */
-        .condition-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        .condition-grade {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--color-black);
-        }
-
-        .condition-scale {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .condition-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+        .condition-grade { font-size: 24px; font-weight: 700; color: var(--color-black); }
+        .condition-scale { display: flex; align-items: center; gap: 8px; }
 
         .scale-bar {
             width: 120px;
@@ -1630,161 +1406,51 @@
             overflow: hidden;
         }
 
-        .scale-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--color-gold), #d4c36a);
-            border-radius: 5px;
-        }
+        .scale-fill { height: 100%; background: linear-gradient(90deg, var(--color-gold), #d4c36a); border-radius: 5px; }
+        .scale-number { font-size: 16px; font-weight: 700; color: var(--color-gold); }
 
-        .scale-number {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--color-gold);
-        }
+        .bore-rating-display { display: flex; align-items: center; gap: 16px; }
+        .bore-scale { display: flex; align-items: center; gap: 8px; }
+        .bore-number { font-size: 28px; font-weight: 700; color: var(--color-gold); }
+        .bore-max { font-size: 18px; color: var(--color-gray-muted); }
 
-        /* ========== BORE RATING ========== */
-        .bore-rating-display {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+        .bullet-list { list-style: disc; margin-left: 20px; }
+        .bullet-list li { color: var(--color-gray-text); font-size: 15px; line-height: 1.8; margin-bottom: 8px; }
+        .bullet-list li:last-child { margin-bottom: 0; }
 
-        .bore-scale {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .bore-number {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--color-gold);
-        }
-
-        .bore-max {
-            font-size: 18px;
-            color: var(--color-gray-muted);
-        }
-
-        /* ========== BULLET LISTS ========== */
-        .bullet-list {
-            list-style: disc;
-            margin-left: 20px;
-        }
-
-        .bullet-list li {
-            color: var(--color-gray-text);
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 8px;
-        }
-
-        .bullet-list li:last-child {
-            margin-bottom: 0;
-        }
-
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 900px) {
-            .specs-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .main-image-wrapper {
-                height: 400px;
-            }
+            .specs-grid { grid-template-columns: 1fr; }
+            .main-image-wrapper { height: 400px; }
         }
 
         @media (max-width: 768px) {
-            .lot-title {
-                font-size: 24px;
-            }
-
-            .main-image-wrapper {
-                height: 300px;
-            }
-
-            .thumbnail {
-                flex: 0 0 60px;
-                width: 60px;
-                height: 60px;
-            }
-
-            .content-section {
-                padding: 20px;
-            }
-
-            .section-title {
-                font-size: 18px;
-            }
-
-            .condition-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .page-nav {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .nav-group {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .nav-btn {
-                flex: 1;
-                justify-content: center;
-            }
-
-            .back-btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .zoom-controls {
-                bottom: 10px;
-                right: 10px;
-            }
-            
-            .zoom-level {
-                min-width: 40px;
-                height: 38px;
-                padding: 0 8px;
-                font-size: 11px;
-            }
-
-            .image-nav-controls {
-                bottom: 10px;
-                left: 10px;
-            }
-
-            .zoom-btn,
-            .image-nav-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
-            }
+            .lot-title { font-size: 24px; }
+            .main-image-wrapper { height: 300px; }
+            .thumbnail { flex: 0 0 60px; width: 60px; height: 60px; }
+            .content-section { padding: 20px; }
+            .section-title { font-size: 18px; }
+            .condition-header { flex-direction: column; align-items: flex-start; }
+            .page-nav { flex-direction: column; gap: 12px; }
+            .nav-group { width: 100%; justify-content: space-between; }
+            .nav-btn { flex: 1; justify-content: center; }
+            .back-btn { width: 100%; justify-content: center; }
+            .zoom-controls { bottom: 10px; right: 10px; }
+            .zoom-level { min-width: 40px; height: 38px; padding: 0 8px; font-size: 11px; }
+            .image-nav-controls { bottom: 10px; left: 10px; }
+            .zoom-btn, .image-nav-btn { width: 38px; height: 38px; font-size: 16px; }
         }
 
         @media (max-width: 600px) {
-            .main-content {
-                padding: 20px 15px;
-            }
+            .main-content { padding: 20px 15px; }
         }
 
-        /* ========== HIDDEN UTILITY ========== */
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- ========== MAIN CONTENT ========== -->
     <main class="main-content">
         
-        <!-- Top Navigation -->
         <nav class="page-nav">
             <a href="${escapeHtml(data.navigation.catalogURL)}" id="back-to-catalog-top" class="nav-btn back-btn">
                 <i class="fa fa-arrow-left"></i>
@@ -1802,10 +1468,8 @@
             </div>
         </nav>
 
-        <!-- Lot Title -->
         <h1 class="lot-title">${escapeHtml(data.title)}</h1>
 
-        <!-- Image Gallery -->
         <section class="gallery-section">
             <div class="main-image-container">
                 <div class="zoom-hint" id="zoom-hint">
@@ -1815,7 +1479,6 @@
                 <div class="main-image-wrapper" id="main-image-wrapper">
                     <img src="${data.images.length > 0 ? toImageUrl(data.images[0], 'w1600') : ''}" alt="${escapeHtml(data.title)}" class="main-image" id="main-image" draggable="false">
                 </div>
-                <!-- Image Navigation Arrows -->
                 <div class="image-nav-controls">
                     <button class="image-nav-btn" id="image-prev" title="Previous image">
                         <i class="fa fa-chevron-left"></i>
@@ -1824,7 +1487,6 @@
                         <i class="fa fa-chevron-right"></i>
                     </button>
                 </div>
-                <!-- Zoom Controls -->
                 <div class="zoom-controls">
                     <span class="zoom-level" id="zoom-level">100%</span>
                     <button class="zoom-btn" id="zoom-out" title="Zoom out">−</button>
@@ -1841,10 +1503,8 @@
             </div>
         </section>
 
-        <!-- Top CTA -->
         <section class="cta-section" id="cta-top">
             ${data.hammerPrice ? `
-            <!-- Auction Closed - Show Sold Price -->
             <div class="sold-display">
                 <span class="auction-closed-badge">Auction Closed</span>
                 <div class="hammer-price-display">
@@ -1853,7 +1513,6 @@
                 </div>
             </div>
             ` : `
-            <!-- Active Auction - Show Current Bids -->
             <div class="high-bid-row">
                 <div class="high-bid-display" id="high-bid-top">
                     <span class="high-bid-label">GEA Live High Bid</span>
@@ -1875,7 +1534,6 @@
             `}
         </section>
 
-        <!-- Overview -->
         ${data.overview ? `
         <section class="content-section">
             <h2 class="section-title">Overview</h2>
@@ -1885,13 +1543,10 @@
         </section>
         ` : ''}
 
-        <!-- Identification & Provenance -->
         ${generateIdentificationSection(data)}
 
-        <!-- Condition Summary -->
         ${generateConditionSection(data)}
 
-        <!-- Mechanics -->
         ${data.mechanics ? `
         <section class="content-section">
             <h2 class="section-title">Mechanics</h2>
@@ -1901,7 +1556,6 @@
         </section>
         ` : ''}
 
-        <!-- Bore Rating -->
         ${data.boreRating ? `
         <section class="content-section">
             <h2 class="section-title">Bore Rating</h2>
@@ -1919,10 +1573,8 @@
         </section>
         ` : ''}
 
-        <!-- Specs & Measurements -->
         ${generateSpecsSection(data)}
 
-        <!-- Accessories & Paperwork -->
         ${data.accessories.length > 0 ? `
         <section class="content-section">
             <h2 class="section-title">Accessories & Paperwork</h2>
@@ -1934,7 +1586,6 @@
         </section>
         ` : ''}
 
-        <!-- Notes for Buyers -->
         ${data.notesForBuyers ? `
         <section class="content-section">
             <h2 class="section-title">Notes for Buyers</h2>
@@ -1944,7 +1595,6 @@
         </section>
         ` : ''}
 
-        <!-- Feature Highlights -->
         ${data.featureHighlights.length > 0 ? `
         <section class="content-section">
             <h2 class="section-title">Feature Highlights</h2>
@@ -1956,7 +1606,6 @@
         </section>
         ` : ''}
 
-        <!-- Market Note -->
         ${data.marketNote ? `
         <section class="content-section">
             <h2 class="section-title">Market Note</h2>
@@ -1966,10 +1615,8 @@
         </section>
         ` : ''}
 
-        <!-- Bottom CTA -->
         <section class="cta-section bottom" id="cta-bottom">
             ${data.hammerPrice ? `
-            <!-- Auction Closed - Show Sold Price -->
             <div class="sold-display">
                 <span class="auction-closed-badge">Auction Closed</span>
                 <div class="hammer-price-display">
@@ -1978,7 +1625,6 @@
                 </div>
             </div>
             ` : `
-            <!-- Active Auction - Show Current Bids -->
             <div class="high-bid-row">
                 <div class="high-bid-display" id="high-bid-bottom">
                     <span class="high-bid-label">GEA Live High Bid</span>
@@ -2000,7 +1646,6 @@
             `}
         </section>
 
-        <!-- Bottom Navigation -->
         <nav class="page-nav bottom">
             <a href="${escapeHtml(data.navigation.catalogURL)}" id="back-to-catalog-bottom" class="nav-btn back-btn">
                 <i class="fa fa-arrow-left"></i>
@@ -2020,7 +1665,6 @@
 
     </main>
 
-    <!-- ========== JAVASCRIPT ========== -->
     <script>
     const PRODUCT_IMAGES = ${JSON.stringify(data.images)};
     
@@ -2058,13 +1702,11 @@
     const imagePrevBtn = document.getElementById('image-prev');
     const imageNextBtn = document.getElementById('image-next');
     
-    // Adjust container height based on image aspect ratio
     function adjustContainerHeight() {
         if (!mainImage.naturalWidth || !mainImage.naturalHeight) return;
         const containerWidth = mainImageWrapper.clientWidth;
         const aspectRatio = mainImage.naturalWidth / mainImage.naturalHeight;
         const idealHeight = containerWidth / aspectRatio;
-        // Clamp between min and max heights - reduced for less white space
         const minHeight = 280;
         const maxHeight = 550;
         const newHeight = Math.max(minHeight, Math.min(maxHeight, idealHeight));
@@ -2074,7 +1716,6 @@
     mainImage.addEventListener('load', adjustContainerHeight);
     window.addEventListener('resize', adjustContainerHeight);
 
-    // Image navigation
     function setActiveImage(index) {
         if (index < 0 || index >= PRODUCT_IMAGES.length) return;
         currentImageIndex = index;
@@ -2109,7 +1750,6 @@
         else if (e.key === 'ArrowRight') navigateImage(1);
     });
 
-    // Zoom functions
     function zoom(delta) {
         const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale + delta));
         if (newScale !== scale) {
@@ -2139,21 +1779,13 @@
 
     function clampTranslation() {
         if (scale <= 1) { translateX = 0; translateY = 0; return; }
-        
         const wrapperRect = mainImageWrapper.getBoundingClientRect();
-        
-        // Without object-fit, the image element IS the visible size
-        // After scaling, calculate how much we can pan
         const imgWidth = mainImage.offsetWidth;
         const imgHeight = mainImage.offsetHeight;
-        
         const scaledWidth = imgWidth * scale;
         const scaledHeight = imgHeight * scale;
-        
-        // Max pan before edge of image reaches edge of container
         const maxPanX = Math.max(0, (scaledWidth - wrapperRect.width) / 2);
         const maxPanY = Math.max(0, (scaledHeight - wrapperRect.height) / 2);
-        
         translateX = Math.max(-maxPanX, Math.min(maxPanX, translateX));
         translateY = Math.max(-maxPanY, Math.min(maxPanY, translateY));
     }
@@ -2162,7 +1794,6 @@
     zoomOutBtn.addEventListener('click', () => zoom(-SCALE_STEP));
     zoomResetBtn.addEventListener('click', resetZoom);
 
-    // Double-click to zoom
     mainImageWrapper.addEventListener('dblclick', function(e) {
         if (scale === 1) {
             const rect = mainImageWrapper.getBoundingClientRect();
@@ -2181,7 +1812,6 @@
         }
     });
 
-    // Mouse drag for panning
     function startDrag(e) {
         if (scale <= 1) return;
         isDragging = true;
@@ -2208,7 +1838,6 @@
     document.addEventListener('mousemove', drag);
     document.addEventListener('mouseup', endDrag);
 
-    // Touch handlers
     let touchStartDistance = null, touchStartScale = 1;
     let touchStartX = null, touchStartY = null, isSwiping = false;
 
@@ -2231,8 +1860,6 @@
         } else if (e.touches.length === 1) {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
-            
-            // If we were just pinching and now have 1 finger, set up for panning
             if (wasPinching && scale > 1) {
                 isDragging = true;
                 startX = e.touches[0].clientX;
@@ -2259,28 +1886,17 @@
             e.preventDefault();
             const currentDistance = getTouchDistance(e.touches);
             const newScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, touchStartScale * (currentDistance / touchStartDistance)));
-            
-            // Calculate center point between fingers for zoom origin
-            const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-            const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-            const rect = mainImageWrapper.getBoundingClientRect();
-            const imageCenterX = rect.left + rect.width / 2;
-            const imageCenterY = rect.top + rect.height / 2;
-            
-            // Adjust translation to zoom toward pinch center
             if (scale !== newScale) {
                 const scaleRatio = newScale / scale;
                 translateX = translateX * scaleRatio;
                 translateY = translateY * scaleRatio;
             }
-            
             scale = newScale;
             clampTranslation();
             applyTransform();
             updateZoomUI();
         } else if (e.touches.length === 1 && scale > 1) {
             e.preventDefault();
-            // If not yet dragging but zoomed in, start dragging
             if (!isDragging) {
                 isDragging = true;
                 startX = e.touches[0].clientX;
@@ -2297,7 +1913,6 @@
 
     mainImageWrapper.addEventListener('touchend', function(e) {
         if (e.touches.length === 1 && wasPinching && scale > 1) {
-            // Transitioning from pinch to pan - set up for panning
             isDragging = true;
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
@@ -2306,11 +1921,7 @@
             wasPinching = false;
             return;
         }
-        
-        if (e.touches.length === 0) {
-            wasPinching = false;
-        }
-        
+        if (e.touches.length === 0) wasPinching = false;
         if (isSwiping && touchStartX !== null && scale <= 1 && e.changedTouches && e.changedTouches.length > 0) {
             const deltaX = e.changedTouches[0].clientX - touchStartX;
             const deltaY = e.changedTouches[0].clientY - touchStartY;
@@ -2325,7 +1936,6 @@
         touchStartY = null;
     });
 
-    // Wheel zoom
     mainImageWrapper.addEventListener('wheel', function(e) {
         if (e.ctrlKey) {
             e.preventDefault();
@@ -2333,7 +1943,6 @@
         }
     }, { passive: false });
 
-    // Hide zoom hint
     mainImageWrapper.addEventListener('click', function() {
         zoomHint.classList.add('hidden');
     });
@@ -2342,132 +1951,62 @@
     });
     <\/script>
 
-    <!-- Live Bid Update Script -->
+    <!-- Live Bid Update Script - V2 (fetches from bids.json on GitHub Pages) -->
     <script>
     (function() {
-        const API_URL = '${apiUrl}';
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/1WFlVVSsMSpEx6s4YTUl7xvN_tbQe-oA-3fTZYqSVTgA/export?format=csv&gid=699359384';
+        const BIDS_JSON_URL = 'https://nallmd82.github.io/GEA-Tools/bids.json';
         const PRODUCT_TITLE = ${JSON.stringify(data.title)};
         
-        function parseCSV(text) {
-            const rows = [];
-            let i = 0, field = '', row = [], inQuotes = false;
-            while (i < text.length) {
-                const c = text[i], n = text[i + 1];
-                if (inQuotes) {
-                    if (c === '"' && n === '"') { field += '"'; i += 2; continue; }
-                    if (c === '"') { inQuotes = false; i++; continue; }
-                    field += c; i++; continue;
-                }
-                if (c === '"') { inQuotes = true; i++; continue; }
-                if (c === ',') { row.push(field); field = ''; i++; continue; }
-                if (c === '\\n') { row.push(field); rows.push(row); field = ''; row = []; i++; continue; }
-                if (c === '\\r') { i++; continue; }
-                field += c; i++;
-            }
-            if (field.length || row.length) { row.push(field); rows.push(row); }
-            return rows;
+        function extractLotNumber(title) {
+            const match = (title || '').match(/^Lot\\s*#?\\s*(\\d+)/i);
+            return match ? match[1] : null;
         }
         
-        function csvToObjects(rows) {
-            if (rows.length < 2) return [];
-            const headers = rows[0].map(h => h.trim());
-            return rows.slice(1).map(row => {
-                const obj = {};
-                headers.forEach((h, i) => obj[h] = (row[i] || '').trim());
-                return obj;
-            });
-        }
-        
-        async function fetchWithFallback() {
-            // Try Apps Script API first
-            try {
-                const response = await fetch(API_URL, { cache: 'no-store', redirect: 'follow' });
-                if (response.ok) {
-                    const text = await response.text();
-                    if (!text.includes('<!DOCTYPE') && !text.includes('<html')) {
-                        return JSON.parse(text);
-                    }
-                }
-            } catch (e) { console.log('API failed, trying proxy...'); }
-            
-            // Fallback to CORS proxies
-            const proxies = ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?'];
-            for (const proxy of proxies) {
-                try {
-                    const response = await fetch(proxy + encodeURIComponent(CSV_URL), { cache: 'no-store' });
-                    if (response.ok) {
-                        const csvText = await response.text();
-                        return csvToObjects(parseCSV(csvText));
-                    }
-                } catch (e) { continue; }
-            }
-            return null;
-        }
-        
-        function formatCurrency(value) {
-            if (!value && value !== 0) return '$0.00';
-            var str = String(value).trim();
-            if (str.charAt(0) === '$') {
-                if (str.indexOf('.') === -1) return str + '.00';
-                return str;
-            }
-            var num = parseFloat(str.replace(/[^0-9.-]/g, ''));
-            if (isNaN(num)) return '$0.00';
-            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        function formatBid(amount) {
+            if (!amount || amount === 0) return '$0.00';
+            return '$' + Number(amount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
         
         async function updateLiveBid() {
             try {
-                const items = await fetchWithFallback();
-                if (!items || !Array.isArray(items)) return;
+                const response = await fetch(BIDS_JSON_URL + '?t=' + Date.now(), { cache: 'no-store' });
+                if (!response.ok) return;
                 
-                // Find matching item by title
-                const item = items.find(i => i['Title'] === PRODUCT_TITLE);
-                if (!item) return;
+                const bidsData = await response.json();
+                const lotNumber = extractLotNumber(PRODUCT_TITLE);
                 
-                const highBid = formatCurrency(item['Current High Bid']);
-                const proxibidBid = formatCurrency(item['Proxibid High Bid']);
-                const ctaUrl = item['CTA URL'];
-                const hammerPrice = item['Hammer Price'] ? formatCurrency(item['Hammer Price']) : null;
+                if (!lotNumber) return;
+                
+                let geaBid = 0;
+                let proxibidBid = 0;
+                
+                if (bidsData.auctionTechs && bidsData.auctionTechs.bids && bidsData.auctionTechs.bids[lotNumber]) {
+                    geaBid = bidsData.auctionTechs.bids[lotNumber].currentBid || 0;
+                }
+                
+                if (bidsData.proxibid && bidsData.proxibid.bids && bidsData.proxibid.bids[lotNumber]) {
+                    proxibidBid = bidsData.proxibid.bids[lotNumber].currentBid || 0;
+                }
                 
                 const ctaTop = document.getElementById('cta-top');
                 const ctaBottom = document.getElementById('cta-bottom');
                 
-                // If hammer price exists, replace content with sold display
-                if (hammerPrice) {
-                    const soldHTML = \`
-                        <div class="sold-display">
-                            <span class="auction-closed-badge">Auction Closed</span>
-                            <div class="hammer-price-display">
-                                <span class="hammer-price-label">Sold For</span>
-                                <span class="hammer-price-amount">\${hammerPrice}</span>
-                            </div>
-                        </div>
-                    \`;
-                    if (ctaTop) ctaTop.innerHTML = soldHTML;
-                    if (ctaBottom) ctaBottom.innerHTML = soldHTML;
-                    return;
-                }
-                
-                // Check if bid containers exist - if not, page was generated with hammer price
-                // and we need to rebuild the active auction display
                 let bidTop = document.getElementById('bid-amount-top');
                 if (!bidTop) {
                     const activeHTML = \`
                         <div class="high-bid-row">
                             <div class="high-bid-display" id="high-bid-top">
                                 <span class="high-bid-label">GEA Live High Bid</span>
-                                <span class="high-bid-amount" id="bid-amount-top">\${highBid}</span>
+                                <span class="high-bid-amount" id="bid-amount-top">\${formatBid(geaBid)}</span>
                             </div>
                             <div class="high-bid-display proxibid" id="proxibid-bid-top">
                                 <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
-                                <span class="high-bid-amount" id="proxibid-amount-top">\${proxibidBid}</span>
+                                <span class="high-bid-amount" id="proxibid-amount-top">\${formatBid(proxibidBid)}</span>
                             </div>
                         </div>
                         <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
                         <div class="cta-buttons">
-                            <a href="\${ctaUrl || '#'}" class="btn btn-primary cta-btn" id="cta-btn-top" target="_blank" \${ctaUrl ? '' : 'style="display:none;"'}>
+                            <a href="#" class="btn btn-primary cta-btn" id="cta-btn-top" target="_blank" style="display:none;">
                                 <i class="fa fa-gavel"></i> Bid Now on GEA Live
                             </a>
                         </div>
@@ -2476,16 +2015,16 @@
                         <div class="high-bid-row">
                             <div class="high-bid-display" id="high-bid-bottom">
                                 <span class="high-bid-label">GEA Live High Bid</span>
-                                <span class="high-bid-amount" id="bid-amount-bottom">\${highBid}</span>
+                                <span class="high-bid-amount" id="bid-amount-bottom">\${formatBid(geaBid)}</span>
                             </div>
                             <div class="high-bid-display proxibid" id="proxibid-bid-bottom">
                                 <span class="high-bid-label">Proxibid High Bid<sup>*</sup></span>
-                                <span class="high-bid-amount" id="proxibid-amount-bottom">\${proxibidBid}</span>
+                                <span class="high-bid-amount" id="proxibid-amount-bottom">\${formatBid(proxibidBid)}</span>
                             </div>
                         </div>
                         <p class="bid-disclaimer"><sup>*</sup>Bids from GEA Live and Proxibid do not sync. During the live auction, bid precedence is given to onsite bidders and GEA Live over Proxibid.</p>
                         <div class="cta-buttons">
-                            <a href="\${ctaUrl || '#'}" class="btn btn-primary cta-btn" id="cta-btn-bottom" target="_blank" \${ctaUrl ? '' : 'style="display:none;"'}>
+                            <a href="#" class="btn btn-primary cta-btn" id="cta-btn-bottom" target="_blank" style="display:none;">
                                 <i class="fa fa-gavel"></i> Bid Now on GEA Live
                             </a>
                         </div>
@@ -2495,48 +2034,36 @@
                     return;
                 }
                 
-                // Update GEA Live bid displays - always show, default to $0.00
                 const bidBottom = document.getElementById('bid-amount-bottom');
                 const displayTop = document.getElementById('high-bid-top');
                 const displayBottom = document.getElementById('high-bid-bottom');
                 
-                if (bidTop) bidTop.textContent = highBid;
-                if (bidBottom) bidBottom.textContent = highBid;
+                if (bidTop) bidTop.textContent = formatBid(geaBid);
+                if (bidBottom) bidBottom.textContent = formatBid(geaBid);
                 if (displayTop) displayTop.style.display = '';
                 if (displayBottom) displayBottom.style.display = '';
                 
-                // Update Proxibid bid displays - always show, default to $0.00
                 const proxibidTop = document.getElementById('proxibid-amount-top');
                 const proxibidBottom = document.getElementById('proxibid-amount-bottom');
                 const proxibidDisplayTop = document.getElementById('proxibid-bid-top');
                 const proxibidDisplayBottom = document.getElementById('proxibid-bid-bottom');
                 
-                if (proxibidTop) proxibidTop.textContent = proxibidBid;
-                if (proxibidBottom) proxibidBottom.textContent = proxibidBid;
+                if (proxibidTop) proxibidTop.textContent = formatBid(proxibidBid);
+                if (proxibidBottom) proxibidBottom.textContent = formatBid(proxibidBid);
                 if (proxibidDisplayTop) proxibidDisplayTop.style.display = '';
                 if (proxibidDisplayBottom) proxibidDisplayBottom.style.display = '';
                 
-                // Always show CTA sections
                 if (ctaTop) ctaTop.classList.remove('empty');
                 if (ctaBottom) ctaBottom.classList.remove('empty');
-                
-                // Update CTA buttons if URL exists
-                if (ctaUrl) {
-                    const btnTop = document.getElementById('cta-btn-top');
-                    const btnBottom = document.getElementById('cta-btn-bottom');
-                    if (btnTop) { btnTop.href = ctaUrl; btnTop.style.display = ''; }
-                    if (btnBottom) { btnBottom.href = ctaUrl; btnBottom.style.display = ''; }
-                }
                 
             } catch (e) {
                 console.log('Live bid update skipped:', e.message);
             }
         }
         
-        // Update on page load
         updateLiveBid();
+        setInterval(updateLiveBid, 60000);
         
-        // Update Back to Catalog buttons with saved URL from sessionStorage
         (function() {
             try {
                 var savedUrl = sessionStorage.getItem('gea_catalog_url');
