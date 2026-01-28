@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T22:00:59.027Z",
+  "lastUpdated": "2026-01-28T21:58:58.620Z",
   "auctionTechs": {
     "auctionId": "2610",
     "itemCount": 50,
@@ -2095,7 +2095,7 @@
       "251": {
         "lotNumber": "251",
         "lotId": "98214632",
-        "currentBid": 55,
+        "currentBid": 2,
         "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214632"
       },
       "252": {
