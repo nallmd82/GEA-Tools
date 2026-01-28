@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T22:42:58.434Z",
+  "lastUpdated": "2026-01-28T22:46:58.274Z",
   "auctionTechs": {
     "auctionId": "2610",
     "itemCount": 50,
@@ -2491,7 +2491,7 @@
       "215A": {
         "lotNumber": "215A",
         "lotId": "98868100",
-        "currentBid": 10,
+        "currentBid": 55,
         "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868100"
       },
       "220A": {
@@ -2509,7 +2509,7 @@
       "250A": {
         "lotNumber": "250A",
         "lotId": "98868103",
-        "currentBid": 10,
+        "currentBid": 130,
         "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868103"
       },
       "255A": {
