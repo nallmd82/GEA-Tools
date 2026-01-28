@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T21:51:58.567Z",
+  "lastUpdated": "2026-01-28T21:52:59.420Z",
   "auctionTechs": {
     "auctionId": "2610",
     "itemCount": 50,
@@ -607,7 +607,7 @@
     }
   },
   "proxibid": {
-    "eventId": "289108",
+    "eventId": "291350",
     "itemCount": 0,
     "bids": {}
   },
