@@ -1979,6 +1979,7 @@
                 
                 let geaBid = 0;
                 let proxibidBid = 0;
+                let hammerPrice = null;
                 
                 if (bidsData.auctionTechs && bidsData.auctionTechs.bids && bidsData.auctionTechs.bids[lotNumber]) {
                     geaBid = bidsData.auctionTechs.bids[lotNumber].currentBid || 0;
@@ -1988,8 +1989,29 @@
                     proxibidBid = bidsData.proxibid.bids[lotNumber].currentBid || 0;
                 }
                 
+                // Check if item is sold
+                if (bidsData.soldItems && bidsData.soldItems.items && bidsData.soldItems.items[lotNumber]) {
+                    hammerPrice = bidsData.soldItems.items[lotNumber].hammerPrice || null;
+                }
+                
                 const ctaTop = document.getElementById('cta-top');
                 const ctaBottom = document.getElementById('cta-bottom');
+                
+                // If item is sold, show sold display
+                if (hammerPrice) {
+                    const soldHTML = \`
+                        <div class="sold-display">
+                            <span class="auction-closed-badge">Auction Closed</span>
+                            <div class="hammer-price-display">
+                                <span class="hammer-price-label">Sold For</span>
+                                <span class="hammer-price-amount">\${hammerPrice}</span>
+                            </div>
+                        </div>
+                    \`;
+                    if (ctaTop) ctaTop.innerHTML = soldHTML;
+                    if (ctaBottom) ctaBottom.innerHTML = soldHTML;
+                    return;
+                }
                 
                 let bidTop = document.getElementById('bid-amount-top');
                 if (!bidTop) {
