@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T22:44:58.483Z",
+  "lastUpdated": "2026-01-28T22:48:58.606Z",
   "auctionTechs": {
     "auctionId": "2610",
     "itemCount": 50,
@@ -608,7 +608,7 @@
   },
   "proxibid": {
     "eventId": "289108",
-    "itemCount": 318,
+    "itemCount": 319,
     "bids": {
       "2": {
         "lotNumber": "2",
@@ -2391,6 +2391,12 @@
         "lotId": "98214491",
         "currentBid": 0,
         "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214491"
+      },
+      "1B": {
+        "lotNumber": "1B",
+        "lotId": "98214492",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214492"
       },
       "1C": {
         "lotNumber": "1C",
