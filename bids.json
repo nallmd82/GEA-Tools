@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-01-28T22:09:58.249Z",
+  "lastUpdated": "2026-01-28T21:53:58.258Z",
   "auctionTechs": {
     "auctionId": "2610",
     "itemCount": 50,
@@ -607,1922 +607,3908 @@
     }
   },
   "proxibid": {
-    "eventId": "289108",
-    "itemCount": 319,
+    "eventId": "291350",
+    "itemCount": 650,
     "bids": {
+      "1": {
+        "lotNumber": "1",
+        "lotId": "98634174",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634174"
+      },
       "2": {
         "lotNumber": "2",
-        "lotId": "98214496",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214496"
+        "lotId": "98634350",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634350"
       },
       "3": {
         "lotNumber": "3",
-        "lotId": "98214497",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214497"
+        "lotId": "98634495",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634495"
       },
       "4": {
         "lotNumber": "4",
-        "lotId": "98214498",
-        "currentBid": 90,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214498"
+        "lotId": "98634303",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634303"
       },
       "5": {
         "lotNumber": "5",
-        "lotId": "98214499",
-        "currentBid": 70,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214499"
+        "lotId": "98634652",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634652"
       },
       "6": {
         "lotNumber": "6",
-        "lotId": "98214500",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214500"
+        "lotId": "98634763",
+        "currentBid": 2750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634763"
       },
       "7": {
         "lotNumber": "7",
-        "lotId": "98214501",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214501"
+        "lotId": "98634377",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634377"
       },
       "8": {
         "lotNumber": "8",
-        "lotId": "98214502",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214502"
+        "lotId": "98634388",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634388"
       },
       "9": {
         "lotNumber": "9",
-        "lotId": "98214503",
-        "currentBid": 1600,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214503"
+        "lotId": "98634399",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634399"
       },
       "10": {
         "lotNumber": "10",
-        "lotId": "98662175",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98662175"
+        "lotId": "98634175",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634175"
       },
       "11": {
         "lotNumber": "11",
-        "lotId": "98214504",
-        "currentBid": 220,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214504"
+        "lotId": "98634186",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634186"
       },
       "12": {
         "lotNumber": "12",
-        "lotId": "98214505",
-        "currentBid": 190,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214505"
+        "lotId": "98634197",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634197"
       },
       "13": {
         "lotNumber": "13",
-        "lotId": "98214506",
-        "currentBid": 350,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214506"
+        "lotId": "98634208",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634208"
       },
       "14": {
         "lotNumber": "14",
-        "lotId": "98214507",
-        "currentBid": 5,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214507"
+        "lotId": "98634219",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634219"
       },
       "15": {
         "lotNumber": "15",
-        "lotId": "98214508",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214508"
+        "lotId": "98634230",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634230"
       },
       "16": {
         "lotNumber": "16",
-        "lotId": "98214509",
-        "currentBid": 350,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214509"
+        "lotId": "98634241",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634241"
+      },
+      "17": {
+        "lotNumber": "17",
+        "lotId": "98634317",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634317"
       },
       "18": {
         "lotNumber": "18",
-        "lotId": "98214510",
-        "currentBid": 600,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214510"
+        "lotId": "98634328",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634328"
       },
       "19": {
         "lotNumber": "19",
-        "lotId": "98214511",
-        "currentBid": 45,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214511"
+        "lotId": "98634339",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634339"
       },
       "20": {
         "lotNumber": "20",
-        "lotId": "98412767",
-        "currentBid": 700,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412767"
+        "lotId": "98634351",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634351"
       },
       "21": {
         "lotNumber": "21",
-        "lotId": "98214512",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214512"
+        "lotId": "98634362",
+        "currentBid": 2250,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634362"
       },
       "22": {
         "lotNumber": "22",
-        "lotId": "98214513",
-        "currentBid": 230,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214513"
+        "lotId": "98634373",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634373"
       },
       "23": {
         "lotNumber": "23",
-        "lotId": "98214514",
-        "currentBid": 9,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214514"
+        "lotId": "98634418",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634418"
       },
       "24": {
         "lotNumber": "24",
-        "lotId": "98214515",
-        "currentBid": 220,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214515"
+        "lotId": "98634429",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634429"
       },
       "25": {
         "lotNumber": "25",
-        "lotId": "98412768",
-        "currentBid": 21,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412768"
+        "lotId": "98634440",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634440"
       },
       "26": {
         "lotNumber": "26",
-        "lotId": "98214516",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214516"
+        "lotId": "98634451",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634451"
       },
       "27": {
         "lotNumber": "27",
-        "lotId": "98354977",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354977"
+        "lotId": "98634462",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634462"
       },
       "28": {
         "lotNumber": "28",
-        "lotId": "98214517",
-        "currentBid": 190,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214517"
+        "lotId": "98634473",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634473"
       },
       "29": {
         "lotNumber": "29",
-        "lotId": "98214518",
-        "currentBid": 220,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214518"
+        "lotId": "98634484",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634484"
       },
       "30": {
         "lotNumber": "30",
-        "lotId": "98214519",
-        "currentBid": 170,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214519"
+        "lotId": "98634496",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634496"
       },
       "31": {
         "lotNumber": "31",
-        "lotId": "98214520",
-        "currentBid": 40,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214520"
+        "lotId": "98634507",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634507"
       },
       "32": {
         "lotNumber": "32",
-        "lotId": "98214521",
-        "currentBid": 300,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214521"
+        "lotId": "98634518",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634518"
       },
       "33": {
         "lotNumber": "33",
-        "lotId": "98214522",
-        "currentBid": 350,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214522"
+        "lotId": "98634529",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634529"
       },
       "34": {
         "lotNumber": "34",
-        "lotId": "98214523",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214523"
+        "lotId": "98634540",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634540"
       },
       "35": {
         "lotNumber": "35",
-        "lotId": "98470403",
-        "currentBid": 17,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98470403"
+        "lotId": "98634248",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634248"
       },
       "36": {
         "lotNumber": "36",
-        "lotId": "98214524",
-        "currentBid": 40,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214524"
+        "lotId": "98634259",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634259"
       },
       "37": {
         "lotNumber": "37",
-        "lotId": "98354978",
-        "currentBid": 20,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354978"
+        "lotId": "98634270",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634270"
       },
       "38": {
         "lotNumber": "38",
-        "lotId": "98214525",
-        "currentBid": 80,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214525"
+        "lotId": "98634281",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634281"
       },
       "39": {
         "lotNumber": "39",
-        "lotId": "98214526",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214526"
+        "lotId": "98634292",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634292"
       },
       "40": {
         "lotNumber": "40",
-        "lotId": "98483787",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98483787"
+        "lotId": "98634304",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634304"
       },
       "41": {
         "lotNumber": "41",
-        "lotId": "98214527",
-        "currentBid": 80,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214527"
+        "lotId": "98634553",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634553"
       },
       "42": {
         "lotNumber": "42",
-        "lotId": "98214528",
-        "currentBid": 170,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214528"
+        "lotId": "98634564",
+        "currentBid": 1050,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634564"
       },
       "43": {
         "lotNumber": "43",
-        "lotId": "98214529",
-        "currentBid": 240,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214529"
+        "lotId": "98634575",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634575"
       },
       "44": {
         "lotNumber": "44",
-        "lotId": "98214530",
-        "currentBid": 80,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214530"
+        "lotId": "98634586",
+        "currentBid": 2000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634586"
       },
       "45": {
         "lotNumber": "45",
-        "lotId": "98542242",
-        "currentBid": 30,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98542242"
+        "lotId": "98634597",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634597"
       },
       "46": {
         "lotNumber": "46",
-        "lotId": "98214531",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214531"
+        "lotId": "98634608",
+        "currentBid": 2500,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634608"
       },
       "47": {
         "lotNumber": "47",
-        "lotId": "98354979",
-        "currentBid": 25,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354979"
+        "lotId": "98634619",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634619"
       },
       "48": {
         "lotNumber": "48",
-        "lotId": "98214532",
-        "currentBid": 700,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214532"
+        "lotId": "98634630",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634630"
       },
       "49": {
         "lotNumber": "49",
-        "lotId": "98214533",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214533"
+        "lotId": "98634641",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634641"
       },
       "50": {
         "lotNumber": "50",
-        "lotId": "98662176",
-        "currentBid": 150,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98662176"
+        "lotId": "98634653",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634653"
       },
       "51": {
         "lotNumber": "51",
-        "lotId": "98214534",
-        "currentBid": 400,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214534"
+        "lotId": "98634664",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634664"
       },
       "52": {
         "lotNumber": "52",
-        "lotId": "98214535",
-        "currentBid": 140,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214535"
+        "lotId": "98634675",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634675"
       },
       "53": {
         "lotNumber": "53",
-        "lotId": "98214536",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214536"
+        "lotId": "98634686",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634686"
       },
       "54": {
         "lotNumber": "54",
-        "lotId": "98214537",
-        "currentBid": 180,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214537"
+        "lotId": "98634697",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634697"
       },
       "55": {
         "lotNumber": "55",
-        "lotId": "98451807",
-        "currentBid": 65,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98451807"
+        "lotId": "98634708",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634708"
       },
       "56": {
         "lotNumber": "56",
-        "lotId": "98214538",
-        "currentBid": 375,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214538"
+        "lotId": "98634719",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634719"
       },
       "57": {
         "lotNumber": "57",
-        "lotId": "98354980",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354980"
+        "lotId": "98634730",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634730"
       },
       "58": {
         "lotNumber": "58",
-        "lotId": "98214539",
-        "currentBid": 90,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214539"
+        "lotId": "98634741",
+        "currentBid": 2000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634741"
       },
       "59": {
         "lotNumber": "59",
-        "lotId": "98214540",
-        "currentBid": 500,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214540"
+        "lotId": "98634752",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634752"
       },
       "60": {
         "lotNumber": "60",
-        "lotId": "98451808",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98451808"
+        "lotId": "98634764",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634764"
       },
       "61": {
         "lotNumber": "61",
-        "lotId": "98214541",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214541"
+        "lotId": "98634775",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634775"
       },
       "62": {
         "lotNumber": "62",
-        "lotId": "98214542",
-        "currentBid": 35,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214542"
+        "lotId": "98634786",
+        "currentBid": 2500,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634786"
       },
       "63": {
         "lotNumber": "63",
-        "lotId": "98214543",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214543"
+        "lotId": "98634797",
+        "currentBid": 1200,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634797"
       },
       "64": {
         "lotNumber": "64",
-        "lotId": "98214544",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214544"
+        "lotId": "98634808",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634808"
       },
       "65": {
         "lotNumber": "65",
-        "lotId": "98470404",
-        "currentBid": 75,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98470404"
+        "lotId": "98634819",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634819"
       },
       "66": {
         "lotNumber": "66",
-        "lotId": "98214545",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214545"
+        "lotId": "98634821",
+        "currentBid": 7500,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634821"
       },
       "67": {
         "lotNumber": "67",
-        "lotId": "98354981",
-        "currentBid": 40,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354981"
+        "lotId": "98634822",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634822"
       },
       "68": {
         "lotNumber": "68",
-        "lotId": "98231775",
-        "currentBid": 220,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231775"
+        "lotId": "98634823",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634823"
       },
       "69": {
         "lotNumber": "69",
-        "lotId": "98214546",
-        "currentBid": 425,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214546"
+        "lotId": "98634376",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634376"
       },
       "70": {
         "lotNumber": "70",
-        "lotId": "98582093",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98582093"
+        "lotId": "98634378",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634378"
       },
       "71": {
         "lotNumber": "71",
-        "lotId": "98214547",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214547"
+        "lotId": "98634379",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634379"
       },
       "72": {
         "lotNumber": "72",
-        "lotId": "98214548",
-        "currentBid": 240,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214548"
+        "lotId": "98634380",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634380"
       },
       "73": {
         "lotNumber": "73",
-        "lotId": "98214549",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214549"
+        "lotId": "98634381",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634381"
       },
       "74": {
         "lotNumber": "74",
-        "lotId": "98214550",
-        "currentBid": 95,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214550"
+        "lotId": "98634382",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634382"
       },
       "75": {
         "lotNumber": "75",
-        "lotId": "98690992",
-        "currentBid": 75,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98690992"
+        "lotId": "98634383",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634383"
       },
       "76": {
         "lotNumber": "76",
-        "lotId": "98214551",
-        "currentBid": 140,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214551"
+        "lotId": "98634384",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634384"
       },
       "77": {
         "lotNumber": "77",
-        "lotId": "98596776",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596776"
+        "lotId": "98634385",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634385"
       },
       "78": {
         "lotNumber": "78",
-        "lotId": "98214552",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214552"
+        "lotId": "98634386",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634386"
       },
       "79": {
         "lotNumber": "79",
-        "lotId": "98214553",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214553"
+        "lotId": "98634387",
+        "currentBid": 13000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634387"
       },
       "80": {
         "lotNumber": "80",
-        "lotId": "98542243",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98542243"
+        "lotId": "98634389",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634389"
       },
       "81": {
         "lotNumber": "81",
-        "lotId": "98214554",
-        "currentBid": 80,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214554"
+        "lotId": "98634390",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634390"
       },
       "82": {
         "lotNumber": "82",
-        "lotId": "98214555",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214555"
+        "lotId": "98634391",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634391"
       },
       "83": {
         "lotNumber": "83",
-        "lotId": "98214556",
-        "currentBid": 100,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214556"
+        "lotId": "98634392",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634392"
       },
       "84": {
         "lotNumber": "84",
-        "lotId": "98214557",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214557"
+        "lotId": "98634393",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634393"
       },
       "85": {
         "lotNumber": "85",
-        "lotId": "98662177",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98662177"
+        "lotId": "98634394",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634394"
       },
       "86": {
         "lotNumber": "86",
-        "lotId": "98231776",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231776"
+        "lotId": "98634395",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634395"
       },
       "87": {
         "lotNumber": "87",
-        "lotId": "98596777",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596777"
+        "lotId": "98634396",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634396"
       },
       "88": {
         "lotNumber": "88",
-        "lotId": "98231777",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231777"
+        "lotId": "98634397",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634397"
       },
       "89": {
         "lotNumber": "89",
-        "lotId": "98214558",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214558"
+        "lotId": "98634398",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634398"
       },
       "90": {
         "lotNumber": "90",
-        "lotId": "98690993",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98690993"
+        "lotId": "98634400",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634400"
       },
       "91": {
         "lotNumber": "91",
-        "lotId": "98214559",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214559"
+        "lotId": "98634401",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634401"
       },
       "92": {
         "lotNumber": "92",
-        "lotId": "98214560",
-        "currentBid": 250,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214560"
+        "lotId": "98634402",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634402"
       },
       "93": {
         "lotNumber": "93",
-        "lotId": "98214561",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214561"
+        "lotId": "98634403",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634403"
       },
       "94": {
         "lotNumber": "94",
-        "lotId": "98231778",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231778"
+        "lotId": "98634404",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634404"
       },
       "95": {
         "lotNumber": "95",
-        "lotId": "98642066",
-        "currentBid": 100,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98642066"
+        "lotId": "98634405",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634405"
       },
       "96": {
         "lotNumber": "96",
-        "lotId": "98214562",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214562"
+        "lotId": "98634406",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634406"
       },
       "97": {
         "lotNumber": "97",
-        "lotId": "98354982",
-        "currentBid": 100,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354982"
+        "lotId": "98634407",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634407"
       },
       "98": {
         "lotNumber": "98",
-        "lotId": "98542244",
-        "currentBid": 300,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98542244"
+        "lotId": "98634408",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634408"
       },
       "99": {
         "lotNumber": "99",
-        "lotId": "98214563",
-        "currentBid": 850,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214563"
+        "lotId": "98634409",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634409"
       },
       "100": {
         "lotNumber": "100",
-        "lotId": "98733944",
-        "currentBid": 30,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98733944"
+        "lotId": "98634176",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634176"
       },
       "101": {
         "lotNumber": "101",
-        "lotId": "98214564",
-        "currentBid": 90,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214564"
+        "lotId": "98634177",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634177"
       },
       "102": {
         "lotNumber": "102",
-        "lotId": "98412769",
-        "currentBid": 45,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412769"
+        "lotId": "98634178",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634178"
       },
       "103": {
         "lotNumber": "103",
-        "lotId": "98214565",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214565"
+        "lotId": "98634179",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634179"
       },
       "104": {
         "lotNumber": "104",
-        "lotId": "98214566",
-        "currentBid": 30,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214566"
+        "lotId": "98634180",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634180"
       },
       "105": {
         "lotNumber": "105",
-        "lotId": "98645670",
-        "currentBid": 300,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645670"
+        "lotId": "98634181",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634181"
       },
       "106": {
         "lotNumber": "106",
-        "lotId": "98214567",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214567"
+        "lotId": "98634182",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634182"
       },
       "107": {
         "lotNumber": "107",
-        "lotId": "98354983",
-        "currentBid": 80,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354983"
+        "lotId": "98634183",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634183"
       },
       "108": {
         "lotNumber": "108",
-        "lotId": "98214568",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214568"
+        "lotId": "98634184",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634184"
       },
       "109": {
         "lotNumber": "109",
-        "lotId": "98542245",
-        "currentBid": 5,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98542245"
+        "lotId": "98634185",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634185"
       },
       "110": {
         "lotNumber": "110",
-        "lotId": "98214569",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214569"
+        "lotId": "98634187",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634187"
       },
       "111": {
         "lotNumber": "111",
-        "lotId": "98542246",
-        "currentBid": 21,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98542246"
+        "lotId": "98634188",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634188"
       },
       "112": {
         "lotNumber": "112",
-        "lotId": "98214570",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214570"
+        "lotId": "98634189",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634189"
       },
       "113": {
         "lotNumber": "113",
-        "lotId": "98214571",
-        "currentBid": 40,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214571"
+        "lotId": "98634190",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634190"
       },
       "114": {
         "lotNumber": "114",
-        "lotId": "98231779",
-        "currentBid": 550,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231779"
+        "lotId": "98634191",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634191"
       },
       "115": {
         "lotNumber": "115",
-        "lotId": "98214572",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214572"
+        "lotId": "98634192",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634192"
       },
       "116": {
         "lotNumber": "116",
-        "lotId": "98214573",
-        "currentBid": 85,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214573"
+        "lotId": "98634193",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634193"
       },
       "117": {
         "lotNumber": "117",
-        "lotId": "98354984",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354984"
+        "lotId": "98634194",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634194"
       },
       "118": {
         "lotNumber": "118",
-        "lotId": "98214574",
-        "currentBid": 140,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214574"
+        "lotId": "98634195",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634195"
       },
       "119": {
         "lotNumber": "119",
-        "lotId": "98214575",
-        "currentBid": 1900,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214575"
+        "lotId": "98634196",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634196"
       },
       "120": {
         "lotNumber": "120",
-        "lotId": "98451809",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98451809"
+        "lotId": "98634198",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634198"
       },
       "121": {
         "lotNumber": "121",
-        "lotId": "98214576",
-        "currentBid": 70,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214576"
+        "lotId": "98634199",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634199"
       },
       "122": {
         "lotNumber": "122",
-        "lotId": "98748762",
-        "currentBid": 190,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98748762"
+        "lotId": "98634200",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634200"
       },
       "123": {
         "lotNumber": "123",
-        "lotId": "98214577",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214577"
+        "lotId": "98634201",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634201"
       },
       "124": {
         "lotNumber": "124",
-        "lotId": "98764433",
-        "currentBid": 22,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98764433"
+        "lotId": "98634202",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634202"
       },
       "125": {
         "lotNumber": "125",
-        "lotId": "98690994",
-        "currentBid": 425,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98690994"
+        "lotId": "98634203",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634203"
       },
       "126": {
         "lotNumber": "126",
-        "lotId": "98214578",
-        "currentBid": 170,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214578"
+        "lotId": "98634204",
+        "currentBid": 3750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634204"
       },
       "127": {
         "lotNumber": "127",
-        "lotId": "98354985",
-        "currentBid": 45,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354985"
+        "lotId": "98634205",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634205"
       },
       "128": {
         "lotNumber": "128",
-        "lotId": "98214579",
-        "currentBid": 1200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214579"
+        "lotId": "98634206",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634206"
       },
       "129": {
         "lotNumber": "129",
-        "lotId": "98214580",
-        "currentBid": 275,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214580"
+        "lotId": "98634207",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634207"
       },
       "130": {
         "lotNumber": "130",
-        "lotId": "98662178",
-        "currentBid": 425,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98662178"
+        "lotId": "98634209",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634209"
       },
       "131": {
         "lotNumber": "131",
-        "lotId": "98214581",
-        "currentBid": 400,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214581"
+        "lotId": "98634210",
+        "currentBid": 4500,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634210"
       },
       "132": {
         "lotNumber": "132",
-        "lotId": "98214582",
-        "currentBid": 375,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214582"
+        "lotId": "98634211",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634211"
       },
       "133": {
         "lotNumber": "133",
-        "lotId": "98214583",
-        "currentBid": 140,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214583"
+        "lotId": "98634212",
+        "currentBid": 1100,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634212"
       },
       "134": {
         "lotNumber": "134",
-        "lotId": "98412770",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412770"
+        "lotId": "98634213",
+        "currentBid": 3000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634213"
       },
       "135": {
         "lotNumber": "135",
-        "lotId": "98752927",
-        "currentBid": 5,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98752927"
+        "lotId": "98634214",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634214"
       },
       "136": {
         "lotNumber": "136",
-        "lotId": "98412771",
-        "currentBid": 350,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412771"
+        "lotId": "98634215",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634215"
       },
       "137": {
         "lotNumber": "137",
-        "lotId": "98596778",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596778"
+        "lotId": "98634216",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634216"
       },
       "138": {
         "lotNumber": "138",
-        "lotId": "98412772",
-        "currentBid": 375,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412772"
+        "lotId": "98634217",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634217"
       },
       "139": {
         "lotNumber": "139",
-        "lotId": "98231780",
-        "currentBid": 400,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231780"
+        "lotId": "98634218",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634218"
       },
       "140": {
         "lotNumber": "140",
-        "lotId": "98662179",
-        "currentBid": 85,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98662179"
+        "lotId": "98634220",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634220"
       },
       "141": {
         "lotNumber": "141",
-        "lotId": "98214584",
-        "currentBid": 170,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214584"
+        "lotId": "98634221",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634221"
       },
       "142": {
         "lotNumber": "142",
-        "lotId": "98214585",
-        "currentBid": 425,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214585"
+        "lotId": "98634222",
+        "currentBid": 2100,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634222"
       },
       "143": {
         "lotNumber": "143",
-        "lotId": "98214586",
-        "currentBid": 40,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214586"
+        "lotId": "98634223",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634223"
       },
       "144": {
         "lotNumber": "144",
-        "lotId": "98214587",
-        "currentBid": 800,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214587"
+        "lotId": "98634224",
+        "currentBid": 2250,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634224"
       },
       "145": {
         "lotNumber": "145",
-        "lotId": "98596779",
-        "currentBid": 230,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596779"
+        "lotId": "98634225",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634225"
       },
       "146": {
         "lotNumber": "146",
-        "lotId": "98214588",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214588"
+        "lotId": "98634226",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634226"
       },
       "147": {
         "lotNumber": "147",
-        "lotId": "98354986",
-        "currentBid": 275,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354986"
+        "lotId": "98634227",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634227"
       },
       "148": {
         "lotNumber": "148",
-        "lotId": "98231781",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231781"
+        "lotId": "98634228",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634228"
       },
       "149": {
         "lotNumber": "149",
-        "lotId": "98645672",
-        "currentBid": 800,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645672"
+        "lotId": "98634229",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634229"
       },
       "150": {
         "lotNumber": "150",
-        "lotId": "98662180",
-        "currentBid": 800,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98662180"
+        "lotId": "98634231",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634231"
       },
       "151": {
         "lotNumber": "151",
-        "lotId": "98642067",
-        "currentBid": 230,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98642067"
+        "lotId": "98634232",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634232"
       },
       "152": {
         "lotNumber": "152",
-        "lotId": "98642068",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98642068"
+        "lotId": "98634233",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634233"
       },
       "153": {
         "lotNumber": "153",
-        "lotId": "98231782",
-        "currentBid": 3600,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231782"
+        "lotId": "98634234",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634234"
       },
       "154": {
         "lotNumber": "154",
-        "lotId": "98214589",
-        "currentBid": 8500,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214589"
+        "lotId": "98634235",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634235"
       },
       "155": {
         "lotNumber": "155",
-        "lotId": "98214590",
-        "currentBid": 240,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214590"
+        "lotId": "98634236",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634236"
       },
       "156": {
         "lotNumber": "156",
-        "lotId": "98214591",
-        "currentBid": 600,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214591"
+        "lotId": "98634237",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634237"
       },
       "157": {
         "lotNumber": "157",
-        "lotId": "98354987",
-        "currentBid": 240,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354987"
+        "lotId": "98634238",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634238"
       },
       "158": {
         "lotNumber": "158",
-        "lotId": "98214592",
-        "currentBid": 230,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214592"
+        "lotId": "98634239",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634239"
       },
       "159": {
         "lotNumber": "159",
-        "lotId": "98596780",
-        "currentBid": 450,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596780"
+        "lotId": "98634240",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634240"
       },
       "160": {
         "lotNumber": "160",
-        "lotId": "98645673",
-        "currentBid": 1,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645673"
+        "lotId": "98634242",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634242"
       },
       "161": {
         "lotNumber": "161",
-        "lotId": "98582094",
-        "currentBid": 220,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98582094"
+        "lotId": "98634243",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634243"
       },
       "162": {
         "lotNumber": "162",
-        "lotId": "98214593",
-        "currentBid": 950,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214593"
+        "lotId": "98634309",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634309"
       },
       "163": {
         "lotNumber": "163",
-        "lotId": "98214594",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214594"
+        "lotId": "98634310",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634310"
       },
       "164": {
         "lotNumber": "164",
-        "lotId": "98214595",
-        "currentBid": 750,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214595"
+        "lotId": "98634311",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634311"
       },
       "165": {
         "lotNumber": "165",
-        "lotId": "98375077",
-        "currentBid": 50,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98375077"
+        "lotId": "98634312",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634312"
       },
       "166": {
         "lotNumber": "166",
-        "lotId": "98375078",
-        "currentBid": 12,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98375078"
+        "lotId": "98634313",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634313"
       },
       "167": {
         "lotNumber": "167",
-        "lotId": "98354988",
-        "currentBid": 23,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354988"
+        "lotId": "98634314",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634314"
       },
       "168": {
         "lotNumber": "168",
-        "lotId": "98214596",
-        "currentBid": 950,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214596"
+        "lotId": "98634315",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634315"
       },
       "169": {
         "lotNumber": "169",
-        "lotId": "98214597",
-        "currentBid": 425,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214597"
+        "lotId": "98634316",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634316"
       },
       "170": {
         "lotNumber": "170",
-        "lotId": "98412773",
-        "currentBid": 425,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412773"
+        "lotId": "98634318",
+        "currentBid": 2750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634318"
       },
       "171": {
         "lotNumber": "171",
-        "lotId": "98214598",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214598"
+        "lotId": "98634319",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634319"
       },
       "172": {
         "lotNumber": "172",
-        "lotId": "98214599",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214599"
+        "lotId": "98634320",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634320"
       },
       "173": {
         "lotNumber": "173",
-        "lotId": "98214600",
-        "currentBid": 75,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214600"
+        "lotId": "98634321",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634321"
       },
       "174": {
         "lotNumber": "174",
-        "lotId": "98375079",
-        "currentBid": 220,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98375079"
+        "lotId": "98634322",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634322"
       },
       "175": {
         "lotNumber": "175",
-        "lotId": "98690996",
-        "currentBid": 80,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98690996"
+        "lotId": "98634323",
+        "currentBid": 3000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634323"
       },
       "176": {
         "lotNumber": "176",
-        "lotId": "98214601",
-        "currentBid": 450,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214601"
+        "lotId": "98634324",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634324"
+      },
+      "177": {
+        "lotNumber": "177",
+        "lotId": "98634325",
+        "currentBid": 1700,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634325"
       },
       "178": {
         "lotNumber": "178",
-        "lotId": "98582095",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98582095"
+        "lotId": "98634326",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634326"
       },
       "179": {
         "lotNumber": "179",
-        "lotId": "98214602",
+        "lotId": "98634327",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214602"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634327"
       },
       "180": {
         "lotNumber": "180",
-        "lotId": "98214603",
-        "currentBid": 240,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214603"
+        "lotId": "98634329",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634329"
       },
       "181": {
         "lotNumber": "181",
-        "lotId": "98214604",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214604"
+        "lotId": "98634330",
+        "currentBid": 5000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634330"
       },
       "182": {
         "lotNumber": "182",
-        "lotId": "98214605",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214605"
+        "lotId": "98634331",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634331"
       },
       "183": {
         "lotNumber": "183",
-        "lotId": "98214606",
-        "currentBid": 5,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214606"
+        "lotId": "98634332",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634332"
       },
       "184": {
         "lotNumber": "184",
-        "lotId": "98645674",
+        "lotId": "98634333",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645674"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634333"
       },
       "185": {
         "lotNumber": "185",
-        "lotId": "98470405",
-        "currentBid": 85,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98470405"
+        "lotId": "98634334",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634334"
       },
       "186": {
         "lotNumber": "186",
-        "lotId": "98645675",
-        "currentBid": 850,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645675"
+        "lotId": "98634335",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634335"
       },
       "187": {
         "lotNumber": "187",
-        "lotId": "98354989",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354989"
+        "lotId": "98634336",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634336"
       },
       "188": {
         "lotNumber": "188",
-        "lotId": "98690997",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98690997"
+        "lotId": "98634337",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634337"
       },
       "189": {
         "lotNumber": "189",
-        "lotId": "98214607",
-        "currentBid": 375,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214607"
+        "lotId": "98634338",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634338"
       },
       "190": {
         "lotNumber": "190",
-        "lotId": "98214608",
-        "currentBid": 1,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214608"
+        "lotId": "98634340",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634340"
       },
       "191": {
         "lotNumber": "191",
-        "lotId": "98214609",
-        "currentBid": 3,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214609"
+        "lotId": "98634341",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634341"
       },
       "192": {
         "lotNumber": "192",
-        "lotId": "98690998",
+        "lotId": "98634342",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98690998"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634342"
       },
       "193": {
         "lotNumber": "193",
-        "lotId": "98214610",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214610"
+        "lotId": "98634343",
+        "currentBid": 1900,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634343"
       },
       "194": {
         "lotNumber": "194",
-        "lotId": "98214611",
-        "currentBid": 80,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214611"
+        "lotId": "98634344",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634344"
       },
       "195": {
         "lotNumber": "195",
-        "lotId": "98451810",
-        "currentBid": 8,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98451810"
+        "lotId": "98634345",
+        "currentBid": 1800,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634345"
       },
       "196": {
         "lotNumber": "196",
-        "lotId": "98690999",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98690999"
+        "lotId": "98634346",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634346"
       },
       "197": {
         "lotNumber": "197",
-        "lotId": "98354990",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354990"
+        "lotId": "98634347",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634347"
       },
       "198": {
         "lotNumber": "198",
-        "lotId": "98542247",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98542247"
+        "lotId": "98634348",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634348"
       },
       "199": {
         "lotNumber": "199",
-        "lotId": "98642069",
-        "currentBid": 11,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98642069"
+        "lotId": "98634349",
+        "currentBid": 2500,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634349"
       },
       "200": {
         "lotNumber": "200",
-        "lotId": "98214612",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214612"
+        "lotId": "98634352",
+        "currentBid": 2500,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634352"
       },
       "201": {
         "lotNumber": "201",
-        "lotId": "98214613",
-        "currentBid": 300,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214613"
+        "lotId": "98634353",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634353"
       },
       "202": {
         "lotNumber": "202",
-        "lotId": "98214614",
-        "currentBid": 300,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214614"
+        "lotId": "98634354",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634354"
       },
       "203": {
         "lotNumber": "203",
-        "lotId": "98214615",
-        "currentBid": 35,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214615"
+        "lotId": "98634355",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634355"
       },
       "204": {
         "lotNumber": "204",
-        "lotId": "98645676",
-        "currentBid": 30,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645676"
+        "lotId": "98634356",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634356"
       },
       "205": {
         "lotNumber": "205",
-        "lotId": "98451811",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98451811"
+        "lotId": "98634357",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634357"
       },
       "206": {
         "lotNumber": "206",
-        "lotId": "98691000",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98691000"
+        "lotId": "98634358",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634358"
       },
       "207": {
         "lotNumber": "207",
-        "lotId": "98354991",
-        "currentBid": 220,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354991"
+        "lotId": "98634359",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634359"
       },
       "208": {
         "lotNumber": "208",
-        "lotId": "98691001",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98691001"
+        "lotId": "98634360",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634360"
       },
       "209": {
         "lotNumber": "209",
-        "lotId": "98214616",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214616"
+        "lotId": "98634361",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634361"
       },
       "210": {
         "lotNumber": "210",
-        "lotId": "98691002",
+        "lotId": "98634363",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98691002"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634363"
       },
       "211": {
         "lotNumber": "211",
-        "lotId": "98214617",
-        "currentBid": 275,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214617"
+        "lotId": "98634364",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634364"
       },
       "212": {
         "lotNumber": "212",
-        "lotId": "98412774",
-        "currentBid": 45,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412774"
+        "lotId": "98634365",
+        "currentBid": 3250,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634365"
       },
       "213": {
         "lotNumber": "213",
-        "lotId": "98752928",
-        "currentBid": 600,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98752928"
+        "lotId": "98634366",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634366"
       },
       "214": {
         "lotNumber": "214",
-        "lotId": "98748763",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98748763"
+        "lotId": "98634367",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634367"
       },
       "215": {
         "lotNumber": "215",
-        "lotId": "98733945",
-        "currentBid": 21,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98733945"
+        "lotId": "98634368",
+        "currentBid": 2750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634368"
       },
       "216": {
         "lotNumber": "216",
-        "lotId": "98214618",
-        "currentBid": 220,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214618"
+        "lotId": "98634369",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634369"
       },
       "217": {
         "lotNumber": "217",
-        "lotId": "98596781",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596781"
+        "lotId": "98634370",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634370"
       },
       "218": {
         "lotNumber": "218",
-        "lotId": "98662181",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98662181"
+        "lotId": "98634371",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634371"
       },
       "219": {
         "lotNumber": "219",
-        "lotId": "98214619",
-        "currentBid": 1,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214619"
+        "lotId": "98634372",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634372"
       },
       "220": {
         "lotNumber": "220",
-        "lotId": "98451812",
-        "currentBid": 5,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98451812"
+        "lotId": "98634374",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634374"
       },
       "221": {
         "lotNumber": "221",
-        "lotId": "98214620",
-        "currentBid": 170,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214620"
+        "lotId": "98634375",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634375"
       },
       "222": {
         "lotNumber": "222",
-        "lotId": "98596782",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596782"
+        "lotId": "98634410",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634410"
       },
       "223": {
         "lotNumber": "223",
-        "lotId": "98214621",
-        "currentBid": 275,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214621"
+        "lotId": "98634411",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634411"
       },
       "224": {
         "lotNumber": "224",
-        "lotId": "98214622",
-        "currentBid": 850,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214622"
+        "lotId": "98634412",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634412"
       },
       "225": {
         "lotNumber": "225",
-        "lotId": "98827819",
-        "currentBid": 13,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98827819"
+        "lotId": "98634413",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634413"
       },
       "226": {
         "lotNumber": "226",
-        "lotId": "98214623",
-        "currentBid": 200,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214623"
+        "lotId": "98634414",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634414"
       },
       "227": {
         "lotNumber": "227",
-        "lotId": "98231783",
-        "currentBid": 75,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231783"
+        "lotId": "98634415",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634415"
       },
       "228": {
         "lotNumber": "228",
-        "lotId": "98827820",
-        "currentBid": 13,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98827820"
+        "lotId": "98634416",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634416"
       },
       "229": {
         "lotNumber": "229",
-        "lotId": "98582096",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98582096"
+        "lotId": "98634417",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634417"
       },
       "230": {
         "lotNumber": "230",
-        "lotId": "98691003",
-        "currentBid": 150,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98691003"
+        "lotId": "98634419",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634419"
       },
       "231": {
         "lotNumber": "231",
-        "lotId": "98231784",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231784"
+        "lotId": "98634420",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634420"
       },
       "232": {
         "lotNumber": "232",
-        "lotId": "98214624",
-        "currentBid": 170,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214624"
+        "lotId": "98634421",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634421"
       },
       "233": {
         "lotNumber": "233",
-        "lotId": "98214625",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214625"
+        "lotId": "98634422",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634422"
       },
       "234": {
         "lotNumber": "234",
-        "lotId": "98691004",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98691004"
+        "lotId": "98634423",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634423"
       },
       "235": {
         "lotNumber": "235",
-        "lotId": "98854050",
-        "currentBid": 1,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98854050"
+        "lotId": "98634424",
+        "currentBid": 3000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634424"
       },
       "236": {
         "lotNumber": "236",
-        "lotId": "98214626",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214626"
+        "lotId": "98634425",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634425"
       },
       "237": {
         "lotNumber": "237",
-        "lotId": "98354992",
-        "currentBid": 65,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354992"
+        "lotId": "98634426",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634426"
       },
       "238": {
         "lotNumber": "238",
-        "lotId": "98582097",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98582097"
+        "lotId": "98634427",
+        "currentBid": 2500,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634427"
       },
       "239": {
         "lotNumber": "239",
-        "lotId": "98645695",
-        "currentBid": 190,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645695"
+        "lotId": "98634428",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634428"
       },
       "240": {
         "lotNumber": "240",
-        "lotId": "98214627",
-        "currentBid": 85,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214627"
+        "lotId": "98634430",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634430"
       },
       "241": {
         "lotNumber": "241",
-        "lotId": "98642070",
-        "currentBid": 130,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98642070"
+        "lotId": "98634431",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634431"
       },
       "242": {
         "lotNumber": "242",
-        "lotId": "98214628",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214628"
+        "lotId": "98634432",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634432"
       },
       "243": {
         "lotNumber": "243",
-        "lotId": "98214629",
-        "currentBid": 700,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214629"
+        "lotId": "98634433",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634433"
       },
       "244": {
         "lotNumber": "244",
-        "lotId": "98214630",
-        "currentBid": 475,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214630"
+        "lotId": "98634434",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634434"
       },
       "245": {
         "lotNumber": "245",
-        "lotId": "98691005",
-        "currentBid": 85,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98691005"
+        "lotId": "98634435",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634435"
       },
       "246": {
         "lotNumber": "246",
-        "lotId": "98596783",
+        "lotId": "98634436",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596783"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634436"
       },
       "247": {
         "lotNumber": "247",
-        "lotId": "98596784",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596784"
+        "lotId": "98634437",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634437"
       },
       "248": {
         "lotNumber": "248",
-        "lotId": "98807779",
-        "currentBid": 3,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98807779"
+        "lotId": "98634438",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634438"
       },
       "249": {
         "lotNumber": "249",
-        "lotId": "98214631",
-        "currentBid": 1,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214631"
+        "lotId": "98634439",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634439"
       },
       "250": {
         "lotNumber": "250",
-        "lotId": "98764435",
-        "currentBid": 20,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98764435"
+        "lotId": "98634441",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634441"
       },
       "251": {
         "lotNumber": "251",
-        "lotId": "98214632",
-        "currentBid": 85,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214632"
+        "lotId": "98634442",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634442"
       },
       "252": {
         "lotNumber": "252",
-        "lotId": "98807780",
-        "currentBid": 3,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98807780"
+        "lotId": "98634443",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634443"
       },
       "253": {
         "lotNumber": "253",
-        "lotId": "98214633",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214633"
+        "lotId": "98634444",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634444"
       },
       "254": {
         "lotNumber": "254",
-        "lotId": "98645696",
-        "currentBid": 800,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645696"
+        "lotId": "98634445",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634445"
       },
       "255": {
         "lotNumber": "255",
-        "lotId": "98733946",
-        "currentBid": 180,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98733946"
+        "lotId": "98634446",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634446"
       },
       "256": {
         "lotNumber": "256",
-        "lotId": "98214634",
-        "currentBid": 11,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214634"
+        "lotId": "98634447",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634447"
       },
       "257": {
         "lotNumber": "257",
-        "lotId": "98231785",
-        "currentBid": 180,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231785"
+        "lotId": "98634448",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634448"
       },
       "258": {
         "lotNumber": "258",
-        "lotId": "98375080",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98375080"
+        "lotId": "98634449",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634449"
       },
       "259": {
         "lotNumber": "259",
-        "lotId": "98214635",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214635"
+        "lotId": "98634450",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634450"
       },
       "260": {
         "lotNumber": "260",
-        "lotId": "98470406",
-        "currentBid": 55,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98470406"
+        "lotId": "98634452",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634452"
       },
       "261": {
         "lotNumber": "261",
-        "lotId": "98214636",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214636"
+        "lotId": "98634453",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634453"
+      },
+      "262": {
+        "lotNumber": "262",
+        "lotId": "98634454",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634454"
       },
       "263": {
         "lotNumber": "263",
-        "lotId": "98214637",
-        "currentBid": 275,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214637"
+        "lotId": "98634455",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634455"
       },
       "264": {
         "lotNumber": "264",
-        "lotId": "98214638",
-        "currentBid": 190,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214638"
+        "lotId": "98634456",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634456"
       },
       "265": {
         "lotNumber": "265",
-        "lotId": "98214639",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214639"
+        "lotId": "98634457",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634457"
       },
       "266": {
         "lotNumber": "266",
-        "lotId": "98214640",
-        "currentBid": 35,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214640"
+        "lotId": "98634458",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634458"
       },
       "267": {
         "lotNumber": "267",
-        "lotId": "98354993",
-        "currentBid": 50,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354993"
+        "lotId": "98634459",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634459"
       },
       "268": {
         "lotNumber": "268",
-        "lotId": "98596786",
+        "lotId": "98634460",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98596786"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634460"
       },
       "269": {
         "lotNumber": "269",
-        "lotId": "98214641",
-        "currentBid": 85,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214641"
+        "lotId": "98634461",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634461"
       },
       "270": {
         "lotNumber": "270",
-        "lotId": "98451813",
-        "currentBid": 13,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98451813"
+        "lotId": "98634463",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634463"
       },
       "271": {
         "lotNumber": "271",
-        "lotId": "98214642",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214642"
+        "lotId": "98634464",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634464"
       },
       "272": {
         "lotNumber": "272",
-        "lotId": "98231786",
-        "currentBid": 60,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98231786"
+        "lotId": "98634465",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634465"
       },
       "273": {
         "lotNumber": "273",
-        "lotId": "98214643",
-        "currentBid": 160,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214643"
+        "lotId": "98634466",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634466"
       },
       "274": {
         "lotNumber": "274",
-        "lotId": "98412775",
-        "currentBid": 550,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412775"
+        "lotId": "98634467",
+        "currentBid": 2750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634467"
       },
       "275": {
         "lotNumber": "275",
-        "lotId": "98451814",
-        "currentBid": 22,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98451814"
+        "lotId": "98634468",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634468"
       },
       "276": {
         "lotNumber": "276",
-        "lotId": "98733952",
-        "currentBid": 30,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98733952"
+        "lotId": "98634469",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634469"
       },
       "277": {
         "lotNumber": "277",
-        "lotId": "98354994",
-        "currentBid": 70,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354994"
+        "lotId": "98634470",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634470"
       },
       "278": {
         "lotNumber": "278",
-        "lotId": "98542248",
-        "currentBid": 275,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98542248"
+        "lotId": "98634471",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634471"
       },
       "279": {
         "lotNumber": "279",
-        "lotId": "98214644",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214644"
+        "lotId": "98634472",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634472"
       },
       "280": {
         "lotNumber": "280",
-        "lotId": "98214645",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214645"
+        "lotId": "98634474",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634474"
       },
       "281": {
         "lotNumber": "281",
-        "lotId": "98214646",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214646"
+        "lotId": "98634475",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634475"
       },
       "282": {
         "lotNumber": "282",
-        "lotId": "98214647",
-        "currentBid": 250,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214647"
+        "lotId": "98634476",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634476"
       },
       "283": {
         "lotNumber": "283",
-        "lotId": "98214648",
-        "currentBid": 325,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214648"
+        "lotId": "98634477",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634477"
       },
       "284": {
         "lotNumber": "284",
-        "lotId": "98748764",
-        "currentBid": 210,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98748764"
+        "lotId": "98634478",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634478"
       },
       "285": {
         "lotNumber": "285",
-        "lotId": "98733953",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98733953"
+        "lotId": "98634479",
+        "currentBid": 4000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634479"
       },
       "286": {
         "lotNumber": "286",
-        "lotId": "98412776",
-        "currentBid": 8,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412776"
+        "lotId": "98634480",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634480"
       },
       "287": {
         "lotNumber": "287",
-        "lotId": "98354995",
-        "currentBid": 1,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98354995"
+        "lotId": "98634481",
+        "currentBid": 22000,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634481"
       },
       "288": {
         "lotNumber": "288",
-        "lotId": "98748765",
-        "currentBid": 30,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98748765"
+        "lotId": "98634482",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634482"
       },
       "289": {
         "lotNumber": "289",
-        "lotId": "98214649",
-        "currentBid": 120,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214649"
+        "lotId": "98634483",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634483"
       },
       "290": {
         "lotNumber": "290",
-        "lotId": "98827821",
-        "currentBid": 100,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98827821"
+        "lotId": "98634485",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634485"
       },
       "291": {
         "lotNumber": "291",
-        "lotId": "98214650",
-        "currentBid": 30,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214650"
+        "lotId": "98634486",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634486"
       },
       "292": {
         "lotNumber": "292",
-        "lotId": "98827822",
+        "lotId": "98634487",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98827822"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634487"
       },
       "293": {
         "lotNumber": "293",
-        "lotId": "98214651",
-        "currentBid": 18,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214651"
+        "lotId": "98634488",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634488"
       },
       "294": {
         "lotNumber": "294",
-        "lotId": "98827823",
-        "currentBid": 1,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98827823"
+        "lotId": "98634489",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634489"
       },
       "295": {
         "lotNumber": "295",
-        "lotId": "98827824",
-        "currentBid": 10,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98827824"
+        "lotId": "98634490",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634490"
       },
       "296": {
         "lotNumber": "296",
-        "lotId": "98827825",
-        "currentBid": 10,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98827825"
+        "lotId": "98634491",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634491"
       },
       "297": {
         "lotNumber": "297",
-        "lotId": "98412777",
-        "currentBid": 23,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98412777"
+        "lotId": "98634492",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634492"
       },
       "298": {
         "lotNumber": "298",
-        "lotId": "98214652",
-        "currentBid": 4,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214652"
+        "lotId": "98634493",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634493"
       },
       "299": {
         "lotNumber": "299",
-        "lotId": "98542249",
-        "currentBid": 40,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98542249"
+        "lotId": "98634494",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634494"
       },
       "300": {
         "lotNumber": "300",
-        "lotId": "98854051",
+        "lotId": "98634497",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98854051"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634497"
       },
-      "1A": {
-        "lotNumber": "1A",
-        "lotId": "98214491",
+      "301": {
+        "lotNumber": "301",
+        "lotId": "98634498",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214491"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634498"
       },
-      "1B": {
-        "lotNumber": "1B",
-        "lotId": "98214492",
+      "302": {
+        "lotNumber": "302",
+        "lotId": "98634499",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214492"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634499"
       },
-      "1C": {
-        "lotNumber": "1C",
-        "lotId": "98214493",
+      "303": {
+        "lotNumber": "303",
+        "lotId": "98634500",
+        "currentBid": 3750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634500"
+      },
+      "304": {
+        "lotNumber": "304",
+        "lotId": "98634501",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214493"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634501"
       },
-      "1D": {
-        "lotNumber": "1D",
-        "lotId": "98214494",
+      "305": {
+        "lotNumber": "305",
+        "lotId": "98634502",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214494"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634502"
       },
-      "1E": {
-        "lotNumber": "1E",
-        "lotId": "98214495",
+      "306": {
+        "lotNumber": "306",
+        "lotId": "98634503",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98214495"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634503"
       },
-      "17A": {
-        "lotNumber": "17A",
-        "lotId": "98748761",
-        "currentBid": 2,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98748761"
-      },
-      "20A": {
-        "lotNumber": "20A",
-        "lotId": "98868095",
+      "307": {
+        "lotNumber": "307",
+        "lotId": "98634504",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868095"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634504"
       },
-      "80A": {
-        "lotNumber": "80A",
-        "lotId": "98868096",
+      "308": {
+        "lotNumber": "308",
+        "lotId": "98634505",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868096"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634505"
       },
-      "115A": {
-        "lotNumber": "115A",
-        "lotId": "98868097",
-        "currentBid": 275,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868097"
-      },
-      "131A": {
-        "lotNumber": "131A",
-        "lotId": "98645671",
-        "currentBid": 30,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98645671"
-      },
-      "145A": {
-        "lotNumber": "145A",
-        "lotId": "98690995",
-        "currentBid": 375,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98690995"
-      },
-      "160A": {
-        "lotNumber": "160A",
-        "lotId": "98854049",
-        "currentBid": 500,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98854049"
-      },
-      "177A": {
-        "lotNumber": "177A",
-        "lotId": "98795813",
-        "currentBid": 110,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98795813"
-      },
-      "177B": {
-        "lotNumber": "177B",
-        "lotId": "98795814",
-        "currentBid": 1300,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98795814"
-      },
-      "180A": {
-        "lotNumber": "180A",
-        "lotId": "98764434",
-        "currentBid": 40,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98764434"
-      },
-      "195A": {
-        "lotNumber": "195A",
-        "lotId": "98868098",
-        "currentBid": 10,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868098"
-      },
-      "200A": {
-        "lotNumber": "200A",
-        "lotId": "98868099",
-        "currentBid": 5,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868099"
-      },
-      "215A": {
-        "lotNumber": "215A",
-        "lotId": "98868100",
-        "currentBid": 10,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868100"
-      },
-      "220A": {
-        "lotNumber": "220A",
-        "lotId": "98868101",
-        "currentBid": 10,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868101"
-      },
-      "240A": {
-        "lotNumber": "240A",
-        "lotId": "98868102",
-        "currentBid": 5,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868102"
-      },
-      "250A": {
-        "lotNumber": "250A",
-        "lotId": "98868103",
-        "currentBid": 10,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868103"
-      },
-      "255A": {
-        "lotNumber": "255A",
-        "lotId": "98868104",
+      "309": {
+        "lotNumber": "309",
+        "lotId": "98634506",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868104"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634506"
       },
-      "270A": {
-        "lotNumber": "270A",
-        "lotId": "98868105",
+      "310": {
+        "lotNumber": "310",
+        "lotId": "98634508",
         "currentBid": 0,
-        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98868105"
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634508"
+      },
+      "311": {
+        "lotNumber": "311",
+        "lotId": "98634509",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634509"
+      },
+      "312": {
+        "lotNumber": "312",
+        "lotId": "98634510",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634510"
+      },
+      "313": {
+        "lotNumber": "313",
+        "lotId": "98634511",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634511"
+      },
+      "314": {
+        "lotNumber": "314",
+        "lotId": "98634512",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634512"
+      },
+      "315": {
+        "lotNumber": "315",
+        "lotId": "98634513",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634513"
+      },
+      "316": {
+        "lotNumber": "316",
+        "lotId": "98634514",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634514"
+      },
+      "317": {
+        "lotNumber": "317",
+        "lotId": "98634515",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634515"
+      },
+      "318": {
+        "lotNumber": "318",
+        "lotId": "98634516",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634516"
+      },
+      "319": {
+        "lotNumber": "319",
+        "lotId": "98634517",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634517"
+      },
+      "320": {
+        "lotNumber": "320",
+        "lotId": "98634519",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634519"
+      },
+      "321": {
+        "lotNumber": "321",
+        "lotId": "98634520",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634520"
+      },
+      "322": {
+        "lotNumber": "322",
+        "lotId": "98634521",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634521"
+      },
+      "323": {
+        "lotNumber": "323",
+        "lotId": "98634522",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634522"
+      },
+      "324": {
+        "lotNumber": "324",
+        "lotId": "98634523",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634523"
+      },
+      "325": {
+        "lotNumber": "325",
+        "lotId": "98634524",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634524"
+      },
+      "326": {
+        "lotNumber": "326",
+        "lotId": "98634525",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634525"
+      },
+      "327": {
+        "lotNumber": "327",
+        "lotId": "98634526",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634526"
+      },
+      "328": {
+        "lotNumber": "328",
+        "lotId": "98634527",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634527"
+      },
+      "329": {
+        "lotNumber": "329",
+        "lotId": "98634528",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634528"
+      },
+      "330": {
+        "lotNumber": "330",
+        "lotId": "98634530",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634530"
+      },
+      "331": {
+        "lotNumber": "331",
+        "lotId": "98634531",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634531"
+      },
+      "332": {
+        "lotNumber": "332",
+        "lotId": "98634532",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634532"
+      },
+      "333": {
+        "lotNumber": "333",
+        "lotId": "98634533",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634533"
+      },
+      "334": {
+        "lotNumber": "334",
+        "lotId": "98634534",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634534"
+      },
+      "335": {
+        "lotNumber": "335",
+        "lotId": "98634535",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634535"
+      },
+      "336": {
+        "lotNumber": "336",
+        "lotId": "98634536",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634536"
+      },
+      "337": {
+        "lotNumber": "337",
+        "lotId": "98634537",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634537"
+      },
+      "338": {
+        "lotNumber": "338",
+        "lotId": "98634538",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634538"
+      },
+      "339": {
+        "lotNumber": "339",
+        "lotId": "98634539",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634539"
+      },
+      "340": {
+        "lotNumber": "340",
+        "lotId": "98634541",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634541"
+      },
+      "341": {
+        "lotNumber": "341",
+        "lotId": "98634542",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634542"
+      },
+      "342": {
+        "lotNumber": "342",
+        "lotId": "98634543",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634543"
+      },
+      "343": {
+        "lotNumber": "343",
+        "lotId": "98634544",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634544"
+      },
+      "344": {
+        "lotNumber": "344",
+        "lotId": "98634545",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634545"
+      },
+      "345": {
+        "lotNumber": "345",
+        "lotId": "98634546",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634546"
+      },
+      "346": {
+        "lotNumber": "346",
+        "lotId": "98634244",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634244"
+      },
+      "347": {
+        "lotNumber": "347",
+        "lotId": "98634245",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634245"
+      },
+      "348": {
+        "lotNumber": "348",
+        "lotId": "98634246",
+        "currentBid": 1950,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634246"
+      },
+      "349": {
+        "lotNumber": "349",
+        "lotId": "98634247",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634247"
+      },
+      "350": {
+        "lotNumber": "350",
+        "lotId": "98634249",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634249"
+      },
+      "351": {
+        "lotNumber": "351",
+        "lotId": "98634250",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634250"
+      },
+      "352": {
+        "lotNumber": "352",
+        "lotId": "98634251",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634251"
+      },
+      "353": {
+        "lotNumber": "353",
+        "lotId": "98634252",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634252"
+      },
+      "354": {
+        "lotNumber": "354",
+        "lotId": "98634253",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634253"
+      },
+      "355": {
+        "lotNumber": "355",
+        "lotId": "98634254",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634254"
+      },
+      "356": {
+        "lotNumber": "356",
+        "lotId": "98634255",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634255"
+      },
+      "357": {
+        "lotNumber": "357",
+        "lotId": "98634256",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634256"
+      },
+      "358": {
+        "lotNumber": "358",
+        "lotId": "98634257",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634257"
+      },
+      "359": {
+        "lotNumber": "359",
+        "lotId": "98634258",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634258"
+      },
+      "360": {
+        "lotNumber": "360",
+        "lotId": "98634260",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634260"
+      },
+      "361": {
+        "lotNumber": "361",
+        "lotId": "98634261",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634261"
+      },
+      "362": {
+        "lotNumber": "362",
+        "lotId": "98634262",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634262"
+      },
+      "363": {
+        "lotNumber": "363",
+        "lotId": "98634263",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634263"
+      },
+      "364": {
+        "lotNumber": "364",
+        "lotId": "98634264",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634264"
+      },
+      "365": {
+        "lotNumber": "365",
+        "lotId": "98634265",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634265"
+      },
+      "366": {
+        "lotNumber": "366",
+        "lotId": "98634266",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634266"
+      },
+      "367": {
+        "lotNumber": "367",
+        "lotId": "98634267",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634267"
+      },
+      "368": {
+        "lotNumber": "368",
+        "lotId": "98634268",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634268"
+      },
+      "369": {
+        "lotNumber": "369",
+        "lotId": "98634269",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634269"
+      },
+      "370": {
+        "lotNumber": "370",
+        "lotId": "98634271",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634271"
+      },
+      "371": {
+        "lotNumber": "371",
+        "lotId": "98634272",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634272"
+      },
+      "372": {
+        "lotNumber": "372",
+        "lotId": "98634273",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634273"
+      },
+      "373": {
+        "lotNumber": "373",
+        "lotId": "98634274",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634274"
+      },
+      "374": {
+        "lotNumber": "374",
+        "lotId": "98634275",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634275"
+      },
+      "375": {
+        "lotNumber": "375",
+        "lotId": "98634276",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634276"
+      },
+      "376": {
+        "lotNumber": "376",
+        "lotId": "98634277",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634277"
+      },
+      "377": {
+        "lotNumber": "377",
+        "lotId": "98634278",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634278"
+      },
+      "378": {
+        "lotNumber": "378",
+        "lotId": "98634279",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634279"
+      },
+      "379": {
+        "lotNumber": "379",
+        "lotId": "98634280",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634280"
+      },
+      "380": {
+        "lotNumber": "380",
+        "lotId": "98634282",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634282"
+      },
+      "381": {
+        "lotNumber": "381",
+        "lotId": "98634283",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634283"
+      },
+      "382": {
+        "lotNumber": "382",
+        "lotId": "98634284",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634284"
+      },
+      "383": {
+        "lotNumber": "383",
+        "lotId": "98634285",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634285"
+      },
+      "384": {
+        "lotNumber": "384",
+        "lotId": "98634286",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634286"
+      },
+      "385": {
+        "lotNumber": "385",
+        "lotId": "98634287",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634287"
+      },
+      "386": {
+        "lotNumber": "386",
+        "lotId": "98634288",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634288"
+      },
+      "387": {
+        "lotNumber": "387",
+        "lotId": "98634289",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634289"
+      },
+      "388": {
+        "lotNumber": "388",
+        "lotId": "98634290",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634290"
+      },
+      "389": {
+        "lotNumber": "389",
+        "lotId": "98634291",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634291"
+      },
+      "390": {
+        "lotNumber": "390",
+        "lotId": "98634293",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634293"
+      },
+      "391": {
+        "lotNumber": "391",
+        "lotId": "98634294",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634294"
+      },
+      "392": {
+        "lotNumber": "392",
+        "lotId": "98634295",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634295"
+      },
+      "393": {
+        "lotNumber": "393",
+        "lotId": "98634296",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634296"
+      },
+      "394": {
+        "lotNumber": "394",
+        "lotId": "98634297",
+        "currentBid": 2400,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634297"
+      },
+      "395": {
+        "lotNumber": "395",
+        "lotId": "98634298",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634298"
+      },
+      "396": {
+        "lotNumber": "396",
+        "lotId": "98634299",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634299"
+      },
+      "397": {
+        "lotNumber": "397",
+        "lotId": "98634300",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634300"
+      },
+      "398": {
+        "lotNumber": "398",
+        "lotId": "98634301",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634301"
+      },
+      "399": {
+        "lotNumber": "399",
+        "lotId": "98634302",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634302"
+      },
+      "400": {
+        "lotNumber": "400",
+        "lotId": "98634305",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634305"
+      },
+      "401": {
+        "lotNumber": "401",
+        "lotId": "98634306",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634306"
+      },
+      "402": {
+        "lotNumber": "402",
+        "lotId": "98634307",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634307"
+      },
+      "403": {
+        "lotNumber": "403",
+        "lotId": "98634308",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634308"
+      },
+      "404": {
+        "lotNumber": "404",
+        "lotId": "98634547",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634547"
+      },
+      "405": {
+        "lotNumber": "405",
+        "lotId": "98634548",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634548"
+      },
+      "406": {
+        "lotNumber": "406",
+        "lotId": "98634549",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634549"
+      },
+      "407": {
+        "lotNumber": "407",
+        "lotId": "98634550",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634550"
+      },
+      "408": {
+        "lotNumber": "408",
+        "lotId": "98634551",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634551"
+      },
+      "409": {
+        "lotNumber": "409",
+        "lotId": "98634552",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634552"
+      },
+      "410": {
+        "lotNumber": "410",
+        "lotId": "98634554",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634554"
+      },
+      "411": {
+        "lotNumber": "411",
+        "lotId": "98634555",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634555"
+      },
+      "412": {
+        "lotNumber": "412",
+        "lotId": "98634556",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634556"
+      },
+      "413": {
+        "lotNumber": "413",
+        "lotId": "98634557",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634557"
+      },
+      "414": {
+        "lotNumber": "414",
+        "lotId": "98634558",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634558"
+      },
+      "415": {
+        "lotNumber": "415",
+        "lotId": "98634559",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634559"
+      },
+      "416": {
+        "lotNumber": "416",
+        "lotId": "98634560",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634560"
+      },
+      "417": {
+        "lotNumber": "417",
+        "lotId": "98634561",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634561"
+      },
+      "418": {
+        "lotNumber": "418",
+        "lotId": "98634562",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634562"
+      },
+      "419": {
+        "lotNumber": "419",
+        "lotId": "98634563",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634563"
+      },
+      "420": {
+        "lotNumber": "420",
+        "lotId": "98634565",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634565"
+      },
+      "421": {
+        "lotNumber": "421",
+        "lotId": "98634566",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634566"
+      },
+      "422": {
+        "lotNumber": "422",
+        "lotId": "98634567",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634567"
+      },
+      "423": {
+        "lotNumber": "423",
+        "lotId": "98634568",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634568"
+      },
+      "424": {
+        "lotNumber": "424",
+        "lotId": "98634569",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634569"
+      },
+      "425": {
+        "lotNumber": "425",
+        "lotId": "98634570",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634570"
+      },
+      "426": {
+        "lotNumber": "426",
+        "lotId": "98634571",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634571"
+      },
+      "427": {
+        "lotNumber": "427",
+        "lotId": "98634572",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634572"
+      },
+      "428": {
+        "lotNumber": "428",
+        "lotId": "98634573",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634573"
+      },
+      "429": {
+        "lotNumber": "429",
+        "lotId": "98634574",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634574"
+      },
+      "430": {
+        "lotNumber": "430",
+        "lotId": "98634576",
+        "currentBid": 1900,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634576"
+      },
+      "431": {
+        "lotNumber": "431",
+        "lotId": "98634577",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634577"
+      },
+      "432": {
+        "lotNumber": "432",
+        "lotId": "98634578",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634578"
+      },
+      "433": {
+        "lotNumber": "433",
+        "lotId": "98634579",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634579"
+      },
+      "434": {
+        "lotNumber": "434",
+        "lotId": "98634580",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634580"
+      },
+      "435": {
+        "lotNumber": "435",
+        "lotId": "98634581",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634581"
+      },
+      "436": {
+        "lotNumber": "436",
+        "lotId": "98634582",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634582"
+      },
+      "437": {
+        "lotNumber": "437",
+        "lotId": "98634583",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634583"
+      },
+      "438": {
+        "lotNumber": "438",
+        "lotId": "98634584",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634584"
+      },
+      "439": {
+        "lotNumber": "439",
+        "lotId": "98634585",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634585"
+      },
+      "440": {
+        "lotNumber": "440",
+        "lotId": "98634587",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634587"
+      },
+      "441": {
+        "lotNumber": "441",
+        "lotId": "98634588",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634588"
+      },
+      "442": {
+        "lotNumber": "442",
+        "lotId": "98634589",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634589"
+      },
+      "443": {
+        "lotNumber": "443",
+        "lotId": "98634590",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634590"
+      },
+      "444": {
+        "lotNumber": "444",
+        "lotId": "98634591",
+        "currentBid": 1700,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634591"
+      },
+      "445": {
+        "lotNumber": "445",
+        "lotId": "98634592",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634592"
+      },
+      "446": {
+        "lotNumber": "446",
+        "lotId": "98634593",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634593"
+      },
+      "447": {
+        "lotNumber": "447",
+        "lotId": "98634594",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634594"
+      },
+      "448": {
+        "lotNumber": "448",
+        "lotId": "98634595",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634595"
+      },
+      "449": {
+        "lotNumber": "449",
+        "lotId": "98634596",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634596"
+      },
+      "450": {
+        "lotNumber": "450",
+        "lotId": "98634598",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634598"
+      },
+      "451": {
+        "lotNumber": "451",
+        "lotId": "98634599",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634599"
+      },
+      "452": {
+        "lotNumber": "452",
+        "lotId": "98634600",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634600"
+      },
+      "453": {
+        "lotNumber": "453",
+        "lotId": "98634601",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634601"
+      },
+      "454": {
+        "lotNumber": "454",
+        "lotId": "98634602",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634602"
+      },
+      "455": {
+        "lotNumber": "455",
+        "lotId": "98634603",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634603"
+      },
+      "456": {
+        "lotNumber": "456",
+        "lotId": "98634604",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634604"
+      },
+      "457": {
+        "lotNumber": "457",
+        "lotId": "98634605",
+        "currentBid": 2200,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634605"
+      },
+      "458": {
+        "lotNumber": "458",
+        "lotId": "98634606",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634606"
+      },
+      "459": {
+        "lotNumber": "459",
+        "lotId": "98634607",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634607"
+      },
+      "460": {
+        "lotNumber": "460",
+        "lotId": "98634609",
+        "currentBid": 3700,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634609"
+      },
+      "461": {
+        "lotNumber": "461",
+        "lotId": "98634610",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634610"
+      },
+      "462": {
+        "lotNumber": "462",
+        "lotId": "98634611",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634611"
+      },
+      "463": {
+        "lotNumber": "463",
+        "lotId": "98634612",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634612"
+      },
+      "464": {
+        "lotNumber": "464",
+        "lotId": "98634613",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634613"
+      },
+      "465": {
+        "lotNumber": "465",
+        "lotId": "98634614",
+        "currentBid": 2900,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634614"
+      },
+      "466": {
+        "lotNumber": "466",
+        "lotId": "98634615",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634615"
+      },
+      "467": {
+        "lotNumber": "467",
+        "lotId": "98634616",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634616"
+      },
+      "468": {
+        "lotNumber": "468",
+        "lotId": "98634617",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634617"
+      },
+      "469": {
+        "lotNumber": "469",
+        "lotId": "98634618",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634618"
+      },
+      "470": {
+        "lotNumber": "470",
+        "lotId": "98634620",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634620"
+      },
+      "471": {
+        "lotNumber": "471",
+        "lotId": "98634621",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634621"
+      },
+      "472": {
+        "lotNumber": "472",
+        "lotId": "98634622",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634622"
+      },
+      "473": {
+        "lotNumber": "473",
+        "lotId": "98634623",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634623"
+      },
+      "474": {
+        "lotNumber": "474",
+        "lotId": "98634624",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634624"
+      },
+      "475": {
+        "lotNumber": "475",
+        "lotId": "98634625",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634625"
+      },
+      "476": {
+        "lotNumber": "476",
+        "lotId": "98634626",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634626"
+      },
+      "477": {
+        "lotNumber": "477",
+        "lotId": "98634627",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634627"
+      },
+      "478": {
+        "lotNumber": "478",
+        "lotId": "98634628",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634628"
+      },
+      "479": {
+        "lotNumber": "479",
+        "lotId": "98634629",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634629"
+      },
+      "480": {
+        "lotNumber": "480",
+        "lotId": "98634631",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634631"
+      },
+      "481": {
+        "lotNumber": "481",
+        "lotId": "98634632",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634632"
+      },
+      "482": {
+        "lotNumber": "482",
+        "lotId": "98634633",
+        "currentBid": 1700,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634633"
+      },
+      "483": {
+        "lotNumber": "483",
+        "lotId": "98634634",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634634"
+      },
+      "484": {
+        "lotNumber": "484",
+        "lotId": "98634635",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634635"
+      },
+      "485": {
+        "lotNumber": "485",
+        "lotId": "98634636",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634636"
+      },
+      "486": {
+        "lotNumber": "486",
+        "lotId": "98634637",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634637"
+      },
+      "487": {
+        "lotNumber": "487",
+        "lotId": "98634638",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634638"
+      },
+      "488": {
+        "lotNumber": "488",
+        "lotId": "98634639",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634639"
+      },
+      "489": {
+        "lotNumber": "489",
+        "lotId": "98634640",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634640"
+      },
+      "490": {
+        "lotNumber": "490",
+        "lotId": "98634642",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634642"
+      },
+      "491": {
+        "lotNumber": "491",
+        "lotId": "98634643",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634643"
+      },
+      "492": {
+        "lotNumber": "492",
+        "lotId": "98634644",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634644"
+      },
+      "493": {
+        "lotNumber": "493",
+        "lotId": "98634645",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634645"
+      },
+      "494": {
+        "lotNumber": "494",
+        "lotId": "98634646",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634646"
+      },
+      "495": {
+        "lotNumber": "495",
+        "lotId": "98634647",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634647"
+      },
+      "496": {
+        "lotNumber": "496",
+        "lotId": "98634648",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634648"
+      },
+      "497": {
+        "lotNumber": "497",
+        "lotId": "98634649",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634649"
+      },
+      "498": {
+        "lotNumber": "498",
+        "lotId": "98634650",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634650"
+      },
+      "499": {
+        "lotNumber": "499",
+        "lotId": "98634651",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634651"
+      },
+      "500": {
+        "lotNumber": "500",
+        "lotId": "98634654",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634654"
+      },
+      "501": {
+        "lotNumber": "501",
+        "lotId": "98634655",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634655"
+      },
+      "502": {
+        "lotNumber": "502",
+        "lotId": "98634656",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634656"
+      },
+      "503": {
+        "lotNumber": "503",
+        "lotId": "98634657",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634657"
+      },
+      "504": {
+        "lotNumber": "504",
+        "lotId": "98634658",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634658"
+      },
+      "505": {
+        "lotNumber": "505",
+        "lotId": "98634659",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634659"
+      },
+      "506": {
+        "lotNumber": "506",
+        "lotId": "98634660",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634660"
+      },
+      "507": {
+        "lotNumber": "507",
+        "lotId": "98634661",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634661"
+      },
+      "508": {
+        "lotNumber": "508",
+        "lotId": "98634662",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634662"
+      },
+      "509": {
+        "lotNumber": "509",
+        "lotId": "98634663",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634663"
+      },
+      "510": {
+        "lotNumber": "510",
+        "lotId": "98634665",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634665"
+      },
+      "511": {
+        "lotNumber": "511",
+        "lotId": "98634666",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634666"
+      },
+      "512": {
+        "lotNumber": "512",
+        "lotId": "98634667",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634667"
+      },
+      "513": {
+        "lotNumber": "513",
+        "lotId": "98634668",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634668"
+      },
+      "514": {
+        "lotNumber": "514",
+        "lotId": "98634669",
+        "currentBid": 4750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634669"
+      },
+      "515": {
+        "lotNumber": "515",
+        "lotId": "98634670",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634670"
+      },
+      "516": {
+        "lotNumber": "516",
+        "lotId": "98634671",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634671"
+      },
+      "517": {
+        "lotNumber": "517",
+        "lotId": "98634672",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634672"
+      },
+      "518": {
+        "lotNumber": "518",
+        "lotId": "98634673",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634673"
+      },
+      "519": {
+        "lotNumber": "519",
+        "lotId": "98634674",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634674"
+      },
+      "520": {
+        "lotNumber": "520",
+        "lotId": "98634676",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634676"
+      },
+      "521": {
+        "lotNumber": "521",
+        "lotId": "98634677",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634677"
+      },
+      "522": {
+        "lotNumber": "522",
+        "lotId": "98634678",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634678"
+      },
+      "523": {
+        "lotNumber": "523",
+        "lotId": "98634679",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634679"
+      },
+      "524": {
+        "lotNumber": "524",
+        "lotId": "98634680",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634680"
+      },
+      "525": {
+        "lotNumber": "525",
+        "lotId": "98634681",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634681"
+      },
+      "526": {
+        "lotNumber": "526",
+        "lotId": "98634682",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634682"
+      },
+      "527": {
+        "lotNumber": "527",
+        "lotId": "98634683",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634683"
+      },
+      "528": {
+        "lotNumber": "528",
+        "lotId": "98634684",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634684"
+      },
+      "529": {
+        "lotNumber": "529",
+        "lotId": "98634685",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634685"
+      },
+      "530": {
+        "lotNumber": "530",
+        "lotId": "98634687",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634687"
+      },
+      "531": {
+        "lotNumber": "531",
+        "lotId": "98634688",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634688"
+      },
+      "532": {
+        "lotNumber": "532",
+        "lotId": "98634689",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634689"
+      },
+      "533": {
+        "lotNumber": "533",
+        "lotId": "98634690",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634690"
+      },
+      "534": {
+        "lotNumber": "534",
+        "lotId": "98634691",
+        "currentBid": 2250,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634691"
+      },
+      "535": {
+        "lotNumber": "535",
+        "lotId": "98634692",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634692"
+      },
+      "536": {
+        "lotNumber": "536",
+        "lotId": "98634693",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634693"
+      },
+      "537": {
+        "lotNumber": "537",
+        "lotId": "98634694",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634694"
+      },
+      "538": {
+        "lotNumber": "538",
+        "lotId": "98634695",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634695"
+      },
+      "539": {
+        "lotNumber": "539",
+        "lotId": "98634696",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634696"
+      },
+      "540": {
+        "lotNumber": "540",
+        "lotId": "98634698",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634698"
+      },
+      "541": {
+        "lotNumber": "541",
+        "lotId": "98634699",
+        "currentBid": 2400,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634699"
+      },
+      "542": {
+        "lotNumber": "542",
+        "lotId": "98634700",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634700"
+      },
+      "543": {
+        "lotNumber": "543",
+        "lotId": "98634701",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634701"
+      },
+      "544": {
+        "lotNumber": "544",
+        "lotId": "98634702",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634702"
+      },
+      "545": {
+        "lotNumber": "545",
+        "lotId": "98634703",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634703"
+      },
+      "546": {
+        "lotNumber": "546",
+        "lotId": "98634704",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634704"
+      },
+      "547": {
+        "lotNumber": "547",
+        "lotId": "98634705",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634705"
+      },
+      "548": {
+        "lotNumber": "548",
+        "lotId": "98634706",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634706"
+      },
+      "549": {
+        "lotNumber": "549",
+        "lotId": "98634707",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634707"
+      },
+      "550": {
+        "lotNumber": "550",
+        "lotId": "98634709",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634709"
+      },
+      "551": {
+        "lotNumber": "551",
+        "lotId": "98634710",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634710"
+      },
+      "552": {
+        "lotNumber": "552",
+        "lotId": "98634711",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634711"
+      },
+      "553": {
+        "lotNumber": "553",
+        "lotId": "98634712",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634712"
+      },
+      "554": {
+        "lotNumber": "554",
+        "lotId": "98634713",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634713"
+      },
+      "555": {
+        "lotNumber": "555",
+        "lotId": "98634714",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634714"
+      },
+      "556": {
+        "lotNumber": "556",
+        "lotId": "98634715",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634715"
+      },
+      "557": {
+        "lotNumber": "557",
+        "lotId": "98634716",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634716"
+      },
+      "558": {
+        "lotNumber": "558",
+        "lotId": "98634717",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634717"
+      },
+      "559": {
+        "lotNumber": "559",
+        "lotId": "98634718",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634718"
+      },
+      "560": {
+        "lotNumber": "560",
+        "lotId": "98634720",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634720"
+      },
+      "561": {
+        "lotNumber": "561",
+        "lotId": "98634721",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634721"
+      },
+      "562": {
+        "lotNumber": "562",
+        "lotId": "98634722",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634722"
+      },
+      "563": {
+        "lotNumber": "563",
+        "lotId": "98634723",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634723"
+      },
+      "564": {
+        "lotNumber": "564",
+        "lotId": "98634724",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634724"
+      },
+      "565": {
+        "lotNumber": "565",
+        "lotId": "98634725",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634725"
+      },
+      "566": {
+        "lotNumber": "566",
+        "lotId": "98634726",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634726"
+      },
+      "567": {
+        "lotNumber": "567",
+        "lotId": "98634727",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634727"
+      },
+      "568": {
+        "lotNumber": "568",
+        "lotId": "98634728",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634728"
+      },
+      "569": {
+        "lotNumber": "569",
+        "lotId": "98634729",
+        "currentBid": 2100,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634729"
+      },
+      "570": {
+        "lotNumber": "570",
+        "lotId": "98634731",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634731"
+      },
+      "571": {
+        "lotNumber": "571",
+        "lotId": "98634732",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634732"
+      },
+      "572": {
+        "lotNumber": "572",
+        "lotId": "98634733",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634733"
+      },
+      "573": {
+        "lotNumber": "573",
+        "lotId": "98634734",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634734"
+      },
+      "574": {
+        "lotNumber": "574",
+        "lotId": "98634735",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634735"
+      },
+      "575": {
+        "lotNumber": "575",
+        "lotId": "98634736",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634736"
+      },
+      "576": {
+        "lotNumber": "576",
+        "lotId": "98634737",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634737"
+      },
+      "577": {
+        "lotNumber": "577",
+        "lotId": "98634738",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634738"
+      },
+      "578": {
+        "lotNumber": "578",
+        "lotId": "98634739",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634739"
+      },
+      "579": {
+        "lotNumber": "579",
+        "lotId": "98634740",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634740"
+      },
+      "580": {
+        "lotNumber": "580",
+        "lotId": "98634742",
+        "currentBid": 2750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634742"
+      },
+      "581": {
+        "lotNumber": "581",
+        "lotId": "98634743",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634743"
+      },
+      "582": {
+        "lotNumber": "582",
+        "lotId": "98634744",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634744"
+      },
+      "583": {
+        "lotNumber": "583",
+        "lotId": "98634745",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634745"
+      },
+      "584": {
+        "lotNumber": "584",
+        "lotId": "98634746",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634746"
+      },
+      "585": {
+        "lotNumber": "585",
+        "lotId": "98634747",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634747"
+      },
+      "586": {
+        "lotNumber": "586",
+        "lotId": "98634748",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634748"
+      },
+      "587": {
+        "lotNumber": "587",
+        "lotId": "98634749",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634749"
+      },
+      "588": {
+        "lotNumber": "588",
+        "lotId": "98634750",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634750"
+      },
+      "589": {
+        "lotNumber": "589",
+        "lotId": "98634751",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634751"
+      },
+      "590": {
+        "lotNumber": "590",
+        "lotId": "98634753",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634753"
+      },
+      "591": {
+        "lotNumber": "591",
+        "lotId": "98634754",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634754"
+      },
+      "592": {
+        "lotNumber": "592",
+        "lotId": "98634755",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634755"
+      },
+      "593": {
+        "lotNumber": "593",
+        "lotId": "98634756",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634756"
+      },
+      "594": {
+        "lotNumber": "594",
+        "lotId": "98634757",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634757"
+      },
+      "595": {
+        "lotNumber": "595",
+        "lotId": "98634758",
+        "currentBid": 2700,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634758"
+      },
+      "596": {
+        "lotNumber": "596",
+        "lotId": "98634759",
+        "currentBid": 13750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634759"
+      },
+      "597": {
+        "lotNumber": "597",
+        "lotId": "98634760",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634760"
+      },
+      "598": {
+        "lotNumber": "598",
+        "lotId": "98634761",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634761"
+      },
+      "599": {
+        "lotNumber": "599",
+        "lotId": "98634762",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634762"
+      },
+      "600": {
+        "lotNumber": "600",
+        "lotId": "98634765",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634765"
+      },
+      "601": {
+        "lotNumber": "601",
+        "lotId": "98634766",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634766"
+      },
+      "602": {
+        "lotNumber": "602",
+        "lotId": "98634767",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634767"
+      },
+      "603": {
+        "lotNumber": "603",
+        "lotId": "98634768",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634768"
+      },
+      "604": {
+        "lotNumber": "604",
+        "lotId": "98634769",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634769"
+      },
+      "605": {
+        "lotNumber": "605",
+        "lotId": "98634770",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634770"
+      },
+      "606": {
+        "lotNumber": "606",
+        "lotId": "98634771",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634771"
+      },
+      "607": {
+        "lotNumber": "607",
+        "lotId": "98634772",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634772"
+      },
+      "608": {
+        "lotNumber": "608",
+        "lotId": "98634773",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634773"
+      },
+      "609": {
+        "lotNumber": "609",
+        "lotId": "98634774",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634774"
+      },
+      "610": {
+        "lotNumber": "610",
+        "lotId": "98634776",
+        "currentBid": 2750,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634776"
+      },
+      "611": {
+        "lotNumber": "611",
+        "lotId": "98634777",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634777"
+      },
+      "612": {
+        "lotNumber": "612",
+        "lotId": "98634778",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634778"
+      },
+      "613": {
+        "lotNumber": "613",
+        "lotId": "98634779",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634779"
+      },
+      "614": {
+        "lotNumber": "614",
+        "lotId": "98634780",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634780"
+      },
+      "615": {
+        "lotNumber": "615",
+        "lotId": "98634781",
+        "currentBid": 1150,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634781"
+      },
+      "616": {
+        "lotNumber": "616",
+        "lotId": "98634782",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634782"
+      },
+      "617": {
+        "lotNumber": "617",
+        "lotId": "98634783",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634783"
+      },
+      "618": {
+        "lotNumber": "618",
+        "lotId": "98634784",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634784"
+      },
+      "619": {
+        "lotNumber": "619",
+        "lotId": "98634785",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634785"
+      },
+      "620": {
+        "lotNumber": "620",
+        "lotId": "98634787",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634787"
+      },
+      "621": {
+        "lotNumber": "621",
+        "lotId": "98634788",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634788"
+      },
+      "622": {
+        "lotNumber": "622",
+        "lotId": "98634789",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634789"
+      },
+      "623": {
+        "lotNumber": "623",
+        "lotId": "98634790",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634790"
+      },
+      "624": {
+        "lotNumber": "624",
+        "lotId": "98634791",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634791"
+      },
+      "625": {
+        "lotNumber": "625",
+        "lotId": "98634792",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634792"
+      },
+      "626": {
+        "lotNumber": "626",
+        "lotId": "98634793",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634793"
+      },
+      "627": {
+        "lotNumber": "627",
+        "lotId": "98634794",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634794"
+      },
+      "628": {
+        "lotNumber": "628",
+        "lotId": "98634795",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634795"
+      },
+      "629": {
+        "lotNumber": "629",
+        "lotId": "98634796",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634796"
+      },
+      "630": {
+        "lotNumber": "630",
+        "lotId": "98634798",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634798"
+      },
+      "631": {
+        "lotNumber": "631",
+        "lotId": "98634799",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634799"
+      },
+      "632": {
+        "lotNumber": "632",
+        "lotId": "98634800",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634800"
+      },
+      "633": {
+        "lotNumber": "633",
+        "lotId": "98634801",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634801"
+      },
+      "634": {
+        "lotNumber": "634",
+        "lotId": "98634802",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634802"
+      },
+      "635": {
+        "lotNumber": "635",
+        "lotId": "98634803",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634803"
+      },
+      "636": {
+        "lotNumber": "636",
+        "lotId": "98634804",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634804"
+      },
+      "637": {
+        "lotNumber": "637",
+        "lotId": "98634805",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634805"
+      },
+      "638": {
+        "lotNumber": "638",
+        "lotId": "98634806",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634806"
+      },
+      "639": {
+        "lotNumber": "639",
+        "lotId": "98634807",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634807"
+      },
+      "640": {
+        "lotNumber": "640",
+        "lotId": "98634809",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634809"
+      },
+      "641": {
+        "lotNumber": "641",
+        "lotId": "98634810",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634810"
+      },
+      "642": {
+        "lotNumber": "642",
+        "lotId": "98634811",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634811"
+      },
+      "643": {
+        "lotNumber": "643",
+        "lotId": "98634812",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634812"
+      },
+      "644": {
+        "lotNumber": "644",
+        "lotId": "98634813",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634813"
+      },
+      "645": {
+        "lotNumber": "645",
+        "lotId": "98634814",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634814"
+      },
+      "646": {
+        "lotNumber": "646",
+        "lotId": "98634815",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634815"
+      },
+      "647": {
+        "lotNumber": "647",
+        "lotId": "98634816",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634816"
+      },
+      "648": {
+        "lotNumber": "648",
+        "lotId": "98634817",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634817"
+      },
+      "649": {
+        "lotNumber": "649",
+        "lotId": "98634818",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634818"
+      },
+      "650": {
+        "lotNumber": "650",
+        "lotId": "98634820",
+        "currentBid": 0,
+        "url": "https://www.proxibid.com/asp/LotDetail.asp?lid=98634820"
       }
     }
   },
